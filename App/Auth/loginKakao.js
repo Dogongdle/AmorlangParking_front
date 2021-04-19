@@ -18,7 +18,7 @@ const signInKakaoTalk = setUserInfo => {
           setUserInfo({
             username: email,
             provider: 'kakao',
-            service_id: id,
+            serviceId: id,
           });
         })
         .catch(err => {
