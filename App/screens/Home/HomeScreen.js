@@ -6,6 +6,7 @@ import {useDispatch} from 'react-redux';
 
 const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   const handleLogout = () => {
     dispatch(logout());
   };
