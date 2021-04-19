@@ -56,8 +56,6 @@ export const images = {
   kakaoTalk: require('../images/kakaoTalkLogin.png'),
   loginBackground: require('../images/backgroundScreen.jpg'),
   mainLogo: require('../images/MainLogo.png'),
-  mainLogo2: require('../images/MainLogo2.png'),
-  mainLogo3: require('../images/MainLogo3.png'),
 };
 
 export const storyBoardDimensions = {

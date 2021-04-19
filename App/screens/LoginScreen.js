@@ -58,7 +58,7 @@ const loginScreen = () => {
         source={images.loginBackground}>
         <View style={{flex: 7, justifyContent: 'center', alignItems: 'center'}}>
           <Image
-            source={images.mainLogo3}
+            source={images.mainLogo2}
             style={styles.mainLogo}
             resizeMode="contain"
           />
@@ -115,8 +115,8 @@ export default loginScreen;
 
 const styles = StyleSheet.create({
   mainLogo: {
-    width: width * 350,
-    height: height * 350,
+    width: width * 330,
+    height: height * 330,
   },
   socialButton: {
     width: width * 343,
