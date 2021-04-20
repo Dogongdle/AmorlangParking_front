@@ -1,23 +1,44 @@
 import React, {Component} from 'react';
-import {Text, SafeAreaView} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {useIsDrawerOpen} from '@react-navigation/drawer';
 import {logout, selectUser} from '../../reducer/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
+import {AppHeader} from '../../components/AppHeader';
+import {AppSafeArea} from '../../components/AppSafeArea';
+import {images, width, height, colors} from '../../config/globalStyles';
+import {color} from 'react-native-reanimated';
+import {StateArea} from '../../components/StateArea';
 
 const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const handleLogout = () => {
-    dispatch(logout());
-  };
 
   return (
-    <SafeAreaView>
-      <Text>커뮤니티</Text>
-      <TouchableOpacity onPress={handleLogout}>
-        <Text>로그아웃</Text>
-      </TouchableOpacity>
-    </SafeAreaView>
+    <AppSafeArea>
+      <AppHeader
+        onPressLeft={() => navigation.openDrawer()}
+        leftTitle="ㅡ"
+        title={user.apart}
+      />
+      <View style={{flex: 1}}>
+        <ImageBackground
+          style={{
+            width: '100%',
+            height: '100%',
+            flex: 1,
+          }}
+          source={images.parking}>
+          <StateArea />
+        </ImageBackground>
+      </View>
+    </AppSafeArea>
   );
 };
 

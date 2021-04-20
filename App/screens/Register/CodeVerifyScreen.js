@@ -1,4 +1,4 @@
-import React, {Component, useState, useRef} from 'react';
+import React, {Component, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {register, selectToken} from '../../reducer/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
@@ -11,14 +11,13 @@ import * as Animatable from 'react-native-animatable';
 import {AppTag} from '../../components/AppTag';
 import {TextInput} from 'react-native-paper';
 import parkingAPI from '../../api/auth';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+
 
 const CodeVerifyScreen = ({navigation, route}) => {
   const [code, setCode] = useState(null);
   const dispatch = useDispatch();
   const {apart, region} = route.params;
   const token = useSelector(selectToken);
-  const inputRef = useRef('');
 
   const handleUpdate = () => {
     parkingAPI
@@ -51,9 +50,6 @@ const CodeVerifyScreen = ({navigation, route}) => {
         <AppTag>{apart}</AppTag>
       </View>
       <View style={styles.dropdownArea}>
-        <TouchableOpacity onPress={() => inputRef.blur}>
-          <Text>ddd</Text>
-        </TouchableOpacity>
         <Text
           style={{
             fontSize: width * 17,
@@ -63,7 +59,6 @@ const CodeVerifyScreen = ({navigation, route}) => {
           인증 코드를 입력해주세요
         </Text>
         <TextInput
-          ref={inputRef}
           label="인증코드"
           value={code}
           style={styles.codeInput}
@@ -73,6 +68,7 @@ const CodeVerifyScreen = ({navigation, route}) => {
           onChangeText={text => setCode(text)}
           maxLength={15}
           keyboardType={'email-address'}
+          secureTextEntry={true}
         />
       </View>
       <AppButton

@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import loginScreen from './screens/LoginScreen';
-
-import 'react-native-gesture-handler';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -14,6 +13,8 @@ import HomeScreen from './screens/Home/HomeScreen';
 import RegisterStack from './navigation/RegisterStack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import LoadingScreen from './Loading/LoadingScreen';
+import NotificationsScreen from './screens/Home/NotificationsScreen';
+import AppDrawer from './components/AppDrawer';
 
 const StackApp = createStackNavigator();
 
@@ -51,6 +52,23 @@ const App = () => {
     bootstrapAsync();
   }, []);
 
+  const Drawer = createDrawerNavigator();
+
+  function DrawerNavigator({navigation}) {
+    return (
+      <Drawer.Navigator
+        initialRouteName="Home"
+        drawerContent={() => <AppDrawer navigation={navigation} />}>
+        <Drawer.Screen
+          name="HomeStack"
+          component={HomeScreen}
+          options={navOptionHandler}
+        />
+        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+      </Drawer.Navigator>
+    );
+  }
+
   return (
     <Provider store={store}>
       <SafeAreaProvider>
@@ -80,8 +98,8 @@ const App = () => {
                       />
                     ) : (
                       <StackApp.Screen
-                        name="HomeStack"
-                        component={HomeScreen}
+                        name="Home"
+                        component={DrawerNavigator}
                         options={navOptionHandler}
                       />
                     )}

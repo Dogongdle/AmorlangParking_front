@@ -58,6 +58,7 @@ export const images = {
   mainLogo: require('../images/MainLogo.png'),
   apartSetting: require('../images/ApartSetting.png'),
   verify: require('../images/Verify.png'),
+  parking: require('../images/parking.png'),
 };
 
 export const storyBoardDimensions = {
