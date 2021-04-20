@@ -12,12 +12,12 @@ export const AppMenu = ({
   ...props
 }) => {
   return (
-    <View style={styles.menuView}>
-      <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.menuView}>
         <Text style={styles.menuText}>{children && children}</Text>
-      </TouchableOpacity>
-      <View>{leftIcon && leftIcon}</View>
-    </View>
+        <View>{leftIcon && leftIcon}</View>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   menuText: {
-    color: colors.black,
+    color: colors.grey,
     fontSize: width * 14,
     fontWeight: '600',
   },

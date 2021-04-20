@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -13,12 +13,21 @@ import {colors, height, images, width} from '../config/globalStyles';
 import {logout, selectUser} from '../reducer/userSlice';
 import {AppMenu} from './AppMenu';
 import MyIcon from '../config/Icon-font.js';
+import AppModal from './AppModal';
+import ModalSplash from './ModalSplash';
 
 const AppDrawer = ({navigation}) => {
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [modalSplash, setModalSplash] = useState('none');
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const handleLogout = () => {
     dispatch(logout());
+  };
+
+  const openModal = () => {
+    setVisibleModal(true);
+    setModalSplash('flex');
   };
 
   return (
@@ -48,9 +57,36 @@ const AppDrawer = ({navigation}) => {
               color={colors.borderGrey}
             />
           }
-          onPress={handleLogout}>
+          onPress={openModal}>
           로그아웃
         </AppMenu>
+        <AppModal visible={visibleModal}>
+          <ModalSplash
+            buttonText="로그아웃"
+            footer={'로그아웃 하시겠습니까?'}
+            image={
+              <Image
+                source={images.mainLogo}
+                style={{height: height * 225, width: width * 225}}
+                resizeMode="contain"
+              />
+            }
+            icon={
+              <MyIcon name="alarm-6" size={width * 14} color={colors.primary} />
+            }
+            style={{display: modalSplash}}
+            onPressExit={() => {
+              setVisibleModal(!visibleModal);
+              setModalSplash('none');
+            }}
+            onPressConfirm={() => {
+              setVisibleModal(!visibleModal);
+              setModalSplash('none');
+              handleLogout();
+            }}
+          />
+          {/* modal splash end */}
+        </AppModal>
       </View>
     </View>
   );

@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {register, selectToken} from '../../reducer/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppSafeArea} from '../../components/AppSafeArea';
@@ -11,8 +11,13 @@ import * as Animatable from 'react-native-animatable';
 import {AppTag} from '../../components/AppTag';
 import {TextInput} from 'react-native-paper';
 import parkingAPI from '../../api/auth';
+import AppModal from '../../components/AppModal';
+import ModalSplash from '../../components/ModalSplash';
+import MyIcon from '../../config/Icon-font.js';
 
 const CodeVerifyScreen = ({navigation, route}) => {
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [modalSplash, setModalSplash] = useState('none');
   const [code, setCode] = useState(null);
   const dispatch = useDispatch();
   const {apart, region} = route.params;
@@ -27,6 +32,11 @@ const CodeVerifyScreen = ({navigation, route}) => {
           dispatch(register(apart));
         }
       });
+  };
+
+  const openModal = () => {
+    setVisibleModal(true);
+    setModalSplash('flex');
   };
 
   return (
@@ -58,14 +68,24 @@ const CodeVerifyScreen = ({navigation, route}) => {
         <AppTag>{apart}</AppTag>
       </View>
       <View style={styles.dropdownArea}>
-        <Text
+        <View
           style={{
-            fontSize: width * 17,
-            fontWeight: '700',
-            color: colors.black,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
           }}>
-          인증 코드를 입력해주세요
-        </Text>
+          <Text
+            style={{
+              fontSize: width * 17,
+              fontWeight: '700',
+              color: colors.black,
+            }}>
+            인증 코드를 입력해주세요
+          </Text>
+          <TouchableOpacity onPress={openModal}>
+            <MyIcon name="alarm-3" size={width * 16} color={colors.primary} />
+          </TouchableOpacity>
+        </View>
         <TextInput
           label="인증코드"
           value={code}
@@ -78,6 +98,34 @@ const CodeVerifyScreen = ({navigation, route}) => {
           keyboardType={'email-address'}
           secureTextEntry={true}
         />
+        <AppModal visible={visibleModal}>
+          <ModalSplash
+            buttonText="확인"
+            footer={
+              '아파트 관리실에 가서 인증코드를 발급받은 뒤 해당 인증번호를 입력하면 됩니다:)'
+            }
+            image={
+              <Image
+                source={images.mainLogo}
+                style={{height: height * 225, width: width * 225}}
+                resizeMode="contain"
+              />
+            }
+            icon={
+              <MyIcon name="alarm-6" size={width * 14} color={colors.primary} />
+            }
+            style={{display: modalSplash}}
+            onPressExit={() => {
+              setVisibleModal(!visibleModal);
+              setModalSplash('none');
+            }}
+            onPressConfirm={() => {
+              setVisibleModal(!visibleModal);
+              setModalSplash('none');
+            }}
+          />
+          {/* modal splash end */}
+        </AppModal>
       </View>
       <AppButton
         onPress={handleUpdate}
