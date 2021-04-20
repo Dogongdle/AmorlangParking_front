@@ -48,7 +48,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <StackApp.Navigator>
+        <StackApp.Navigator mode="modal">
           {!loggedIn ? (
             <StackApp.Screen
               name="LoginStack"

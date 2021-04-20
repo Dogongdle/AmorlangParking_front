@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 //custom imports
-import {colors, height, width} from '../config/globalstyles';
+import {colors, height, width} from '../config/globalStyles';
 
 export const SocialButton = ({disable, style, onPress, children, ...props}) => {
   return (

@@ -1,10 +1,19 @@
-import React, {Component} from 'react';
-import {Text, SafeAreaView} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import React, {Component, useState} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
 import {logout, selectUser} from '../../reducer/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
+import {AppSafeArea} from '../../components/AppSafeArea';
+import {IllustrArea} from '../../components/IllustArea';
+import {colors, images, width, height} from '../../config/globalStyles';
+import {regionOptions, apartOptions} from '../../config/globalArray';
+import {AppButton} from '../../components/AppButton';
+import ModalDropdown from 'react-native-modal-dropdown';
+import {AppHeader} from '../../components/AppHeader';
+import * as Animatable from 'react-native-animatable';
 
 const ApartSetting = ({navigation}) => {
+  const [region, setRegion] = useState(null);
+  const [apart, setApart] = useState(null);
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const handleLogout = () => {
@@ -12,15 +21,97 @@ const ApartSetting = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView>
-      <Text>아파트세팅</Text>
-      <TouchableOpacity onPress={handleLogout}>
-        <Text>로그아웃</Text>
-      </TouchableOpacity>
-
-      <Text>{user.username}</Text>
-    </SafeAreaView>
+    <AppSafeArea>
+      <AppHeader title="아파트 설정" />
+      <Animatable.View
+        animation="slideInDown"
+        delay={0}
+        duration={2000}
+        useNativeDriver
+        style={{
+          flex: 3,
+        }}>
+        <IllustrArea style={{flex: 1}} imageSource={images.apartSetting} />
+      </Animatable.View>
+      <View
+        style={{
+          flex: 2,
+          paddingHorizontal: width * 20,
+          marginTop: height * 30,
+        }}>
+        <Text
+          style={{
+            fontSize: width * 17,
+            fontWeight: '700',
+            color: colors.black,
+          }}>
+          거주하시는 지역을 선택해주세요.
+        </Text>
+        <ModalDropdown
+          onSelect={e => setRegion(regionOptions[e])}
+          dropdownStyle={{width: width * 320}}
+          options={regionOptions}>
+          <View
+            style={{
+              width: '100%',
+              borderWidth: 1,
+              padding: width * 6,
+              marginTop: height * 10,
+              borderRadius: 5,
+              borderColor: colors.borderGrey,
+            }}>
+            <Text style={{color: colors.grey}}>
+              {region ? region : '지역 선택'}
+            </Text>
+          </View>
+        </ModalDropdown>
+        {region && (
+          <>
+            <Text
+              style={{
+                fontSize: width * 17,
+                fontWeight: '700',
+                color: colors.black,
+                marginTop: height * 20,
+              }}>
+              아파트를 선택해주세요.
+            </Text>
+            <ModalDropdown
+              onSelect={e => setApart(apartOptions[e])}
+              dropdownStyle={{width: width * 320}}
+              options={apartOptions}>
+              <View
+                style={{
+                  width: '100%',
+                  borderWidth: 1,
+                  padding: width * 6,
+                  marginTop: height * 10,
+                  borderRadius: 5,
+                  borderColor: colors.borderGrey,
+                }}>
+                <Text style={{color: colors.grey}}>
+                  {apart ? apart : '아파트 선택'}
+                </Text>
+              </View>
+            </ModalDropdown>
+          </>
+        )}
+        {/* <TouchableOpacity onPress={handleLogout}>
+          <Text>로그아웃</Text>
+        </TouchableOpacity> */}
+      </View>
+      <AppButton
+        style={{
+          backgroundColor: colors.primary,
+        }}>
+        <Text style={{fontSize: width * 17, fontWeight: '600', color: '#fff'}}>
+          다음으로
+        </Text>
+      </AppButton>
+    </AppSafeArea>
   );
 };
 
 export default ApartSetting;
+
+const styles = StyleSheet.create({});

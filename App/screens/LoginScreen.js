@@ -20,7 +20,7 @@ import parkingAPI from '../api/auth';
 //reducer
 import {login, setUser} from '../reducer/userSlice';
 import {useDispatch} from 'react-redux';
-import {colors, images, width, height} from '../config/globalstyles';
+import {colors, images, width, height} from '../config/globalStyles';
 import {SocialButton} from '../components/socialButton';
 
 const loginScreen = () => {
@@ -54,56 +54,64 @@ const loginScreen = () => {
   return (
     <>
       <ImageBackground
-        style={{width: '100%', height: '100%'}}
+        style={{
+          width: '100%',
+          height: '100%',
+          flex: 1,
+          paddingTop: Platform.OS === 'android' ? 25 : 0,
+        }}
         source={images.loginBackground}>
-        <View style={{flex: 7, justifyContent: 'center', alignItems: 'center'}}>
-          <Image
-            source={images.mainLogo2}
-            style={styles.mainLogo}
-            resizeMode="contain"
-          />
-        </View>
-        <View style={{flex: 3}}>
-          <View style={styles.socialButtonView}>
-            <SocialButton
-              onPress={() => signInGoogle(setUserInfo)}
-              color={colors.white}>
-              <Image
-                source={images.google}
-                style={styles.socialLogo}
-                resizeMode="contain"
-              />
-            </SocialButton>
-            <SocialButton
-              onPress={() => signInKakaoTalk(setUserInfo)}
-              color={colors.kakaoTalk}>
-              <Image
-                source={images.kakaoTalk}
-                style={[styles.socialLogo, {width: width * 50}]}
-                resizeMode="contain"
-              />
-            </SocialButton>
-            {Platform.OS === 'ios' && (
+        <View style={{flex: 1, backgroundColor: 'rgba(52, 52, 52, 0.5)'}}>
+          <View
+            style={{flex: 7, justifyContent: 'center', alignItems: 'center'}}>
+            <Image
+              source={images.mainLogo}
+              style={styles.mainLogo}
+              resizeMode="contain"
+            />
+          </View>
+          <View style={{flex: 3}}>
+            <View style={styles.socialButtonView}>
               <SocialButton
-                onPress={() => signInApple(setUserInfo)}
-                color={colors.apple}>
+                onPress={() => signInGoogle(setUserInfo)}
+                color={colors.white}>
                 <Image
-                  source={images.apple}
-                  style={[styles.socialLogo]}
+                  source={images.google}
+                  style={styles.socialLogo}
                   resizeMode="contain"
                 />
               </SocialButton>
-            )}
-          </View>
-          <View style={{flex: 1, alignItems: 'center'}}>
-            <Text
-              style={{
-                fontSize: width * 16,
-                color: colors.white,
-                fontWeight: '600',
-              }}>
-              SNS 간편 로그인
-            </Text>
+              <SocialButton
+                onPress={() => signInKakaoTalk(setUserInfo)}
+                color={colors.kakaoTalk}>
+                <Image
+                  source={images.kakaoTalk}
+                  style={[styles.socialLogo, {width: width * 50}]}
+                  resizeMode="contain"
+                />
+              </SocialButton>
+              {Platform.OS === 'ios' && (
+                <SocialButton
+                  onPress={() => signInApple(setUserInfo)}
+                  color={colors.apple}>
+                  <Image
+                    source={images.apple}
+                    style={[styles.socialLogo]}
+                    resizeMode="contain"
+                  />
+                </SocialButton>
+              )}
+            </View>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <Text
+                style={{
+                  fontSize: width * 16,
+                  color: colors.white,
+                  fontWeight: '700',
+                }}>
+                SNS 간편 로그인
+              </Text>
+            </View>
           </View>
         </View>
       </ImageBackground>
@@ -117,6 +125,7 @@ const styles = StyleSheet.create({
   mainLogo: {
     width: width * 330,
     height: height * 330,
+    marginTop: height * 70,
   },
   socialButton: {
     width: width * 343,
@@ -128,6 +137,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
+    paddingHorizontal: width * 20,
   },
   socialLogo: {
     width: width * 30,

@@ -1,13 +1,13 @@
 import {Dimensions} from 'react-native';
 
 export const colors = {
-  primary: '#013469',
+  primary: '#EC8B57',
   black: '#191919',
   red: '#FF3636',
   lightBlue: '#36D2FF',
   green: '#8FEF73',
   grey: '#767676',
-  borderGrey: '#707070',
+  borderGrey: '#C9C9C9',
   statusGrey: '#666666',
   textGrey: '#A2A2A2',
   darkBlue: '#83abeb',
@@ -56,6 +56,7 @@ export const images = {
   kakaoTalk: require('../images/kakaoTalkLogin.png'),
   loginBackground: require('../images/backgroundScreen.jpg'),
   mainLogo: require('../images/MainLogo.png'),
+  apartSetting: require('../images/ApartSetting.png'),
 };
 
 export const storyBoardDimensions = {
