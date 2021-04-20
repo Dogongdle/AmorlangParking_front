@@ -10,6 +10,7 @@ import {AppButton} from '../../components/AppButton';
 import ModalDropdown from 'react-native-modal-dropdown';
 import {AppHeader} from '../../components/AppHeader';
 import * as Animatable from 'react-native-animatable';
+import MyIcon from '../../config/Icon-font.js';
 
 const ApartSetting = ({navigation}) => {
   const [region, setRegion] = useState(null);
@@ -25,7 +26,16 @@ const ApartSetting = ({navigation}) => {
       <AppHeader
         title="아파트 선택"
         onPressLeft={handleLogout}
-        leftTitle="뒤로가기"
+        leftTitle={
+          <MyIcon
+            name={'alarm-4'}
+            size={width * 10}
+            color={colors.white}
+            style={{
+              transform: [{rotate: '270deg'}],
+            }}
+          />
+        }
       />
       <Animatable.View
         animation="slideInUp"

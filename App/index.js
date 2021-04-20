@@ -15,6 +15,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import LoadingScreen from './Loading/LoadingScreen';
 import NotificationsScreen from './screens/Home/NotificationsScreen';
 import AppDrawer from './components/AppDrawer';
+import HomeStack from './navigation/HomeStack';
 
 const StackApp = createStackNavigator();
 
@@ -61,10 +62,9 @@ const App = () => {
         drawerContent={() => <AppDrawer navigation={navigation} />}>
         <Drawer.Screen
           name="HomeStack"
-          component={HomeScreen}
+          component={HomeStack}
           options={navOptionHandler}
         />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
       </Drawer.Navigator>
     );
   }

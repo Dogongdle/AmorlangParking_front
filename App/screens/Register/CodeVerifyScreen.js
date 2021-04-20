@@ -12,7 +12,6 @@ import {AppTag} from '../../components/AppTag';
 import {TextInput} from 'react-native-paper';
 import parkingAPI from '../../api/auth';
 
-
 const CodeVerifyScreen = ({navigation, route}) => {
   const [code, setCode] = useState(null);
   const dispatch = useDispatch();
@@ -33,7 +32,16 @@ const CodeVerifyScreen = ({navigation, route}) => {
   return (
     <AppSafeArea>
       <AppHeader
-        rightTitle="skip"
+        rightTitle={
+          <Text
+            style={{
+              fontSize: width * 14,
+              fontWeight: '500',
+              color: colors.white,
+            }}>
+            skip
+          </Text>
+        }
         onPressRight={() => console.log('skip')}
         title="거주민 인증"
       />

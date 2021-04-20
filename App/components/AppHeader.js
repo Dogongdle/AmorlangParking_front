@@ -18,16 +18,17 @@ export const AppHeader = ({
     <View style={styles.headerContainer}>
       <View style={styles.headerLeft}>
         <TouchableOpacity onPress={onPressLeft}>
-          <Text style={styles.leftTitle}>{leftTitle && leftTitle}</Text>
+          <View style={{marginLeft: width * 17}}>{leftTitle && leftTitle}</View>
         </TouchableOpacity>
       </View>
       <View style={styles.headerCenter}>
         <Text style={styles.headerTitle}>{title}</Text>
       </View>
-
       <View style={styles.headerRight}>
         <TouchableOpacity onPress={onPressRight}>
-          <Text style={styles.leftTitle}>{rightTitle && rightTitle}</Text>
+          <View style={{marginRight: width * 17}}>
+            {rightTitle && rightTitle}
+          </View>
         </TouchableOpacity>
       </View>
     </View>
@@ -41,12 +42,12 @@ const styles = StyleSheet.create({
     marginBottom: height * 10,
     flexDirection: 'row',
     alignItems: 'center',
-
+    width: '100%',
     zIndex: 10,
   },
   headerLeft: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
   headerCenter: {
     flex: 2,
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
   },
   headerRight: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'flex-end',
   },
   headerTitle: {
     fontSize: width * 17,
