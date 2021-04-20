@@ -39,8 +39,22 @@ const getUser = async token => {
   }
 };
 
+const registerApart = async (token, data) => {
+  try {
+    return await parkingAPI.post('/user', data, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export default {
   signUp,
   signIn,
   getUser,
+  registerApart,
 };

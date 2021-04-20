@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Text, SafeAreaView} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {logout} from '../../reducer/userSlice';
-import {useDispatch} from 'react-redux';
+import {logout, selectUser} from '../../reducer/userSlice';
+import {useDispatch, useSelector} from 'react-redux';
 
 const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();

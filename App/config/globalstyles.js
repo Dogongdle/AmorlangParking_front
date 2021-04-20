@@ -57,6 +57,7 @@ export const images = {
   loginBackground: require('../images/backgroundScreen.jpg'),
   mainLogo: require('../images/MainLogo.png'),
   apartSetting: require('../images/ApartSetting.png'),
+  verify: require('../images/Verify.png'),
 };
 
 export const storyBoardDimensions = {

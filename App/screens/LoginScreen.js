@@ -22,9 +22,11 @@ import {login, setUser} from '../reducer/userSlice';
 import {useDispatch} from 'react-redux';
 import {colors, images, width, height} from '../config/globalStyles';
 import {SocialButton} from '../components/socialButton';
+import LoadingScreen from '../Loading/LoadingScreen';
 
 const loginScreen = () => {
   const [userInfo, setUserInfo] = useState(null);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,9 +40,9 @@ const loginScreen = () => {
   // };
 
   const handleLogin = async data => {
+    setLoading(true);
     const userData = await parkingAPI.signUp(data);
     if (userData.status === 200) {
-      console.log('성공', userData.data);
       const response = await parkingAPI.signIn(data);
       const token = response.data.token;
       const userInfo = await parkingAPI.getUser(token);
@@ -49,7 +51,12 @@ const loginScreen = () => {
     } else {
       alert('실패', userData.data);
     }
+    setLoading(false);
   };
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <>

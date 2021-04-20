@@ -23,11 +23,15 @@ export const userSlice = createSlice({
       state.user = action.payload;
       console.log(state.user);
     },
+    register: (state, action) => {
+      state.user.apart = action.payload;
+    },
   },
 });
-export const {login, setUser, logout} = userSlice.actions; //액션들을 익스포트
+export const {login, setUser, logout, register} = userSlice.actions; //액션들을 익스포트
 
 export const selectLogin = state => state.user.loggedIn;
+export const selectToken = state => state.user.token;
 export const selectUser = state => state.user.user;
 
 export default userSlice.reducer;

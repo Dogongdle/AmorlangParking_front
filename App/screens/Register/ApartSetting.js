@@ -22,23 +22,20 @@ const ApartSetting = ({navigation}) => {
 
   return (
     <AppSafeArea>
-      <AppHeader title="아파트 설정" />
+      <AppHeader
+        title="아파트 선택"
+        onPressLeft={handleLogout}
+        leftTitle="뒤로가기"
+      />
       <Animatable.View
-        animation="slideInDown"
+        animation="slideInUp"
         delay={0}
         duration={2000}
         useNativeDriver
-        style={{
-          flex: 3,
-        }}>
+        style={{flex: 3}}>
         <IllustrArea style={{flex: 1}} imageSource={images.apartSetting} />
       </Animatable.View>
-      <View
-        style={{
-          flex: 2,
-          paddingHorizontal: width * 20,
-          marginTop: height * 30,
-        }}>
+      <View style={styles.menuArea}>
         <Text
           style={{
             fontSize: width * 17,
@@ -51,15 +48,7 @@ const ApartSetting = ({navigation}) => {
           onSelect={e => setRegion(regionOptions[e])}
           dropdownStyle={{width: width * 320}}
           options={regionOptions}>
-          <View
-            style={{
-              width: '100%',
-              borderWidth: 1,
-              padding: width * 6,
-              marginTop: height * 10,
-              borderRadius: 5,
-              borderColor: colors.borderGrey,
-            }}>
+          <View style={styles.dropdownArea}>
             <Text style={{color: colors.grey}}>
               {region ? region : '지역 선택'}
             </Text>
@@ -80,15 +69,7 @@ const ApartSetting = ({navigation}) => {
               onSelect={e => setApart(apartOptions[e])}
               dropdownStyle={{width: width * 320}}
               options={apartOptions}>
-              <View
-                style={{
-                  width: '100%',
-                  borderWidth: 1,
-                  padding: width * 6,
-                  marginTop: height * 10,
-                  borderRadius: 5,
-                  borderColor: colors.borderGrey,
-                }}>
+              <View style={styles.dropdownArea}>
                 <Text style={{color: colors.grey}}>
                   {apart ? apart : '아파트 선택'}
                 </Text>
@@ -101,12 +82,14 @@ const ApartSetting = ({navigation}) => {
         </TouchableOpacity> */}
       </View>
       <AppButton
-        style={{
-          backgroundColor: colors.primary,
-        }}>
-        <Text style={{fontSize: width * 17, fontWeight: '600', color: '#fff'}}>
-          다음으로
-        </Text>
+        onPress={() =>
+          navigation.navigate('CodeVerify', {
+            region: region,
+            apart: apart,
+          })
+        }
+        disable={apart && region ? false : true}>
+        <Text style={styles.buttonText}>다음으로</Text>
       </AppButton>
     </AppSafeArea>
   );
@@ -114,4 +97,23 @@ const ApartSetting = ({navigation}) => {
 
 export default ApartSetting;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  menuArea: {
+    flex: 2,
+    paddingHorizontal: width * 20,
+    marginTop: height * 30,
+  },
+  buttonText: {
+    fontSize: width * 17,
+    fontWeight: '600',
+    color: '#fff',
+  },
+  dropdownArea: {
+    width: '100%',
+    borderWidth: 1,
+    padding: width * 6,
+    marginTop: height * 10,
+    borderRadius: 5,
+    borderColor: colors.borderGrey,
+  },
+});

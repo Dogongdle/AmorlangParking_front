@@ -3,6 +3,7 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 //custom imports
 import {colors, height} from '../config/globalStyles';
 
+
 export const AppButton = ({disable, style, onPress, children, ...props}) => {
   return (
     <TouchableOpacity
@@ -24,6 +25,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: height * 52,
+    backgroundColor: colors.primary,
   },
   disableButton: {
     backgroundColor: colors.secondaryGrey,
