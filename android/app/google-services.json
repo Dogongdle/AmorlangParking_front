@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "379989609546",
+    "project_id": "amorangparking",
+    "storage_bucket": "amorangparking.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379989609546:android:f119c63503554343eeaab3",
+        "android_client_info": {
+          "package_name": "com.amorangparking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "379989609546-hnkskq7fbcd83qvdatpfvcpqlgm9aa93.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amorangparking",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "379989609546-kpf7p1inndsbu2c45s6jvcl41it201nl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amorangparking",
+            "certificate_hash": "cd2a50e9ddd64fa150a8041aa23b50d1ba978ad5"
+          }
+        },
+        {
+          "client_id": "379989609546-s3baje7dj0fe2ua805ucntght0t2ubph.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoVdiEgSQVPpx0U7aGoXlDuRabqzdRIPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "379989609546-s3baje7dj0fe2ua805ucntght0t2ubph.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "379989609546-derj79ptoo6qr9rpip5auie8carbvmqg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.AmorangParking"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
