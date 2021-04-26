@@ -22,7 +22,6 @@ import {
 import {AreaSelect} from '../../components/AreaSelect';
 import AppModal from '../../components/AppModal';
 import {ModalButtonView} from '../../components/ModalButtonView';
-import ModalSplash from '../../components/ModalSplash';
 import LoadingModal from '../../components/LoadingModal';
 
 const HomeScreen = ({navigation}) => {
@@ -38,6 +37,7 @@ const HomeScreen = ({navigation}) => {
   const dataLoading = useSelector(parkingStatus);
   const [visibleModal, setVisibleModal] = useState(false);
   const [refreshCount, setRefreshCount] = useState(0);
+  const [floor, setFloor] = useState(0);
 
   useEffect(() => {
     dispatch(getParkingData({sector: 'a_sector', token: token}));
@@ -69,12 +69,12 @@ const HomeScreen = ({navigation}) => {
           }
           title={apartName}
         />
-        <View style={{flex: 1, width: '100%', height: '100%'}}>
+        <View style={{flex: 1}}>
           <ReactNativeZoomableView
             maxZoom={2.0}
             minZoom={1.0}
             zoomStep={0.8}
-            initialZoom={1.05}>
+            initialZoom={1.0}>
             <AreaDrawing
               Adata={Adata}
               Bdata={Bdata}
@@ -83,6 +83,8 @@ const HomeScreen = ({navigation}) => {
             />
           </ReactNativeZoomableView>
           <AreaSelect
+            floor={floor}
+            setFloor={setFloor}
             onPressRefresh={() => setRefreshCount(prev => prev + 1)}
           />
           <StateArea visible={visibleModal} />

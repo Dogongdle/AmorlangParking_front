@@ -19,17 +19,21 @@ export const AreaSelect = ({
   onPress,
   onPressRefresh,
   children,
+  floor,
+  setFloor,
   ...props
 }) => {
   return (
     <>
       <View style={[styles.indicator, style]}>
         <ModalDropdown
-          onSelect={e => setApart(apartOptions[e])}
+          onSelect={e => setFloor(prev => e)}
           dropdownStyle={{width: width * 115, marginLeft: width * 60}}
           options={floorOptions}>
           <View style={styles.dropdownArea}>
-            <Text style={{color: colors.black, fontWeight: '600'}}>B2</Text>
+            <Text style={{color: colors.black, fontWeight: '600'}}>
+              {floorOptions[floor]}
+            </Text>
             <MyIcon
               name={'alarm-4'}
               size={width * 9}

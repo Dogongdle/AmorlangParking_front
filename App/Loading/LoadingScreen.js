@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
-import {SkypeIndicator} from 'react-native-indicators';
+import {UIActivityIndicator} from 'react-native-indicators';
 import {colors, height} from '../config/globalStyles';
 import {logout, selectUser} from '../reducer/userSlice';
 const LoadingScreen = ({navigation, route}) => {
@@ -13,7 +13,7 @@ const LoadingScreen = ({navigation, route}) => {
   return (
     <SafeAreaView style={styles.SafeContainer}>
       <View style={styles.ScreenContainer}>
-        <SkypeIndicator color={colors.primary} size={50} />
+        <UIActivityIndicator color={colors.primary} size={50} />
         <TouchableOpacity onPress={handleLogout}>
           <Text>dd</Text>
         </TouchableOpacity>

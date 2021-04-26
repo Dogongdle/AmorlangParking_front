@@ -1,4 +1,5 @@
 export const regionOptions = [
+  '수원시',
   '강남구',
   '강동구',
   '강북구',
@@ -26,6 +27,7 @@ export const regionOptions = [
 ];
 
 export const apartOptions = [
+  '광교아이파크',
   '상계 주공아파트',
   '중계 브라운스톤',
   '월계 우남아파트',
@@ -37,4 +39,4 @@ export const apartOptions = [
   '하계 장미아파트',
 ];
 
-export const floorOptions = ['B2', 'B1'];
+export const floorOptions = ['지상 1층', '지하 1층', '지하 2층'];

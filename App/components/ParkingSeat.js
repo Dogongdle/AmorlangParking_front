@@ -4,7 +4,6 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import {colors, height, width} from '../config/globalStyles';
 
 export const ParkingSeat = ({style, enable, onPress, children, ...props}) => {
-  console.log(props.seatNumber);
   return (
     <TouchableOpacity
       disabled={enable == true ? false : true}

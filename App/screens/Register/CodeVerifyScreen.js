@@ -1,5 +1,12 @@
 import React, {Component, useState} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import {register, selectToken} from '../../reducer/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppSafeArea} from '../../components/AppSafeArea';
@@ -31,6 +38,16 @@ const CodeVerifyScreen = ({navigation, route}) => {
         if ((res.status = 200)) {
           dispatch(register(apart));
         }
+      });
+  };
+
+  const verifyCheck = code => {
+    parkingAPI
+      .verifyCheck(token, {apart: JSON.stringify(apart), code: code})
+      .then(res => {
+        console.log(res);
+        if ((res.status = 200)) handleUpdate;
+        else Alert('인증번호가 틀립니다.');
       });
   };
 
@@ -128,7 +145,7 @@ const CodeVerifyScreen = ({navigation, route}) => {
         </AppModal>
       </View>
       <AppButton
-        onPress={handleUpdate}
+        onPress={() => verifyCheck(code)}
         disable={code && code.length > 10 ? false : true}>
         <Text style={styles.buttonText}>인증 완료</Text>
       </AppButton>

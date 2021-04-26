@@ -1,9 +1,10 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 //custom imports
-import {colors, height, width} from '../config/globalStyles';
+import {colors, height, images, width} from '../config/globalStyles';
 import {EntryView} from './EntryView';
 import {ParkingSeat} from './ParkingSeat';
+import {SectorDrawing} from './SectorDrawing';
 
 export const AreaDrawing = React.memo(
   ({Adata, Bdata, Cdata, Ddata, onPress, ...props}) => {
@@ -11,40 +12,13 @@ export const AreaDrawing = React.memo(
       <>
         <EntryView />
         <View style={styles.drawingView}>
-          <View style={{marginTop: height * 130}}>
-            {Adata &&
-              Adata.map(item => (
-                <ParkingSeat
-                  enable={item.enable}
-                  seatNumber={item.parkingSeat}
-                  key={item.parkingSeat}
-                  onPress={onPress}
-                />
-              ))}
+          <View style={styles.leftArea}>
+            <SectorDrawing data={Adata} onPress={onPress} style={{}} />
           </View>
+
           <View style={{flexDirection: 'row'}}>
-            <View>
-              {Bdata &&
-                Bdata.map(item => (
-                  <ParkingSeat
-                    enable={item.enable}
-                    seatNumber={item.parkingSeat}
-                    key={item.parkingSeat}
-                    onPress={onPress}
-                  />
-                ))}
-            </View>
-            <View>
-              {Cdata &&
-                Cdata.map(item => (
-                  <ParkingSeat
-                    enable={item.enable}
-                    seatNumber={item.parkingSeat}
-                    key={item.parkingSeat}
-                    onPress={onPress}
-                  />
-                ))}
-            </View>
+            <SectorDrawing data={Bdata} onPress={onPress} />
+            <SectorDrawing data={Cdata} onPress={onPress} />
           </View>
         </View>
       </>
@@ -55,10 +29,13 @@ export const AreaDrawing = React.memo(
 const styles = StyleSheet.create({
   drawingView: {
     flex: 1,
-    height: height * 1200,
+
     backgroundColor: colors.parkingBackground,
     paddingHorizontal: width * 20,
     flexDirection: 'row',
     justifyContent: 'space-around',
+  },
+  leftArea: {
+    marginTop: height * 130,
   },
 });

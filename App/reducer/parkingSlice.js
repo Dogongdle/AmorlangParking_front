@@ -21,7 +21,7 @@ export const parkingSlice = createSlice({
     BsectorData: [],
     CsectorData: [],
     DsectorData: [],
-    status: null,
+    status: 'success',
   },
 
   reducers: {},
