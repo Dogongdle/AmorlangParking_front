@@ -12,7 +12,7 @@ export const AppMenu = ({
   ...props
 }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity activeOpacity={0.9} onPress={onPress}>
       <View style={styles.menuView}>
         <Text style={styles.menuText}>{children && children}</Text>
         <View>{leftIcon && leftIcon}</View>

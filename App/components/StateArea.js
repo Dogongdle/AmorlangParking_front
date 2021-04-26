@@ -22,8 +22,8 @@ export const StateArea = ({disable, style, onPress, children, ...props}) => {
 const styles = StyleSheet.create({
   indicator: {
     position: 'absolute',
-    bottom: height * 120,
-    right: 20,
+    bottom: height * 80,
+    right: width * 20,
     flexDirection: 'row',
     backgroundColor: colors.white,
     paddingHorizontal: width * 15,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
+    borderRadius: 10,
     elevation: 5,
   },
   stateItem: {

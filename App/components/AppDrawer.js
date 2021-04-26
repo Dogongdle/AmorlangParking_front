@@ -30,6 +30,8 @@ const AppDrawer = ({navigation}) => {
     setModalSplash('flex');
   };
 
+  const apartName = user.apart.substring(1, user.apart.length - 1);
+
   return (
     <View style={{flex: 1}}>
       <View
@@ -43,7 +45,7 @@ const AppDrawer = ({navigation}) => {
             <Image style={styles.profileImage} source={images.user} />
           </View>
           <Text style={styles.userName}>{user.username}</Text>
-          <Text style={styles.apartText}>{user.apart}</Text>
+          <Text style={styles.apartText}>{apartName}</Text>
         </View>
       </View>
       <View style={{flex: 5}}>

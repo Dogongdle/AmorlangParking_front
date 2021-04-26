@@ -39,6 +39,7 @@ export const colors = {
   mediumGrey: '#84888F',
   darkMediumGrey: '#0A1321',
   postcardGrey: '#F2F2F2',
+  parkingBackground: '#EFEFF1',
 };
 
 export const fonts = {

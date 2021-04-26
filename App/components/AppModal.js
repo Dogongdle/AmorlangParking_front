@@ -6,7 +6,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 const AppModal = ({visible, children}) => {
   return (
     <Modal animationType="fade" transparent visible={visible}>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView  style={styles.container}>
         {Platform.OS === 'android' && (
           <StatusBar
             hidden={false}

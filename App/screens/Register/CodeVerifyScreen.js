@@ -25,7 +25,7 @@ const CodeVerifyScreen = ({navigation, route}) => {
 
   const handleUpdate = () => {
     parkingAPI
-      .registerApart(token, {Apart: JSON.stringify(apart)})
+      .registerApart(token, {apart: JSON.stringify(apart)})
       .then(res => {
         console.log(res);
         if ((res.status = 200)) {

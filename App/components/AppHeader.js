@@ -17,7 +17,7 @@ export const AppHeader = ({
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerLeft}>
-        <TouchableOpacity onPress={onPressLeft}>
+        <TouchableOpacity activeOpacity={0.9} onPress={onPressLeft}>
           <View style={{marginLeft: width * 17}}>{leftTitle && leftTitle}</View>
         </TouchableOpacity>
       </View>
@@ -25,7 +25,7 @@ export const AppHeader = ({
         <Text style={styles.headerTitle}>{title}</Text>
       </View>
       <View style={styles.headerRight}>
-        <TouchableOpacity onPress={onPressRight}>
+        <TouchableOpacity activeOpacity={0.9} onPress={onPressRight}>
           <View style={{marginRight: width * 17}}>
             {rightTitle && rightTitle}
           </View>
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
   headerContainer: {
     height: height * 50,
     backgroundColor: colors.primary,
-    marginBottom: height * 10,
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
