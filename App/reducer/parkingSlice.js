@@ -1,5 +1,18 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-community/async-storage';
+import parkingAPI from '../api/parking';
+
+export const getParkingData = createAsyncThunk(
+  'parking/getParkingData',
+  async payload => {
+    const response = await parkingAPI.getParkingData(
+      payload.token,
+      payload.sector,
+    );
+    if (response.status != 200) throw Error(response.data);
+    return response.data;
+  },
+);
 
 export const parkingSlice = createSlice({
   name: 'user',
@@ -10,30 +23,22 @@ export const parkingSlice = createSlice({
     DsectorData: [],
   },
 
-  reducers: {
-    login: (state, action) => {
-      console.log(action.payload.token);
-      AsyncStorage.setItem('userToken', action.payload.token);
-      state.loggedIn = true;
-      state.token = action.payload.token;
+  reducers: {},
+  extraReducers: {
+    [getParkingData.fulfilled]: (state, action) => {
+      state.AsectorData = action.payload;
+      state.status = 'success';
     },
-    logout: state => {
-      AsyncStorage.removeItem('userToken');
-      state.loggedIn = false;
+    [getParkingData.pending]: (state, action) => {
+      state.status = 'loading';
     },
-    setUser: (state, action) => {
-      state.user = action.payload;
-      console.log(state.user);
-    },
-    register: (state, action) => {
-      state.user.apart = action.payload;
+    [getParkingData.rejected]: (state, action) => {
+      state.status = 'failed';
+      alert('데이터를 받아오던 중 문제가 발생하였습니다.');
     },
   },
 });
-export const {login, setUser, logout, register} = userSlice.actions; //액션들을 익스포트
 
-export const selectLogin = state => state.user.loggedIn;
-export const selectToken = state => state.user.token;
-export const selectUser = state => state.user.user;
+export const selectParkingA = state => state.parking.AsectorData;
 
-export default userSlice.reducer;
+export default parkingSlice.reducer;

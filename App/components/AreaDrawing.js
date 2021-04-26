@@ -2,11 +2,19 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 //custom imports
 import {colors, height, width} from '../config/globalStyles';
+import {ParkingSeat} from './ParkingSeat';
 
-export const AreaDrawing = ({children, ...props}) => {
+export const AreaDrawing = ({drawingData, children, ...props}) => {
   return (
     <View style={styles.drawingView}>
-      <Text style={styles.tagText}>dddd</Text>
+      {drawingData &&
+        drawingData.map(item => (
+          <ParkingSeat
+            enable={item.enable}
+            seatNumber={item.parkingSeat}
+            key={item.parkingSeat}
+          />
+        ))}
     </View>
   );
 };
@@ -17,7 +25,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: colors.parkingBackground,
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: width * 50,
   },
 });

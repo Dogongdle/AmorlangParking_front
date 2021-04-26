@@ -2,7 +2,7 @@ import parkingAPI from './API';
 
 const getParkingData = async (token, sector) => {
   try {
-    return await parkingAPI.get(`/data/a_sector/`, null, {
+    return await parkingAPI.get(`/data/${sector}/`, null, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + token,

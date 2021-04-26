@@ -61,6 +61,7 @@ export const images = {
   verify: require('../images/Verify.png'),
   parking: require('../images/parking.png'),
   user: require('../images/user.png'),
+  refresh: require('../images/refresh-button.png'),
 };
 
 export const storyBoardDimensions = {

@@ -7,8 +7,7 @@ import {
   View,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {useIsDrawerOpen} from '@react-navigation/drawer';
-import {logout, selectUser} from '../../reducer/userSlice';
+import {logout, selectUser, selectToken} from '../../reducer/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppHeader} from '../../components/AppHeader';
 import {AppSafeArea} from '../../components/AppSafeArea';
@@ -20,8 +19,8 @@ import MyIcon from '../../config/Icon-font.js';
 import {BottomSheetInner} from '../../components/BottomSheetInner';
 import {AreaDrawing} from '../../components/AreaDrawing';
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
-import parkingAPI from '../../api/parking';
-import {register, selectToken} from '../../reducer/userSlice';
+import {getParkingData, selectParkingA} from '../../reducer/parkingSlice';
+import {AreaSelect} from '../../components/AreaSelect';
 
 const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -30,10 +29,10 @@ const HomeScreen = ({navigation}) => {
   let bottomSheet = React.createRef();
   let fall = new Animated.Value(1);
   const token = useSelector(selectToken);
+  const Adata = useSelector(selectParkingA);
 
-  useEffect(async () => {
-    const userData = await parkingAPI.getParkingData(token, 'a_sector');
-    console.log(userData);
+  useEffect(() => {
+    dispatch(getParkingData({sector: 'a_sector', token: token}));
   }, []);
 
   return (
@@ -57,8 +56,9 @@ const HomeScreen = ({navigation}) => {
             zoomStep={0.5}
             initialZoom={1.0}
             bindToBorders={true}>
-            <AreaDrawing />
+            <AreaDrawing drawingData={Adata} />
           </ReactNativeZoomableView>
+          <AreaSelect />
           <StateArea />
         </View>
       </AppSafeArea>

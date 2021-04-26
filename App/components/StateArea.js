@@ -12,7 +12,7 @@ export const StateArea = ({disable, style, onPress, children, ...props}) => {
         <Text>주차가능</Text>
       </View>
       <View style={styles.stateItem}>
-        <View style={[styles.circle, {backgroundColor: colors.red}]}></View>
+        <View style={[styles.circle, {backgroundColor: '#f5f5f5'}]}></View>
         <Text>이용불가</Text>
       </View>
     </View>

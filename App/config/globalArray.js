@@ -36,3 +36,5 @@ export const apartOptions = [
   '하계 아이원아파트',
   '하계 장미아파트',
 ];
+
+export const floorOptions = ['B2', 'B1'];
