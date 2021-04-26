@@ -1,13 +1,6 @@
 import React, {Component, useEffect, useState} from 'react';
-import {
-  ImageBackground,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {logout, selectUser, selectToken} from '../../reducer/userSlice';
+import {View, Image} from 'react-native';
+import {selectUser, selectToken} from '../../reducer/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppHeader} from '../../components/AppHeader';
 import {AppSafeArea} from '../../components/AppSafeArea';
@@ -19,10 +12,18 @@ import MyIcon from '../../config/Icon-font.js';
 import {BottomSheetInner} from '../../components/BottomSheetInner';
 import {AreaDrawing} from '../../components/AreaDrawing';
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
-import {getParkingData, selectParkingA} from '../../reducer/parkingSlice';
+import {
+  getParkingData,
+  selectParkingA,
+  selectParkingB,
+  selectParkingC,
+  parkingStatus,
+} from '../../reducer/parkingSlice';
 import {AreaSelect} from '../../components/AreaSelect';
 import AppModal from '../../components/AppModal';
 import {ModalButtonView} from '../../components/ModalButtonView';
+import ModalSplash from '../../components/ModalSplash';
+import LoadingModal from '../../components/LoadingModal';
 
 const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -32,12 +33,25 @@ const HomeScreen = ({navigation}) => {
   let fall = new Animated.Value(1);
   const token = useSelector(selectToken);
   const Adata = useSelector(selectParkingA);
+  const Bdata = useSelector(selectParkingB);
+  const Cdata = useSelector(selectParkingC);
+  const dataLoading = useSelector(parkingStatus);
   const [visibleModal, setVisibleModal] = useState(false);
+  const [refreshCount, setRefreshCount] = useState(0);
 
   useEffect(() => {
     dispatch(getParkingData({sector: 'a_sector', token: token}));
-  }, []);
+    dispatch(getParkingData({sector: 'b_sector', token: token}));
+    dispatch(getParkingData({sector: 'c_sector', token: token}));
+  }, [refreshCount]);
 
+  if (dataLoading == 'loading') {
+    return (
+      <AppModal visible={true}>
+        <LoadingModal />
+      </AppModal>
+    );
+  }
   return (
     <>
       <AppSafeArea>
@@ -57,17 +71,20 @@ const HomeScreen = ({navigation}) => {
         />
         <View style={{flex: 1, width: '100%', height: '100%'}}>
           <ReactNativeZoomableView
-            maxZoom={1.5}
-            minZoom={0.5}
-            zoomStep={0.5}
-            initialZoom={1.0}
-            bindToBorders={true}>
+            maxZoom={2.0}
+            minZoom={1.0}
+            zoomStep={0.8}
+            initialZoom={1.05}>
             <AreaDrawing
-              drawingData={Adata}
+              Adata={Adata}
+              Bdata={Bdata}
+              Cdata={Cdata}
               onPress={() => setVisibleModal(true)}
             />
           </ReactNativeZoomableView>
-          <AreaSelect />
+          <AreaSelect
+            onPressRefresh={() => setRefreshCount(prev => prev + 1)}
+          />
           <StateArea visible={visibleModal} />
         </View>
       </AppSafeArea>

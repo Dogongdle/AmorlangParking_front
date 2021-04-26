@@ -62,6 +62,7 @@ export const images = {
   parking: require('../images/parking.png'),
   user: require('../images/user.png'),
   refresh: require('../images/refresh-button.png'),
+  parkingIcon: require('../images/parkingIcon.png'),
 };
 
 export const storyBoardDimensions = {

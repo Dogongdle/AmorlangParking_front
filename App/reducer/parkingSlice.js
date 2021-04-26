@@ -10,7 +10,7 @@ export const getParkingData = createAsyncThunk(
       payload.sector,
     );
     if (response.status != 200) throw Error(response.data);
-    return response.data;
+    return {sector: payload.sector, data: response.data};
   },
 );
 
@@ -21,12 +21,26 @@ export const parkingSlice = createSlice({
     BsectorData: [],
     CsectorData: [],
     DsectorData: [],
+    status: null,
   },
 
   reducers: {},
   extraReducers: {
     [getParkingData.fulfilled]: (state, action) => {
-      state.AsectorData = action.payload;
+      switch (action.payload.sector) {
+        case 'a_sector':
+          state.AsectorData = action.payload.data;
+          break;
+        case 'b_sector':
+          state.BsectorData = action.payload.data;
+          break;
+        case 'c_sector':
+          state.CsectorData = action.payload.data;
+          break;
+        case 'd_sector':
+          state.DsectorData = action.payload.data;
+          break;
+      }
       state.status = 'success';
     },
     [getParkingData.pending]: (state, action) => {
@@ -40,5 +54,9 @@ export const parkingSlice = createSlice({
 });
 
 export const selectParkingA = state => state.parking.AsectorData;
+export const selectParkingB = state => state.parking.BsectorData;
+export const selectParkingC = state => state.parking.CsectorData;
+export const selectParkingD = state => state.parking.DsectorData;
+export const parkingStatus = state => state.parking.status;
 
 export default parkingSlice.reducer;
