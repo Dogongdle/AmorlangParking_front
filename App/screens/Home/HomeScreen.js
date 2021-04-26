@@ -1,4 +1,4 @@
-import React, {Component, useEffect} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import {
   ImageBackground,
   StyleSheet,
@@ -21,6 +21,8 @@ import {AreaDrawing} from '../../components/AreaDrawing';
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 import {getParkingData, selectParkingA} from '../../reducer/parkingSlice';
 import {AreaSelect} from '../../components/AreaSelect';
+import AppModal from '../../components/AppModal';
+import {ModalButtonView} from '../../components/ModalButtonView';
 
 const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -30,6 +32,7 @@ const HomeScreen = ({navigation}) => {
   let fall = new Animated.Value(1);
   const token = useSelector(selectToken);
   const Adata = useSelector(selectParkingA);
+  const [visibleModal, setVisibleModal] = useState(false);
 
   useEffect(() => {
     dispatch(getParkingData({sector: 'a_sector', token: token}));
@@ -38,6 +41,9 @@ const HomeScreen = ({navigation}) => {
   return (
     <>
       <AppSafeArea>
+        <AppModal visible={visibleModal}>
+          <ModalButtonView onPress={() => setVisibleModal(false)} />
+        </AppModal>
         <AppHeader
           onPressLeft={() => navigation.openDrawer()}
           onPressRight={() => navigation.navigate('Notifications')}
@@ -56,10 +62,13 @@ const HomeScreen = ({navigation}) => {
             zoomStep={0.5}
             initialZoom={1.0}
             bindToBorders={true}>
-            <AreaDrawing drawingData={Adata} />
+            <AreaDrawing
+              drawingData={Adata}
+              onPress={() => setVisibleModal(true)}
+            />
           </ReactNativeZoomableView>
           <AreaSelect />
-          <StateArea />
+          <StateArea visible={visibleModal} />
         </View>
       </AppSafeArea>
       <BottomSheet

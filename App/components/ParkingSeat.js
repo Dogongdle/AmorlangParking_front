@@ -7,6 +7,7 @@ export const ParkingSeat = ({style, enable, onPress, children, ...props}) => {
   console.log(props.seatNumber);
   return (
     <TouchableOpacity
+      disabled={enable == true ? false : true}
       style={[
         styles.parkingSeatView,
         enable == true
@@ -14,7 +15,7 @@ export const ParkingSeat = ({style, enable, onPress, children, ...props}) => {
           : {
               backgroundColor: colors.lightGrey,
             },
-        props.seatNumber == 8 && {marginTop: width * 30},
+        props.seatNumber % 2 == 0 && {marginTop: width * 30},
       ]}
       onPress={onPress}
     />

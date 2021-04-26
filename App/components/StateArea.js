@@ -1,21 +1,23 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 //custom imports
 import {colors, height, width} from '../config/globalStyles';
 
 export const StateArea = ({disable, style, onPress, children, ...props}) => {
   return (
-    <View style={[styles.indicator, style]}>
-      <View style={styles.stateItem}>
-        <View
-          style={[styles.circle, {backgroundColor: colors.darkBlue}]}></View>
-        <Text>주차가능</Text>
+    <>
+      <View style={[styles.indicator, style]}>
+        <View style={styles.stateItem}>
+          <View
+            style={[styles.circle, {backgroundColor: colors.darkBlue}]}></View>
+          <Text>주차가능</Text>
+        </View>
+        <View style={styles.stateItem}>
+          <View style={[styles.circle, {backgroundColor: '#f5f5f5'}]}></View>
+          <Text>이용불가</Text>
+        </View>
       </View>
-      <View style={styles.stateItem}>
-        <View style={[styles.circle, {backgroundColor: '#f5f5f5'}]}></View>
-        <Text>이용불가</Text>
-      </View>
-    </View>
+    </>
   );
 };
 
