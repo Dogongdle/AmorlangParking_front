@@ -7,7 +7,7 @@ import {fonts, height, width} from '../config/globalStyles';
 export const AppSafeArea = ({size = width * 9, style, children, ...props}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar animated={true} backgroundColor="#61dafb" />
+      <StatusBar barStyle="dark-content" />
       {children && children}
     </SafeAreaView>
   );
@@ -17,5 +17,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     flex: 1,
+    paddingTop: Platform.OS === 'android' ? 25 : 0,
   },
 });

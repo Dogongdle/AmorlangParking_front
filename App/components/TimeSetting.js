@@ -1,16 +1,19 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 //custom imports
 import {colors, height, width} from '../config/globalStyles';
 import MyIcon from '../config/Icon-font.js';
 import Moment from 'moment';
 
-export const TimeSetting = ({title, children, ...props}) => {
+export const TimeSetting = ({title, children, onPress, ...props}) => {
   const CurrentDate = Moment().format();
   var now = new Date().getTime();
 
   return (
-    <View style={styles.settingView}>
+    <TouchableOpacity
+      onPress={onPress}
+      activeOpacity={0.8}
+      style={styles.settingView}>
       <Text style={styles.settingText}>{title && title}</Text>
       <Text style={styles.timeText}>
         {Moment(CurrentDate).format('YYYY.MM.DD HH:MM')}
@@ -23,9 +26,9 @@ export const TimeSetting = ({title, children, ...props}) => {
           },
         ]}
         size={width * 7}
-        color={colors.black}
+        color={colors.primary}
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -40,8 +43,8 @@ const styles = StyleSheet.create({
     borderColor: colors.borderGrey,
   },
   settingText: {
-    fontSize: width * 13,
-    fontWeight: '300',
+    fontSize: width * 15,
+    fontWeight: '500',
 
     flex: 3,
   },
@@ -49,5 +52,6 @@ const styles = StyleSheet.create({
     fontSize: width * 11,
     fontWeight: '600',
     flex: 3,
+    color: colors.grey,
   },
 });

@@ -69,10 +69,10 @@ const HomeScreen = ({navigation}) => {
           }
           title={apartName}
         />
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, backgroundColor: colors.parkingBackground}}>
           <ReactNativeZoomableView
             maxZoom={2.0}
-            minZoom={1.0}
+            minZoom={0.8}
             zoomStep={0.8}
             initialZoom={1.0}>
             <AreaDrawing

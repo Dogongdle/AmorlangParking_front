@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  AmorangParking
+
+  Created by YongSeong on 2021/04/27.
+  
+*/
+"CFBundleDisplayName"="Aparking";
+"CFBundleName"="Aparking";

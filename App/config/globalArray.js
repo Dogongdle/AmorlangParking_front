@@ -39,4 +39,4 @@ export const apartOptions = [
   '하계 장미아파트',
 ];
 
-export const floorOptions = ['지상 1층', '지하 1층', '지하 2층'];
+export const floorOptions = ['지하 1층', '지하 2층', '지하 3층'];
