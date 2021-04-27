@@ -1,10 +1,10 @@
 import React, {Component, useEffect, useState} from 'react';
-import {View, Image} from 'react-native';
+import {View} from 'react-native';
 import {selectUser, selectToken} from '../../reducer/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppHeader} from '../../components/AppHeader';
 import {AppSafeArea} from '../../components/AppSafeArea';
-import {colors, images, width, height} from '../../config/globalStyles';
+import {colors, width, height} from '../../config/globalStyles';
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 import {StateArea} from '../../components/StateArea';
@@ -43,7 +43,7 @@ const HomeScreen = ({navigation}) => {
     dispatch(getParkingData({sector: 'a_sector', token: token}));
     dispatch(getParkingData({sector: 'b_sector', token: token}));
     dispatch(getParkingData({sector: 'c_sector', token: token}));
-  }, [refreshCount]);
+  }, [refreshCount, floor]);
 
   if (dataLoading == 'loading') {
     return (

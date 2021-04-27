@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   menuText: {
-    color: colors.grey,
+    color: colors.black,
     fontSize: width * 14,
-    fontWeight: '600',
+    fontWeight: '500',
   },
 });

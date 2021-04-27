@@ -1,10 +1,13 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 //custom imports
 import {colors, height, width} from '../config/globalStyles';
 import MyIcon from '../config/Icon-font.js';
 import {TimeSetting} from './TimeSetting';
 import Collapsible from 'react-native-collapsible';
+import {TimePicker} from 'react-native-simple-time-picker';
+import {UIActivityIndicator} from 'react-native-indicators';
+import {CompleteView} from './CompleteView';
 export const BottomSheetInner = ({
   disable,
   style,
@@ -12,8 +15,29 @@ export const BottomSheetInner = ({
   children,
   ...props
 }) => {
+  const [loading, setLoading] = useState(false);
+  const [complete, setComplete] = useState(false);
   const [startCollapsed, setStartCollapsed] = useState(true);
   const [endCollapsed, setEndCollapsed] = useState(true);
+  const [startHours, setStartHours] = React.useState(null);
+  const [endHours, setEndHours] = React.useState(null);
+  const handleStartChange = (value: {hours: number}) => {
+    setStartHours(value.hours);
+  };
+  const handleEndChange = (value: {hours: number}) => {
+    setEndHours(value.hours);
+  };
+
+  useEffect(() => {
+    if (startHours && endHours) {
+      setLoading(true);
+      setEndCollapsed(true);
+      setTimeout(async () => {
+        await setLoading(false);
+        setComplete(true);
+      }, 5000);
+    }
+  }, [startHours, endHours]);
 
   return (
     <View style={styles.bottomSheetView}>
@@ -28,21 +52,49 @@ export const BottomSheetInner = ({
         <TimeSetting
           title="이중주차 시작 시간"
           onPress={() => setStartCollapsed(!startCollapsed)}
+          hour={startHours}
         />
         <Collapsible collapsed={startCollapsed}>
           <View>
-            <Text>dd</Text>
+            <TimePicker
+              value={startHours}
+              onChange={handleStartChange}
+              hoursUnit="시 00분"
+              pickerShows="hours"
+            />
           </View>
         </Collapsible>
         <TimeSetting
           title="예정 출차 시간"
-          onPress={() => setEndCollapsed(!startCollapsed)}
+          onPress={() => {
+            setEndCollapsed(!endCollapsed), setStartCollapsed(true);
+          }}
+          hour={endHours}
         />
         <Collapsible collapsed={endCollapsed}>
-          <View>
-            <Text>dd</Text>
-          </View>
+          <TimePicker
+            value={endHours}
+            onChange={handleEndChange}
+            hoursUnit="시 00분"
+            pickerShows="hours"
+          />
         </Collapsible>
+        {loading && (
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: height * 130,
+            }}>
+            <Text style={styles.loadingText}>이중 주차 가능 자리 탐색중</Text>
+            <UIActivityIndicator
+              style={{marginTop: height * 40}}
+              color={colors.primary}
+              size={40}
+            />
+          </View>
+        )}
+        {complete && <CompleteView />}
       </View>
     </View>
   );
@@ -83,5 +135,9 @@ const styles = StyleSheet.create({
   },
   renderBody: {
     marginTop: height * 30,
+  },
+  loadingText: {
+    fontSize: width * 10,
+    color: colors.primary,
   },
 });

@@ -1,36 +1,44 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 //custom imports
 import {colors, height, width} from '../config/globalStyles';
 import MyIcon from '../config/Icon-font.js';
 import Moment from 'moment';
 
-export const TimeSetting = ({title, children, onPress, ...props}) => {
-  const CurrentDate = Moment().format();
-  var now = new Date().getTime();
+export const TimeSetting = React.memo(
+  ({title, children, onPress, hour, ...props}) => {
+    const CurrentDate = Moment().format();
 
-  return (
-    <TouchableOpacity
-      onPress={onPress}
-      activeOpacity={0.8}
-      style={styles.settingView}>
-      <Text style={styles.settingText}>{title && title}</Text>
-      <Text style={styles.timeText}>
-        {Moment(CurrentDate).format('YYYY.MM.DD HH:MM')}
-      </Text>
-      <MyIcon
-        name={'alarm-4'}
-        style={[
-          {
-            transform: [{rotate: '180deg'}],
-          },
-        ]}
-        size={width * 7}
-        color={colors.primary}
-      />
-    </TouchableOpacity>
-  );
-};
+    const getHour = hour => {
+      return hour;
+    };
+
+    const formatHour = useMemo(() => getHour(hour), [hour]);
+
+    return (
+      <TouchableOpacity
+        onPress={onPress}
+        activeOpacity={0.8}
+        style={styles.settingView}>
+        <Text style={styles.settingText}>{title && title}</Text>
+        <Text style={styles.timeText}>
+          {Moment(CurrentDate).format('YYYY.MM.DD')}
+          {'      '} {formatHour && <Text>{formatHour}시 00분</Text>}
+        </Text>
+        <MyIcon
+          name={'alarm-4'}
+          style={[
+            {
+              transform: [{rotate: '180deg'}],
+            },
+          ]}
+          size={width * 7}
+          color={colors.primary}
+        />
+      </TouchableOpacity>
+    );
+  },
+);
 
 const styles = StyleSheet.create({
   settingView: {
@@ -53,5 +61,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     flex: 3,
     color: colors.grey,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });

@@ -1,17 +1,10 @@
 import React from 'react';
-import {
-  Image,
-  ImageBackground,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 //custom imports
 import {colors, height, width, images} from '../config/globalStyles';
 import {floorOptions} from '../config/globalArray';
-import ModalDropdown from 'react-native-modal-dropdown';
 import MyIcon from '../config/Icon-font.js';
+import {ActionSheet} from 'native-base';
 
 export const AreaSelect = ({
   disable,
@@ -23,29 +16,39 @@ export const AreaSelect = ({
   setFloor,
   ...props
 }) => {
+  const options = floorOptions;
+  const cancelIndex = 3;
+  const viewActionSheet = () => {
+    ActionSheet.show(
+      {
+        options: options,
+        cancelButtonIndex: cancelIndex,
+        title: '원하는 층 선택',
+      },
+      buttonIndex => {
+        if (buttonIndex < 3) setFloor(buttonIndex);
+      },
+    );
+  };
+
   return (
     <>
       <View style={[styles.indicator, style]}>
-        <ModalDropdown
-          onSelect={e => setFloor(prev => e)}
-          dropdownStyle={{width: width * 115, marginLeft: width * 60}}
-          options={floorOptions}>
-          <View style={styles.dropdownArea}>
-            <Text style={{color: colors.black, fontWeight: '600'}}>
-              {floorOptions[floor]}
-            </Text>
-            <MyIcon
-              name={'alarm-4'}
-              size={width * 9}
-              style={[
-                {
-                  transform: [{rotate: '180deg'}],
-                },
-              ]}
-              color={colors.primary}
-            />
-          </View>
-        </ModalDropdown>
+        <TouchableOpacity onPress={viewActionSheet} style={styles.dropdownArea}>
+          <Text style={{color: colors.black, fontWeight: '600'}}>
+            {floorOptions[floor]}
+          </Text>
+          <MyIcon
+            name={'alarm-4'}
+            size={width * 9}
+            style={[
+              {
+                transform: [{rotate: '180deg'}],
+              },
+            ]}
+            color={colors.primary}
+          />
+        </TouchableOpacity>
       </View>
       <TouchableOpacity
         activeOpacity={0.8}
