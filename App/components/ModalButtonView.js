@@ -1,36 +1,31 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {color} from 'react-native-reanimated';
 //custom imports
 import {colors, height, width} from '../config/globalStyles';
 
 import {ModalButton} from './ModalButton';
 import {useSelector, useDispatch} from 'react-redux';
-import {selectToken} from '../reducer/userSlice';
+import {selectToken, reserve} from '../reducer/userSlice';
 import parkingAPI from '../api/parking';
-import {
-  reserveSeat,
-  selectSeatSector,
-  selectSeatNumber,
-  clearSeat,
-} from '../reducer/parkingSlice';
+import {selectSeatSector, selectSeatNumber} from '../reducer/parkingSlice';
 
 export const ModalButtonView = ({
   onPress,
-  children,
   setRefreshCount,
   setVisibleModal,
-  ...props
 }) => {
   const token = useSelector(selectToken);
   const sector = useSelector(selectSeatSector);
   const number = useSelector(selectSeatNumber);
+  const dispatch = useDispatch();
 
   const fiveReserve = async () => {
     const response = await parkingAPI.reserveSeat(token, sector, number);
     console.log(response);
     if (response.status === 200) {
       setRefreshCount(prev => prev + 1);
+      dispatch(reserve(true));
       setVisibleModal(false);
     }
   };

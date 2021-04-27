@@ -1,6 +1,10 @@
 import React, {Component, useEffect, useState} from 'react';
 import {View} from 'react-native';
-import {selectUser, selectToken} from '../../reducer/userSlice';
+import {
+  selectUser,
+  selectToken,
+  selectReserving,
+} from '../../reducer/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppHeader} from '../../components/AppHeader';
 import {AppSafeArea} from '../../components/AppSafeArea';
@@ -29,6 +33,7 @@ import {AppStopWatch} from '../../components/AppStopWatch';
 const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const reserveStatus = useSelector(selectReserving);
   const apartName = user.apart.substring(1, user.apart.length - 1);
   let bottomSheet = React.createRef();
   let fall = new Animated.Value(1);
@@ -97,8 +102,11 @@ const HomeScreen = ({navigation}) => {
             setFloor={setFloor}
             onPressRefresh={() => setRefreshCount(prev => prev + 1)}
           />
-          <AppStopWatch />
-          <StateArea visible={visibleModal} />
+          {reserveStatus == true ? (
+            <AppStopWatch />
+          ) : (
+            <StateArea visible={visibleModal} />
+          )}
         </View>
       </AppSafeArea>
       <BottomSheet

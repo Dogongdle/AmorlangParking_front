@@ -28,7 +28,7 @@ export const userSlice = createSlice({
       state.user.apart = action.payload;
     },
     reserve: (state, action) => {
-      state.user.reserve = true;
+      state.user.reserving = action.payload;
     },
   },
 });
@@ -37,5 +37,6 @@ export const {login, setUser, logout, register, reserve} = userSlice.actions; //
 export const selectLogin = state => state.user.loggedIn;
 export const selectToken = state => state.user.token;
 export const selectUser = state => state.user.user;
+export const selectReserving = state => state.user.reserving;
 
 export default userSlice.reducer;
