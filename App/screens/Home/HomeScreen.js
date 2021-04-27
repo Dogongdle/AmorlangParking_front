@@ -18,11 +18,13 @@ import {
   selectParkingB,
   selectParkingC,
   parkingStatus,
+  clearSeat,
 } from '../../reducer/parkingSlice';
 import {AreaSelect} from '../../components/AreaSelect';
 import AppModal from '../../components/AppModal';
 import {ModalButtonView} from '../../components/ModalButtonView';
 import LoadingModal from '../../components/LoadingModal';
+import {AppStopWatch} from '../../components/AppStopWatch';
 
 const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -40,9 +42,9 @@ const HomeScreen = ({navigation}) => {
   const [floor, setFloor] = useState(0);
 
   useEffect(() => {
-    dispatch(getParkingData({sector: 'a_sector', token: token}));
-    dispatch(getParkingData({sector: 'b_sector', token: token}));
-    dispatch(getParkingData({sector: 'c_sector', token: token}));
+    dispatch(getParkingData({sector: 'a', token: token}));
+    dispatch(getParkingData({sector: 'b', token: token}));
+    dispatch(getParkingData({sector: 'c', token: token}));
   }, [refreshCount, floor]);
 
   if (dataLoading == 'loading') {
@@ -56,7 +58,14 @@ const HomeScreen = ({navigation}) => {
     <>
       <AppSafeArea>
         <AppModal visible={visibleModal}>
-          <ModalButtonView onPress={() => setVisibleModal(false)} />
+          <ModalButtonView
+            setRefreshCount={setRefreshCount}
+            setVisibleModal={setVisibleModal}
+            onPress={() => {
+              setVisibleModal(false);
+              dispatch(clearSeat());
+            }}
+          />
         </AppModal>
         <AppHeader
           onPressLeft={() => navigation.openDrawer()}
@@ -76,6 +85,7 @@ const HomeScreen = ({navigation}) => {
             zoomStep={0.8}
             initialZoom={1.0}>
             <AreaDrawing
+              floor={floor}
               Adata={Adata}
               Bdata={Bdata}
               Cdata={Cdata}
@@ -87,6 +97,7 @@ const HomeScreen = ({navigation}) => {
             setFloor={setFloor}
             onPressRefresh={() => setRefreshCount(prev => prev + 1)}
           />
+          <AppStopWatch />
           <StateArea visible={visibleModal} />
         </View>
       </AppSafeArea>

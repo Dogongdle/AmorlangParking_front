@@ -1,5 +1,4 @@
 import parkingAPI from './API';
-
 const getParkingData = async (token, sector) => {
   try {
     return await parkingAPI.get(`/data/${sector}/`, null, {
@@ -13,9 +12,9 @@ const getParkingData = async (token, sector) => {
   }
 };
 
-const reserveSeat = async token => {
+const reserveSeat = async (token, sector, number) => {
   try {
-    return await parkingAPI.get(`/data/${sector}/`, null, {
+    return await parkingAPI.post(`/data/${sector}/${number}`, null, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + token,
@@ -28,4 +27,5 @@ const reserveSeat = async token => {
 
 export default {
   getParkingData,
+  reserveSeat,
 };

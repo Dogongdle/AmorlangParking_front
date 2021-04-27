@@ -28,7 +28,7 @@ const CodeVerifyScreen = ({navigation, route}) => {
   const [modalSplash, setModalSplash] = useState('none');
   const [code, setCode] = useState(null);
   const dispatch = useDispatch();
-  // const {apart, region} = route.params;
+  const {apart, region} = route.params;
   const token = useSelector(selectToken);
 
   const handleUpdate = () => {
@@ -42,15 +42,19 @@ const CodeVerifyScreen = ({navigation, route}) => {
       });
   };
 
-  const verifyCheck = code => {
-    parkingAPI
-      .verifyCheck(token, {apart: JSON.stringify(apart), code: code})
-      .then(res => {
-        console.log(res);
-        if ((res.status = 200)) handleUpdate;
-        else Alert('인증번호가 틀립니다.');
-      });
-  };
+  // const verifyCheck = () => {
+  //   parkingAPI
+  //     .verifyCheck(token, {
+  //       name: JSON.stringify(apart),
+  //       code: JSON.stringify(code),
+  //     })
+  //     .then(res => {
+  //       console.log(res);
+  //       if (res.data.response) {
+  //         handleUpdate;
+  //       } else console.log('fail');
+  //     });
+  // };
 
   const openModal = () => {
     setVisibleModal(true);
@@ -87,8 +91,8 @@ const CodeVerifyScreen = ({navigation, route}) => {
         </Animatable.View>
 
         <View style={styles.tagArea}>
-          <AppTag>region</AppTag>
-          <AppTag>apart</AppTag>
+          <AppTag>{region}</AppTag>
+          <AppTag>{apart}</AppTag>
         </View>
         <View style={styles.dropdownArea}>
           <View
@@ -155,7 +159,7 @@ const CodeVerifyScreen = ({navigation, route}) => {
         </View>
         <AppButton
           style={{marginTop: height * 30}}
-          onPress={() => verifyCheck(code)}
+          onPress={handleUpdate}
           disable={code && code.length > 10 ? false : true}>
           <Text style={styles.buttonText}>인증 완료</Text>
         </AppButton>

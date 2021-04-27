@@ -5,13 +5,13 @@ import {colors, height, width, images} from '../config/globalStyles';
 import {AppButton} from './AppButton';
 import * as Animatable from 'react-native-animatable';
 
-export const CompleteView = ({disable, style, onPress, children, ...props}) => {
+export const CompleteView = ({style, number, ...props}) => {
   return (
     <View style={styles.completeView}>
       <Text style={styles.completeViewTitle}>자리가 탐색되었습니다!!</Text>
       <Text style={styles.completeViewText}>
         지하 2층 주차장에 이중주차 가능 한 장소{' '}
-        <Text style={styles.pointText}>3곳</Text> 발견되었습니다.
+        <Text style={styles.pointText}>{number} 곳</Text> 발견되었습니다.
       </Text>
       <Animatable.View
         animation="fadeInUp"

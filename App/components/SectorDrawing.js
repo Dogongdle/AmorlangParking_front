@@ -4,7 +4,7 @@ import {View} from 'react-native';
 
 import {ParkingSeat} from './ParkingSeat';
 
-export const SectorDrawing = React.memo(({data, onPress, style}) => {
+export const SectorDrawing = React.memo(({data, onPress, style, sector}) => {
   return (
     <View style={style}>
       {data &&
@@ -14,6 +14,7 @@ export const SectorDrawing = React.memo(({data, onPress, style}) => {
             seatNumber={item.parkingSeat}
             key={item.parkingSeat}
             onPress={onPress}
+            sector={sector}
           />
         ))}
     </View>

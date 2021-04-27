@@ -9,10 +9,25 @@ export const getParkingData = createAsyncThunk(
       payload.token,
       payload.sector,
     );
+    console.log(response);
     if (response.status != 200) throw Error(response.data);
     return {sector: payload.sector, data: response.data};
   },
 );
+
+// export const reserveSeat = createAsyncThunk(
+//   'parking/getParkingData',
+//   async payload => {
+//     const response = await parkingAPI.reserveSeat(
+//       payload.token,
+//       payload.sector,
+//       payload.number,
+//     );
+//     console.log('야된다', response);
+//     if (response.status != 200) throw Error(response.data);
+//     return;
+//   },
+// );
 
 export const parkingSlice = createSlice({
   name: 'user',
@@ -22,22 +37,33 @@ export const parkingSlice = createSlice({
     CsectorData: [],
     DsectorData: [],
     status: 'success',
+    selectSeatNumber: null,
+    selectSeatSector: null,
   },
 
-  reducers: {},
+  reducers: {
+    selectSeat: (state, action) => {
+      state.selectSeatNumber = action.payload.number;
+      state.selectSeatSector = action.payload.sector;
+    },
+    clearSeat: state => {
+      state.selectSeatNumber = null;
+      state.selectSeatSector = null;
+    },
+  },
   extraReducers: {
     [getParkingData.fulfilled]: (state, action) => {
       switch (action.payload.sector) {
-        case 'a_sector':
+        case 'a':
           state.AsectorData = action.payload.data;
           break;
-        case 'b_sector':
+        case 'b':
           state.BsectorData = action.payload.data;
           break;
-        case 'c_sector':
+        case 'c':
           state.CsectorData = action.payload.data;
           break;
-        case 'd_sector':
+        case 'd':
           state.DsectorData = action.payload.data;
           break;
       }
@@ -58,5 +84,8 @@ export const selectParkingB = state => state.parking.BsectorData;
 export const selectParkingC = state => state.parking.CsectorData;
 export const selectParkingD = state => state.parking.DsectorData;
 export const parkingStatus = state => state.parking.status;
+export const {selectSeat, clearSeat} = parkingSlice.actions;
+export const selectSeatNumber = state => state.parking.selectSeatNumber;
+export const selectSeatSector = state => state.parking.selectSeatSector;
 
 export default parkingSlice.reducer;

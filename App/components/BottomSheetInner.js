@@ -84,17 +84,17 @@ export const BottomSheetInner = ({
             style={{
               justifyContent: 'center',
               alignItems: 'center',
-              marginTop: height * 130,
+              marginTop: height * 100,
             }}>
             <Text style={styles.loadingText}>이중 주차 가능 자리 탐색중</Text>
             <UIActivityIndicator
-              style={{marginTop: height * 40}}
+              style={{marginTop: height * 30}}
               color={colors.primary}
               size={40}
             />
           </View>
         )}
-        {complete && <CompleteView />}
+        {complete && <CompleteView number={2} />}
       </View>
     </View>
   );
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: width * 18,
-    fontWeight: '600',
+    fontWeight: '800',
   },
   headerText: {
     fontSize: width * 12,

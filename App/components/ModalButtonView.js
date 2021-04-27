@@ -3,15 +3,44 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {color} from 'react-native-reanimated';
 //custom imports
 import {colors, height, width} from '../config/globalStyles';
-import MyIcon from '../config/Icon-font.js';
-import {ModalButton} from './ModalButton';
 
-export const ModalButtonView = ({onPress, children, ...props}) => {
+import {ModalButton} from './ModalButton';
+import {useSelector, useDispatch} from 'react-redux';
+import {selectToken} from '../reducer/userSlice';
+import parkingAPI from '../api/parking';
+import {
+  reserveSeat,
+  selectSeatSector,
+  selectSeatNumber,
+  clearSeat,
+} from '../reducer/parkingSlice';
+
+export const ModalButtonView = ({
+  onPress,
+  children,
+  setRefreshCount,
+  setVisibleModal,
+  ...props
+}) => {
+  const token = useSelector(selectToken);
+  const sector = useSelector(selectSeatSector);
+  const number = useSelector(selectSeatNumber);
+
+  const fiveReserve = async () => {
+    const response = await parkingAPI.reserveSeat(token, sector, number);
+    console.log(response);
+    if (response.status === 200) {
+      setRefreshCount(prev => prev + 1);
+      setVisibleModal(false);
+    }
+  };
+
   return (
     <View style={styles.modalButtonView}>
       <ModalButton
         icon="alarm-1"
         size={18}
+        onPress={fiveReserve}
         color={colors.primary}
         title="5분 예약하기"
         style={{marginRight: width * 5}}
