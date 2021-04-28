@@ -15,6 +15,7 @@ import {AppMenu} from './AppMenu';
 import MyIcon from '../config/Icon-font.js';
 import AppModal from './AppModal';
 import ModalSplash from './ModalSplash';
+import {SocialTag} from './SocialTag';
 
 const AppDrawer = ({navigation}) => {
   const [visibleModal, setVisibleModal] = useState(false);
@@ -30,6 +31,8 @@ const AppDrawer = ({navigation}) => {
     setModalSplash('flex');
   };
 
+  const apartName = user.apart.substring(1, user.apart.length - 1);
+
   return (
     <View style={{flex: 1}}>
       <View
@@ -41,9 +44,13 @@ const AppDrawer = ({navigation}) => {
         <View style={{marginTop: height * 50}}>
           <View style={styles.profileView}>
             <Image style={styles.profileImage} source={images.user} />
+            <SocialTag
+              provider="kakao"
+              style={{position: 'absolute', bottom: 0, right: 0}}
+            />
           </View>
           <Text style={styles.userName}>{user.username}</Text>
-          <Text style={styles.apartText}>{user.apart}</Text>
+          <Text style={styles.apartText}>{apartName}</Text>
         </View>
       </View>
       <View style={{flex: 5}}>
@@ -51,11 +58,7 @@ const AppDrawer = ({navigation}) => {
         <AppMenu>장애인 인증</AppMenu>
         <AppMenu
           leftIcon={
-            <MyIcon
-              name={'alarm-5'}
-              size={width * 19}
-              color={colors.borderGrey}
-            />
+            <MyIcon name={'alarm-5'} size={width * 19} color={colors.primary} />
           }
           onPress={openModal}>
           로그아웃
@@ -107,7 +110,6 @@ const styles = StyleSheet.create({
     marginTop: height * 10,
   },
   profileView: {
-    borderWidth: 3,
     width: width * 70,
     height: width * 70,
     justifyContent: 'center',
@@ -115,6 +117,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderColor: colors.doubleButtonGrey,
     marginBottom: height * 20,
+    backgroundColor: colors.white,
   },
   profileImage: {
     width: '70%',

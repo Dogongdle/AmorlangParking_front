@@ -16,6 +16,7 @@ import LoadingScreen from './Loading/LoadingScreen';
 import NotificationsScreen from './screens/Home/NotificationsScreen';
 import AppDrawer from './components/AppDrawer';
 import HomeStack from './navigation/HomeStack';
+import {Root} from 'native-base';
 
 const StackApp = createStackNavigator();
 
@@ -71,45 +72,47 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <SafeAreaProvider>
-        <NavigationContainer>
-          <StackApp.Navigator mode="modal">
-            {loading ? (
-              <StackApp.Screen
-                name="Loading"
-                component={LoadingScreen}
-                options={navOptionHandler}
-              />
-            ) : (
-              <>
-                {!loggedIn ? (
-                  <StackApp.Screen
-                    name="Login"
-                    component={loginScreen}
-                    options={navOptionHandler}
-                  />
-                ) : (
-                  <>
-                    {!user.apart ? (
-                      <StackApp.Screen
-                        name="Register"
-                        component={RegisterStack}
-                        options={navOptionHandler}
-                      />
-                    ) : (
-                      <StackApp.Screen
-                        name="Home"
-                        component={DrawerNavigator}
-                        options={navOptionHandler}
-                      />
-                    )}
-                  </>
-                )}
-              </>
-            )}
-          </StackApp.Navigator>
-        </NavigationContainer>
-      </SafeAreaProvider>
+      <Root>
+        <SafeAreaProvider>
+          <NavigationContainer>
+            <StackApp.Navigator mode="modal">
+              {loading ? (
+                <StackApp.Screen
+                  name="Loading"
+                  component={LoadingScreen}
+                  options={navOptionHandler}
+                />
+              ) : (
+                <>
+                  {!loggedIn ? (
+                    <StackApp.Screen
+                      name="Login"
+                      component={loginScreen}
+                      options={navOptionHandler}
+                    />
+                  ) : (
+                    <>
+                      {!user.apart ? (
+                        <StackApp.Screen
+                          name="Register"
+                          component={RegisterStack}
+                          options={navOptionHandler}
+                        />
+                      ) : (
+                        <StackApp.Screen
+                          name="Home"
+                          component={DrawerNavigator}
+                          options={navOptionHandler}
+                        />
+                      )}
+                    </>
+                  )}
+                </>
+              )}
+            </StackApp.Navigator>
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </Root>
     </Provider>
   );
 };

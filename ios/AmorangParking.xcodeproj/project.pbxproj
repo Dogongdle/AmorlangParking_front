@@ -11,6 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2A57799A2637B76D007A4563 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A57799C2637B76D007A4563 /* InfoPlist.strings */; };
 		2A97403A262F2C14009B3AC6 /* amorlangicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A974039262F2C14009B3AC6 /* amorlangicon.ttf */; };
 		2AAB5F422619CA4A00B1B865 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2AAB5F412619CA4A00B1B865 /* GoogleService-Info.plist */; };
 		2AAB5F462619CBAA00B1B865 /* google-signin in Resources */ = {isa = PBXBuildFile; fileRef = 2AAB5F452619CBAA00B1B865 /* google-signin */; };
@@ -45,6 +46,8 @@
 		1C0C68CD03B9D57F897283A7 /* Pods-AmorangParking-AmorangParkingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmorangParking-AmorangParkingTests.release.xcconfig"; path = "Target Support Files/Pods-AmorangParking-AmorangParkingTests/Pods-AmorangParking-AmorangParkingTests.release.xcconfig"; sourceTree = "<group>"; };
 		1D862DE776EA4F77AA5A1F43 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		2506D01B21394C2CB0299BF4 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		2A57799B2637B76D007A4563 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2A57799F2637B773007A4563 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2A974039262F2C14009B3AC6 /* amorlangicon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = amorlangicon.ttf; path = ../App/assets/icon/amorlangicon.ttf; sourceTree = "<group>"; };
 		2AAB5F412619CA4A00B1B865 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2AAB5F452619CBAA00B1B865 /* google-signin */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "google-signin"; path = "../node_modules/@react-native-community/google-signin"; sourceTree = "<group>"; };
@@ -119,6 +122,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				2A57799C2637B76D007A4563 /* InfoPlist.strings */,
 			);
 			name = AmorangParking;
 			sourceTree = "<group>";
@@ -254,6 +258,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = NO;
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -272,6 +277,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
@@ -297,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A97403A262F2C14009B3AC6 /* amorlangicon.ttf in Resources */,
+				2A57799A2637B76D007A4563 /* InfoPlist.strings in Resources */,
 				2AAB5F502619D7C500B1B865 /* kakao-login in Resources */,
 				2AAB5F462619CBAA00B1B865 /* google-signin in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
@@ -483,12 +490,26 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		2A57799C2637B76D007A4563 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2A57799B2637B76D007A4563 /* en */,
+				2A57799F2637B773007A4563 /* ko */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5E31C59EC189E7364D9845BD /* Pods-AmorangParking-AmorangParkingTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				DEVELOPMENT_TEAM = MF2NJY28U9;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -543,6 +564,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AmorangParking/AmorangParking.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MF2NJY28U9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = AmorangParking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -570,6 +592,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AmorangParking/AmorangParking.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MF2NJY28U9;
 				INFOPLIST_FILE = AmorangParking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
