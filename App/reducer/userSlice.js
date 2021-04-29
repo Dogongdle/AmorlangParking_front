@@ -6,7 +6,7 @@ export const userSlice = createSlice({
   initialState: {
     user: null,
     loggedIn: false,
-    reserving: false,
+    reserving: null,
   },
 
   reducers: {
@@ -28,7 +28,7 @@ export const userSlice = createSlice({
       state.user.apart = action.payload;
     },
     reserve: (state, action) => {
-      state.user.reserving = action.payload;
+      state.user.reserving = true;
     },
   },
 });

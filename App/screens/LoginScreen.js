@@ -42,6 +42,7 @@ const loginScreen = () => {
   const handleLogin = async data => {
     setLoading(true);
     const userData = await parkingAPI.signUp(data);
+    console.log(userData);
     if (userData.status === 200) {
       const response = await parkingAPI.signIn(data);
       const token = response.data.token;

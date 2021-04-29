@@ -23,6 +23,7 @@ import {
   selectParkingC,
   parkingStatus,
   clearSeat,
+  clearData,
 } from '../../reducer/parkingSlice';
 import {AreaSelect} from '../../components/AreaSelect';
 import AppModal from '../../components/AppModal';
@@ -34,6 +35,7 @@ const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const reserveStatus = useSelector(selectReserving);
+  console.log(reserveStatus);
   const apartName = user.apart.substring(1, user.apart.length - 1);
   let bottomSheet = React.createRef();
   let fall = new Animated.Value(1);
@@ -50,6 +52,9 @@ const HomeScreen = ({navigation}) => {
     dispatch(getParkingData({sector: 'a', token: token}));
     dispatch(getParkingData({sector: 'b', token: token}));
     dispatch(getParkingData({sector: 'c', token: token}));
+    return () => {
+      dispatch(clearData());
+    };
   }, [refreshCount, floor]);
 
   if (dataLoading == 'loading') {

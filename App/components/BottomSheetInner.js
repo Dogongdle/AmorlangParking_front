@@ -29,13 +29,20 @@ export const BottomSheetInner = ({
   };
 
   useEffect(() => {
+    setComplete(false);
     if (startHours && endHours) {
-      setLoading(true);
-      setEndCollapsed(true);
-      setTimeout(async () => {
-        await setLoading(false);
-        setComplete(true);
-      }, 5000);
+      if (startHours > endHours) {
+        alert('시간을 체크해주세요');
+      } else if (startHours == endHours) {
+        alert('시작 시간과 끝시간이 같습니다.');
+      } else {
+        setLoading(true);
+        setEndCollapsed(true);
+        setTimeout(async () => {
+          await setLoading(false);
+          setComplete(true);
+        }, 5000);
+      }
     }
   }, [startHours, endHours]);
 
@@ -51,7 +58,11 @@ export const BottomSheetInner = ({
       <View style={styles.renderBody}>
         <TimeSetting
           title="이중주차 시작 시간"
-          onPress={() => setStartCollapsed(!startCollapsed)}
+          onPress={() => {
+            setStartCollapsed(!startCollapsed);
+            setStartHours(null);
+            setComplete(false);
+          }}
           hour={startHours}
         />
         <Collapsible collapsed={startCollapsed}>
