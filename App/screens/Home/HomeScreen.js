@@ -1,5 +1,5 @@
 import React, {Component, useEffect, useState} from 'react';
-import {View} from 'react-native';
+import {View, BackHandler, Alert} from 'react-native';
 import {
   selectUser,
   selectToken,
@@ -47,6 +47,25 @@ const HomeScreen = ({navigation}) => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [refreshCount, setRefreshCount] = useState(0);
   const [floor, setFloor] = useState(0);
+
+  const backAction = () => {
+    Alert.alert('앱 종료하기', '앱을 종료하시겠습니까', [
+      {
+        text: 'Cancel',
+        onPress: () => null,
+        style: 'cancel',
+      },
+      {text: 'YES', onPress: () => BackHandler.exitApp()},
+    ]);
+    return true;
+  };
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', backAction);
+
+    return () =>
+      BackHandler.removeEventListener('hardwareBackPress', backAction);
+  }, []);
 
   useEffect(() => {
     dispatch(getParkingData({sector: 'a', token: token}));

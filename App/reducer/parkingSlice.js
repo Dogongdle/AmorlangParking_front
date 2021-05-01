@@ -9,7 +9,6 @@ export const getParkingData = createAsyncThunk(
       payload.token,
       payload.sector,
     );
-    console.log(response);
     if (response.status != 200) throw Error(response.data);
     return {sector: payload.sector, data: response.data};
   },

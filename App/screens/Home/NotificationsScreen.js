@@ -1,5 +1,11 @@
-import React, {Component} from 'react';
-import {Text, SafeAreaView, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  BackHandler,
+  Alert,
+} from 'react-native';
 
 import {logout, selectUser} from '../../reducer/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
@@ -9,12 +15,6 @@ import MyIcon from '../../config/Icon-font.js';
 import {width, colors} from '../../config/globalStyles';
 
 const NotificationsScreen = ({navigation}) => {
-  const dispatch = useDispatch();
-  const user = useSelector(selectUser);
-  const handleLogout = () => {
-    dispatch(logout());
-  };
-
   return (
     <AppSafeArea>
       <AppHeader

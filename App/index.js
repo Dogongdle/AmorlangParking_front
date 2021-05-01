@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {BackHandler, Alert} from 'react-native';
 import loginScreen from './screens/LoginScreen';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
@@ -30,7 +31,7 @@ const App = () => {
   const user = useSelector(selectUser);
   const loading = useSelector(selectLoading);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const bootstrapAsync = async () => {
       let userToken;
 
