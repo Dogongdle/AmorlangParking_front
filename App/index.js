@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {BackHandler, Alert} from 'react-native';
 import loginScreen from './screens/LoginScreen';
 import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -18,6 +18,7 @@ import NotificationsScreen from './screens/Home/NotificationsScreen';
 import AppDrawer from './components/AppDrawer';
 import HomeStack from './navigation/HomeStack';
 import {Root} from 'native-base';
+import messaging from '@react-native-firebase/messaging';
 
 const StackApp = createStackNavigator();
 
@@ -30,6 +31,14 @@ const App = () => {
   const loggedIn = useSelector(selectLogin);
   const user = useSelector(selectUser);
   const loading = useSelector(selectLoading);
+
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+
+    return unsubscribe;
+  }, []);
 
   useEffect(() => {
     const bootstrapAsync = async () => {
