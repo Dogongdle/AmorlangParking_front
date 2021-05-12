@@ -27,7 +27,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.379989609546-derj79ptoo6qr9rpip5auie8carbvmqg</string>
+				<string>com.googleusercontent.apps.379989609546-eh0ke7ct0ri83bhns492u5t9d628sp9f</string>
 			</array>
 		</dict>
 		<dict>
@@ -86,6 +86,10 @@ kakao 94929080233448a77b28392e82cdd967
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

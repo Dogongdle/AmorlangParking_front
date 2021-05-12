@@ -2,7 +2,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {AppRegistry} from 'react-native';
 import {Provider} from 'react-redux';
 import App from './App';
@@ -12,9 +12,20 @@ import store from './App/store';
 import messaging from '@react-native-firebase/messaging';
 
 const ReduxProvider = () => {
-  messaging().setBackgroundMessageHandler(async remoteMessage => {
-    console.log('Message handled in the background!', remoteMessage);
-  });
+  async function requestUserPermission() {
+    const authStatus = await messaging().requestPermission();
+    const enabled =
+      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+    if (enabled) {
+      console.log('Authorization status:', authStatus);
+    }
+  }
+
+  useEffect(() => {
+    requestUserPermission();
+  }, []);
 
   return (
     <Provider store={store}>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>379989609546-eh0ke7ct0ri83bhns492u5t9d628sp9f.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.379989609546-eh0ke7ct0ri83bhns492u5t9d628sp9f</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>379989609546-hnkskq7fbcd83qvdatpfvcpqlgm9aa93.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAUlxH2vHPofzfWDPtYrQfjJCOOaczcCdU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>379989609546</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.kys.AmorangParking</string>
+	<key>PROJECT_ID</key>
+	<string>amorangparking</string>
+	<key>STORAGE_BUCKET</key>
+	<string>amorangparking.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:379989609546:ios:38a37c3cf0c9af19eeaab3</string>
+</dict>
+</plist>
