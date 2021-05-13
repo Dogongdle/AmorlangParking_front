@@ -42,9 +42,10 @@ const loginScreen = () => {
   const handleLogin = async data => {
     setLoading(true);
     const userData = await parkingAPI.signUp(data);
-    console.log(userData);
+    console.log('회원가입 후 유저데이터', userData);
     if (userData.status === 200) {
       const response = await parkingAPI.signIn(data);
+      console.log('로그인 후 리스폰스', response);
       const token = response.data.token;
       const userInfo = await parkingAPI.getUser(token);
       await dispatch(setUser(userInfo.data));

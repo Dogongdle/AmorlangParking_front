@@ -1,6 +1,9 @@
 import {GoogleSignin, statusCodes} from '@react-native-community/google-signin';
+import {Platform} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 //sign in
 const signInGoogle = async setUserInfo => {
+  const fcmToken = await AsyncStorage.getItem('deviceToken');
   //google sign in configuration with our credentials
   await GoogleSignin.configure({
     webClientId:
@@ -19,7 +22,9 @@ const signInGoogle = async setUserInfo => {
         setUserInfo({
           username: response.user.email,
           provider: 'google',
-          serviceId: 21341242,
+          serviceId: response.user.id.slice(0, 7),
+          platform: Platform.OS.toUpperCase(),
+          deviceToken: fcmToken,
         });
       })
       .catch(error => {

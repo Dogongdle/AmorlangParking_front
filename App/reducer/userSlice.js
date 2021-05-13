@@ -18,6 +18,7 @@ export const userSlice = createSlice({
     },
     logout: state => {
       AsyncStorage.removeItem('userToken');
+      AsyncStorage.removeItem('deviceToken');
       state.loggedIn = false;
     },
     setUser: (state, action) => {

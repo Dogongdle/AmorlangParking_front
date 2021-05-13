@@ -1,9 +1,12 @@
 import {appleAuth} from '@invertase/react-native-apple-authentication';
 import jwtDecode from 'jwt-decode';
+import {Platform} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const signInApple = async setUserInfo => {
   console.log('Beginning Apple Authentication');
   // start a login request
+  const fcmToken = await AsyncStorage.getItem('deviceToken');
   try {
     const appleAuthRequestResponse = await appleAuth.performRequest({
       requestedOperation: appleAuth.Operation.LOGIN,
@@ -24,9 +27,11 @@ const signInApple = async setUserInfo => {
     const decodedToken = jwtDecode(appleAuthRequestResponse.identityToken);
     setUserInfo({
       user: {
-        id: appleAuthRequestResponse.user,
-        email: decodedToken.email,
-        type: 'apple',
+        username: decodedToken.email,
+        provider: 'apple',
+        serviceId: appleAuthRequestResponse.user.slice(0, 5),
+        platform: Platform.OS.toUpperCase(),
+        deviceToken: fcmToken,
       },
     });
 
