@@ -61,4 +61,4 @@ buck-out/
 
 #dotenv
 .env
-.env.production
+/ios/.env.production

@@ -1,5 +1,5 @@
 import React, {Component, useEffect, useState} from 'react';
-import {View} from 'react-native';
+import {View, BackHandler, Alert} from 'react-native';
 import {
   selectUser,
   selectToken,
@@ -23,6 +23,7 @@ import {
   selectParkingC,
   parkingStatus,
   clearSeat,
+  clearData,
 } from '../../reducer/parkingSlice';
 import {AreaSelect} from '../../components/AreaSelect';
 import AppModal from '../../components/AppModal';
@@ -34,6 +35,7 @@ const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const reserveStatus = useSelector(selectReserving);
+  console.log(reserveStatus);
   const apartName = user.apart.substring(1, user.apart.length - 1);
   let bottomSheet = React.createRef();
   let fall = new Animated.Value(1);
@@ -46,10 +48,32 @@ const HomeScreen = ({navigation}) => {
   const [refreshCount, setRefreshCount] = useState(0);
   const [floor, setFloor] = useState(0);
 
+  const backAction = () => {
+    Alert.alert('앱 종료하기', '앱을 종료하시겠습니까', [
+      {
+        text: 'Cancel',
+        onPress: () => null,
+        style: 'cancel',
+      },
+      {text: 'YES', onPress: () => BackHandler.exitApp()},
+    ]);
+    return true;
+  };
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', backAction);
+
+    return () =>
+      BackHandler.removeEventListener('hardwareBackPress', backAction);
+  }, []);
+
   useEffect(() => {
     dispatch(getParkingData({sector: 'a', token: token}));
     dispatch(getParkingData({sector: 'b', token: token}));
     dispatch(getParkingData({sector: 'c', token: token}));
+    return () => {
+      dispatch(clearData());
+    };
   }, [refreshCount, floor]);
 
   if (dataLoading == 'loading') {

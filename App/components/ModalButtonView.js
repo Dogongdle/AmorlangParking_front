@@ -25,7 +25,7 @@ export const ModalButtonView = ({
     console.log(response);
     if (response.status === 200) {
       setRefreshCount(prev => prev + 1);
-      dispatch(reserve(true));
+      () => dispatch(reserve());
       setVisibleModal(false);
     }
   };

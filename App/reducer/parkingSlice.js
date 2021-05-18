@@ -9,7 +9,6 @@ export const getParkingData = createAsyncThunk(
       payload.token,
       payload.sector,
     );
-    console.log(response);
     if (response.status != 200) throw Error(response.data);
     return {sector: payload.sector, data: response.data};
   },
@@ -50,6 +49,12 @@ export const parkingSlice = createSlice({
       state.selectSeatNumber = null;
       state.selectSeatSector = null;
     },
+    clearData: state => {
+      state.AsectorData = [];
+      state.BsectorData = [];
+      state.CsectorData = [];
+      state.DsectorData = [];
+    },
   },
   extraReducers: {
     [getParkingData.fulfilled]: (state, action) => {
@@ -84,7 +89,7 @@ export const selectParkingB = state => state.parking.BsectorData;
 export const selectParkingC = state => state.parking.CsectorData;
 export const selectParkingD = state => state.parking.DsectorData;
 export const parkingStatus = state => state.parking.status;
-export const {selectSeat, clearSeat} = parkingSlice.actions;
+export const {selectSeat, clearSeat, clearData} = parkingSlice.actions;
 export const selectSeatNumber = state => state.parking.selectSeatNumber;
 export const selectSeatSector = state => state.parking.selectSeatSector;
 
