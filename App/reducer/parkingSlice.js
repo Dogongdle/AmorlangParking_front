@@ -14,19 +14,7 @@ export const getParkingData = createAsyncThunk(
   },
 );
 
-// export const reserveSeat = createAsyncThunk(
-//   'parking/getParkingData',
-//   async payload => {
-//     const response = await parkingAPI.reserveSeat(
-//       payload.token,
-//       payload.sector,
-//       payload.number,
-//     );
-//     console.log('야된다', response);
-//     if (response.status != 200) throw Error(response.data);
-//     return;
-//   },
-// );
+
 
 export const parkingSlice = createSlice({
   name: 'user',

@@ -1,5 +1,20 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-community/async-storage';
+import parkingAPI from '../api/parking';
+
+// export const reserveSeat = createAsyncThunk(
+//   'parking/getParkingData',
+//   async payload => {
+//     const response = await parkingAPI.reserveSeat(
+//       payload.token,
+//       payload.sector,
+//       payload.number,
+//     );
+//     console.log('야된다', response);
+//     if (response.status != 200) throw Error(response.data);
+//     return;
+//   },
+// );
 
 export const userSlice = createSlice({
   name: 'user',
@@ -29,8 +44,19 @@ export const userSlice = createSlice({
       state.user.apart = action.payload;
     },
     reserve: (state, action) => {
-      state.user.reserving = true;
+      console.log('예약됨');
+      state.reserving = true;
+      AsyncStorage.setItem('reserving', true);
     },
+    // extraReducers: {
+    //   [reserveSeat.fulfilled]: (state, action) => {
+    //     state.reserving = true;
+    //   },
+    //   [reserveSeat.rejected]: (state, action) => {
+    //     state.status = false;
+    //     alert('데이터를 받아오던 중 문제가 발생하였습니다.');
+    //   },
+    // },
   },
 });
 export const {login, setUser, logout, register, reserve} = userSlice.actions; //액션들을 익스포트

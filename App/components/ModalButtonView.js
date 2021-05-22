@@ -8,7 +8,11 @@ import {ModalButton} from './ModalButton';
 import {useSelector, useDispatch} from 'react-redux';
 import {selectToken, reserve} from '../reducer/userSlice';
 import parkingAPI from '../api/parking';
-import {selectSeatSector, selectSeatNumber} from '../reducer/parkingSlice';
+import {
+  selectSeatSector,
+  selectSeatNumber,
+  selectSeat,
+} from '../reducer/parkingSlice';
 
 export const ModalButtonView = ({
   onPress,
@@ -18,14 +22,16 @@ export const ModalButtonView = ({
   const token = useSelector(selectToken);
   const sector = useSelector(selectSeatSector);
   const number = useSelector(selectSeatNumber);
+  // const reserveSeat = useSelector(reserveSeat);
   const dispatch = useDispatch();
+
+  console.log('dd', sector);
 
   const fiveReserve = async () => {
     const response = await parkingAPI.reserveSeat(token, sector, number);
-    console.log(response);
     if (response.status === 200) {
       setRefreshCount(prev => prev + 1);
-      () => dispatch(reserve());
+      dispatch(reserve());
       setVisibleModal(false);
     }
   };

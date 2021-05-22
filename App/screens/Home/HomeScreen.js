@@ -4,6 +4,7 @@ import {
   selectUser,
   selectToken,
   selectReserving,
+  reserve,
 } from '../../reducer/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppHeader} from '../../components/AppHeader';
@@ -47,6 +48,8 @@ const HomeScreen = ({navigation}) => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [refreshCount, setRefreshCount] = useState(0);
   const [floor, setFloor] = useState(0);
+
+  console.log('예약상태', reserveStatus);
 
   const backAction = () => {
     Alert.alert('앱 종료하기', '앱을 종료하시겠습니까', [
