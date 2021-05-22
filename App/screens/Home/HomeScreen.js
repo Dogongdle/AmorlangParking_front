@@ -36,7 +36,7 @@ const HomeScreen = ({navigation}) => {
   const user = useSelector(selectUser);
   const reserveStatus = useSelector(selectReserving);
   console.log(reserveStatus);
-  const apartName = user.apart.substring(1, user.apart.length - 1);
+  // const apartName = user.apart.substring(1, user.apart.length - 1);
   let bottomSheet = React.createRef();
   let fall = new Animated.Value(1);
   const token = useSelector(selectToken);
@@ -105,7 +105,7 @@ const HomeScreen = ({navigation}) => {
           rightTitle={
             <MyIcon name={'alarm-8'} size={width * 19} color={colors.white} />
           }
-          title={apartName}
+          title={user.apart}
         />
         <View style={{flex: 1, backgroundColor: colors.parkingBackground}}>
           <ReactNativeZoomableView
