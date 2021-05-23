@@ -1,22 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-  BackHandler,
-  Alert,
-} from 'react-native';
+import {Text, Switch} from 'react-native';
 
-import {logout, selectUser} from '../../reducer/userSlice';
-import {useDispatch, useSelector} from 'react-redux';
 import {AppHeader} from '../../components/AppHeader';
 import {AppSafeArea} from '../../components/AppSafeArea';
 import MyIcon from '../../config/Icon-font.js';
 import {width, colors} from '../../config/globalStyles';
-import Notification from '../../components/Notification';
-import Swipeout from 'react-native-swipeout';
+import PushSwitch from '../../components/PushSwitch';
 
-const NotificationsScreen = ({navigation}) => {
+const PushSettingScreen = ({navigation}) => {
   return (
     <AppSafeArea>
       <AppHeader
@@ -31,12 +22,11 @@ const NotificationsScreen = ({navigation}) => {
           />
         }
         onPressLeft={() => navigation.goBack()}
-        title="알림"
+        title="알림 설정"
       />
-
-      <Notification />
+      <PushSwitch title="출차 알림" subtitle="찜한 자리에 대해 출차 시 알림" />
+      <PushSwitch title="입차 알림" subtitle="찜한 자리에 대해 입차 시 알림" />
     </AppSafeArea>
   );
 };
-
-export default NotificationsScreen;
+export default PushSettingScreen;

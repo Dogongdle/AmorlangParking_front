@@ -1,6 +1,6 @@
 import parkingAPI from './API';
 
-const checkPush = async token => {
+const getPushList = async token => {
   // 현재 유저에게 할당된 alarm을 받아오는 api
   try {
     console.log(data);
@@ -16,7 +16,7 @@ const checkPush = async token => {
 };
 
 const registerPush = async (token, data) => {
-  // 현재 유저에게 할당된 alarm api
+  // 자리 찜하기.
   try {
     console.log(data);
     return await parkingAPI.post('/push', data, {
@@ -59,7 +59,7 @@ const settingPush = async (token, data) => {
 };
 
 export default {
-  checkPush,
+  getPushList,
   registerPush,
   getSettingPush,
   settingPush,

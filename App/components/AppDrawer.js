@@ -54,6 +54,9 @@ const AppDrawer = ({navigation}) => {
       <View style={{flex: 5}}>
         <AppMenu>성별 인증(여성 전용 주차장)</AppMenu>
         <AppMenu>장애인 인증</AppMenu>
+        <AppMenu onPress={() => navigation.navigate('PushSetting')}>
+          알림 설정
+        </AppMenu>
         <AppMenu
           leftIcon={
             <MyIcon name={'alarm-5'} size={width * 19} color={colors.primary} />
