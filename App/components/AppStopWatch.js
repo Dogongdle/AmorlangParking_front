@@ -4,7 +4,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {colors, height, width} from '../config/globalStyles';
 import CountDown from 'react-native-countdown-component';
 import MyIcon from '../config/Icon-font.js';
-export const AppStopWatch = ({style, ...props}) => {
+export const AppStopWatch = React.memo(({style, ...props}) => {
   return (
     <View style={styles.stopWatchView}>
       <View
@@ -30,7 +30,7 @@ export const AppStopWatch = ({style, ...props}) => {
       />
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   stopWatchView: {

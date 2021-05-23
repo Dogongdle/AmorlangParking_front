@@ -11,6 +11,7 @@ import {
   selectUser,
   setUser,
   reserve,
+  setDuration,
 } from './reducer/userSlice';
 import {selectLoading, endLoading} from './reducer/loadingSlice';
 import {Provider, useDispatch, useSelector} from 'react-redux';
@@ -49,10 +50,17 @@ const App = () => {
   useEffect(() => {
     const bootstrapAsync = async () => {
       let userToken;
+      let reserveStatus;
 
       try {
         userToken = await AsyncStorage.getItem('userToken');
         reserveStatus = await AsyncStorage.getItem('reserving');
+        const duration = await AsyncStorage.getItem('Duration');
+        console.log('왜이래?', duration);
+        console.log(
+          '제발돼라',
+          parseInt(duration.substring(1, duration.length - 1)),
+        );
         if (userToken) {
           const userInfo = await parkingAPI.getUser(userToken);
           console.log('유저정보', userInfo.data);
@@ -65,6 +73,11 @@ const App = () => {
           console.log('예약상태 어떻지?', reserveStatus);
           if (reserveStatus && reserveStatus == 'true') {
             dispatch(reserve());
+          }
+          if (duration) {
+            dispatch(
+              setDuration(parseInt(duration.substring(1, duration.length - 1))),
+            );
           }
         }
         dispatch(endLoading());

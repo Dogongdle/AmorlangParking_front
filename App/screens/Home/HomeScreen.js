@@ -4,7 +4,7 @@ import {
   selectUser,
   selectToken,
   selectReserving,
-  reserve,
+  selectDuration,
 } from '../../reducer/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppHeader} from '../../components/AppHeader';
@@ -36,7 +36,8 @@ const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const reserveStatus = useSelector(selectReserving);
-  console.log(reserveStatus);
+  const duration = useSelector(selectDuration);
+  console.log('몇초주기', duration);
   // const apartName = user.apart.substring(1, user.apart.length - 1);
   let bottomSheet = React.createRef();
   let fall = new Animated.Value(1);
@@ -82,7 +83,7 @@ const HomeScreen = ({navigation}) => {
   useEffect(() => {
     const autoRefresh = setTimeout(() => {
       setRefreshCount(prev => prev + 1);
-    }, 20000);
+    }, 320000);
 
     return () => clearTimeout(autoRefresh);
   });

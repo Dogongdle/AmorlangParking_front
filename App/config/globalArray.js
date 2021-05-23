@@ -39,4 +39,4 @@ export const apartOptions = [
 
 export const floorOptions = ['지하 1층', '지하 2층', '지하 3층', '취소'];
 
-export const durationOptions = ['5초', '10초', '30초'];
+export const durationOptions = ['5초', '10초', '30초', '취소'];
