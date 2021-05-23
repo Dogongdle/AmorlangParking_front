@@ -6,8 +6,18 @@ import {AppSafeArea} from '../../components/AppSafeArea';
 import MyIcon from '../../config/Icon-font.js';
 import {width, colors} from '../../config/globalStyles';
 import PushSwitch from '../../components/PushSwitch';
+import parkingApi from '../../api/push';
+import {selectToken} from '../../reducer/userSlice';
+import {useSelector} from 'react-redux';
 
 const PushSettingScreen = ({navigation}) => {
+  const token = useSelector(selectToken);
+
+  useEffect(async () => {
+    const pushStatus = await parkingApi.getSettingPush(token);
+    console.log(pushStatus);
+  }, []);
+
   return (
     <AppSafeArea>
       <AppHeader
@@ -22,7 +32,7 @@ const PushSettingScreen = ({navigation}) => {
           />
         }
         onPressLeft={() => navigation.goBack()}
-        title="알림 설정"
+        title="설정"
       />
       <PushSwitch title="출차 알림" subtitle="찜한 자리에 대해 출차 시 알림" />
       <PushSwitch title="입차 알림" subtitle="찜한 자리에 대해 입차 시 알림" />

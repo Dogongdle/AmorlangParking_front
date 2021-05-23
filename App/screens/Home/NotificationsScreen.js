@@ -1,22 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import {
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-  BackHandler,
-  Alert,
-} from 'react-native';
 
-import {logout, selectUser} from '../../reducer/userSlice';
-import {useDispatch, useSelector} from 'react-redux';
 import {AppHeader} from '../../components/AppHeader';
 import {AppSafeArea} from '../../components/AppSafeArea';
 import MyIcon from '../../config/Icon-font.js';
 import {width, colors} from '../../config/globalStyles';
 import Notification from '../../components/Notification';
-import Swipeout from 'react-native-swipeout';
+import parkingAPI from '../../api/push';
+import {selectToken} from '../../reducer/userSlice';
+import {useSelector} from 'react-redux';
 
 const NotificationsScreen = ({navigation}) => {
+  const token = useSelector(selectToken);
+
+  useEffect(async () => {
+    const pushList = await parkingAPI.getPushList(token);
+    console.log(pushList);
+  }, []);
+
   return (
     <AppSafeArea>
       <AppHeader

@@ -79,6 +79,14 @@ const HomeScreen = ({navigation}) => {
     };
   }, [refreshCount, floor]);
 
+  useEffect(() => {
+    const autoRefresh = setTimeout(() => {
+      setRefreshCount(prev => prev + 1);
+    }, 20000);
+
+    return () => clearTimeout(autoRefresh);
+  });
+
   const reserveModal = () => {
     if (reserveStatus == true) {
       Alert.alert('현재 예약중인 자리가 있습니다.');

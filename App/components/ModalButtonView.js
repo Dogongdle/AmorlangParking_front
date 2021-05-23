@@ -25,8 +25,6 @@ export const ModalButtonView = ({
   // const reserveSeat = useSelector(reserveSeat);
   const dispatch = useDispatch();
 
-  console.log('dd', sector);
-
   const fiveReserve = async () => {
     const response = await parkingAPI.reserveSeat(token, sector, number);
     if (response.status === 200) {

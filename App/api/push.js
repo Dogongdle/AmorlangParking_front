@@ -3,7 +3,6 @@ import parkingAPI from './API';
 const getPushList = async token => {
   // 현재 유저에게 할당된 alarm을 받아오는 api
   try {
-    console.log(data);
     return await parkingAPI.get('/push', null, {
       headers: {
         'Content-Type': 'application/json',
@@ -32,7 +31,6 @@ const registerPush = async (token, data) => {
 
 const getSettingPush = async token => {
   try {
-    console.log(data);
     return await parkingAPI.get('/push/status', null, {
       headers: {
         'Content-Type': 'application/json',

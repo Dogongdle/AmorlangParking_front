@@ -23,6 +23,7 @@ export const userSlice = createSlice({
     loggedIn: false,
     reserving: null,
     reservingSeat: null,
+    duration: 10000,
   },
 
   reducers: {
@@ -45,9 +46,12 @@ export const userSlice = createSlice({
       state.user.apart = action.payload;
     },
     reserve: (state, action) => {
-      console.log('예약됨');
       state.reserving = true;
       AsyncStorage.setItem('reserving', 'true');
+    },
+    setDuration: (state, action) => {
+      state.duration = action.payload;
+      AsyncStorage.setItem('Duration', JSON.stringify(action.payload));
     },
     // extraReducers: {
     //   [reserveSeat.fulfilled]: (state, action) => {
@@ -60,11 +64,19 @@ export const userSlice = createSlice({
     // },
   },
 });
-export const {login, setUser, logout, register, reserve} = userSlice.actions; //액션들을 익스포트
+export const {
+  login,
+  setUser,
+  logout,
+  register,
+  reserve,
+  setDuration,
+} = userSlice.actions; //액션들을 익스포트
 
 export const selectLogin = state => state.user.loggedIn;
 export const selectToken = state => state.user.token;
 export const selectUser = state => state.user.user;
 export const selectReserving = state => state.user.reserving;
+export const selectDuration = state => state.user.duration;
 
 export default userSlice.reducer;

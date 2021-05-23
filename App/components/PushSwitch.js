@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     lineHeight: height * 25,
   },
   switchSubTitle: {
-    fontSize: width * 10,
+    fontSize: width * 11,
     color: colors.secondaryGrey,
   },
 });
