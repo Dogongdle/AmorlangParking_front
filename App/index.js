@@ -5,7 +5,13 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import AsyncStorage from '@react-native-community/async-storage';
-import {login, selectLogin, selectUser, setUser} from './reducer/userSlice';
+import {
+  login,
+  selectLogin,
+  selectUser,
+  setUser,
+  reserve,
+} from './reducer/userSlice';
 import {selectLoading, endLoading} from './reducer/loadingSlice';
 import {Provider, useDispatch, useSelector} from 'react-redux';
 import store from './store';
@@ -46,6 +52,7 @@ const App = () => {
 
       try {
         userToken = await AsyncStorage.getItem('userToken');
+        reserveStatus = await AsyncStorage.getItem('reserving');
         if (userToken) {
           const userInfo = await parkingAPI.getUser(userToken);
           console.log('유저정보', userInfo.data);
@@ -55,6 +62,10 @@ const App = () => {
           }
           await dispatch(setUser(userInfo.data));
           dispatch(login({token: userToken}));
+          console.log('예약상태 어떻지?', reserveStatus);
+          if (reserveStatus && reserveStatus == 'true') {
+            dispatch(reserve());
+          }
         }
         dispatch(endLoading());
       } catch (e) {

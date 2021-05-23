@@ -79,6 +79,14 @@ const HomeScreen = ({navigation}) => {
     };
   }, [refreshCount, floor]);
 
+  const reserveModal = () => {
+    if (reserveStatus == true) {
+      Alert.alert('현재 예약중인 자리가 있습니다.');
+    } else {
+      setVisibleModal(true);
+    }
+  };
+
   if (dataLoading == 'loading') {
     return (
       <AppModal visible={true}>
@@ -121,7 +129,7 @@ const HomeScreen = ({navigation}) => {
               Adata={Adata}
               Bdata={Bdata}
               Cdata={Cdata}
-              onPress={() => setVisibleModal(true)}
+              onPress={reserveModal}
             />
           </ReactNativeZoomableView>
           <AreaSelect

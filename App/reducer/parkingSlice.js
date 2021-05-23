@@ -14,8 +14,6 @@ export const getParkingData = createAsyncThunk(
   },
 );
 
-
-
 export const parkingSlice = createSlice({
   name: 'user',
   initialState: {
@@ -32,6 +30,10 @@ export const parkingSlice = createSlice({
     selectSeat: (state, action) => {
       state.selectSeatNumber = action.payload.number;
       state.selectSeatSector = action.payload.sector;
+      // AsyncStorage.multiSet(
+      //   ['seatNumber', action.payload.number],
+      //   ['seatSector', action.payload.number],
+      // );
     },
     clearSeat: state => {
       state.selectSeatNumber = null;

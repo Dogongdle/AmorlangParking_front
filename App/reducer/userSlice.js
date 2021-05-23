@@ -22,6 +22,7 @@ export const userSlice = createSlice({
     user: null,
     loggedIn: false,
     reserving: null,
+    reservingSeat: null,
   },
 
   reducers: {
@@ -32,8 +33,8 @@ export const userSlice = createSlice({
       state.token = action.payload.token;
     },
     logout: state => {
-      AsyncStorage.removeItem('userToken');
-      // AsyncStorage.removeItem('deviceToken');
+      AsyncStorage.removeItem('userToken'); // AsyncStorage.removeItem('deviceToken');
+      state.reserving = null;
       state.loggedIn = false;
     },
     setUser: (state, action) => {
@@ -46,7 +47,7 @@ export const userSlice = createSlice({
     reserve: (state, action) => {
       console.log('예약됨');
       state.reserving = true;
-      AsyncStorage.setItem('reserving', true);
+      AsyncStorage.setItem('reserving', 'true');
     },
     // extraReducers: {
     //   [reserveSeat.fulfilled]: (state, action) => {
