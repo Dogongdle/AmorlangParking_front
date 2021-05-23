@@ -8,6 +8,7 @@ import {ModalButton} from './ModalButton';
 import {useSelector, useDispatch} from 'react-redux';
 import {selectToken, reserve} from '../reducer/userSlice';
 import parkingAPI from '../api/parking';
+
 import {
   selectSeatSector,
   selectSeatNumber,
@@ -34,6 +35,15 @@ export const ModalButtonView = ({
     }
   };
 
+  const zzimSeat = async () => {
+    const response = await parkingAPI.registerPush(token, sector, number);
+    console.log(response);
+    if (response.status === 200) {
+      setRefreshCount(prev => prev + 1);
+      setVisibleModal(false);
+    }
+  };
+
   return (
     <View style={styles.modalButtonView}>
       <ModalButton
@@ -47,6 +57,7 @@ export const ModalButtonView = ({
       <ModalButton
         icon="alarm-2"
         size={14}
+        onPress={zzimSeat}
         color={colors.red}
         style={{marginRight: width * 5}}
         title="찜하기"

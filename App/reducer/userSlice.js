@@ -52,7 +52,7 @@ export const userSlice = createSlice({
     setDuration: (state, action) => {
       console.log('reducer에서 어떻게받지?', action.payload);
       state.duration = action.payload * 1000;
-      AsyncStorage.setItem('Duration', JSON.stringify(action.payload));
+      AsyncStorage.setItem('Duration', action.payload);
     },
     // extraReducers: {
     //   [reserveSeat.fulfilled]: (state, action) => {

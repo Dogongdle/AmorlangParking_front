@@ -14,7 +14,7 @@ const getParkingData = async (token, sector) => {
 
 const reserveSeat = async (token, sector, number) => {
   try {
-    return await parkingAPI.post(`/data/${sector}/${number}`, null, {
+    return await parkingAPI.post(`/reserve/${sector}/${number}`, null, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + token,
@@ -25,7 +25,26 @@ const reserveSeat = async (token, sector, number) => {
   }
 };
 
+const registerPush = async (token, sector, number) => {
+  // 자리 찜하기.
+  try {
+    return await parkingAPI.post(
+      '/push',
+      {sector: sector, seat: number},
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      },
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export default {
   getParkingData,
   reserveSeat,
+  registerPush,
 };

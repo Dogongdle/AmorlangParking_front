@@ -18,6 +18,8 @@ export const ParkingSeat = ({
   onPress,
   children,
   seatNumber,
+  reserved,
+  reservedUser,
   ...props
 }) => {
   const dispatch = useDispatch();
@@ -35,9 +37,9 @@ export const ParkingSeat = ({
         styles.parkingSeatView,
         {
           backgroundColor:
-            reserveSeatNumber == seatNumber && reserveSeatSector == sector
+            reservedUser == true
               ? colors.primary
-              : enable == true
+              : enable == true || (enable == true && reserved == false)
               ? colors.darkBlue
               : colors.lightGrey,
         },

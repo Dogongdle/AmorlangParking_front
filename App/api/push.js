@@ -14,21 +14,6 @@ const getPushList = async token => {
   }
 };
 
-const registerPush = async (token, data) => {
-  // 자리 찜하기.
-  try {
-    console.log(data);
-    return await parkingAPI.post('/push', data, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
-      },
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 const getSettingPush = async token => {
   try {
     return await parkingAPI.get('/push/status', null, {
@@ -58,7 +43,6 @@ const settingPush = async (token, data) => {
 
 export default {
   getPushList,
-  registerPush,
   getSettingPush,
   settingPush,
 };

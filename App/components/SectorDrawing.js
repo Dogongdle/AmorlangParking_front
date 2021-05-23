@@ -10,6 +10,8 @@ export const SectorDrawing = React.memo(({data, onPress, style, sector}) => {
       {data &&
         data.map(item => (
           <ParkingSeat
+            reserved={item.reserved}
+            reservedUser={item.reservedUser}
             enable={item.enable}
             seatNumber={item.parkingSeat}
             key={item.parkingSeat}

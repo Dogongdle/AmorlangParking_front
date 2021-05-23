@@ -57,10 +57,7 @@ const App = () => {
         reserveStatus = await AsyncStorage.getItem('reserving');
         const duration = await AsyncStorage.getItem('Duration');
         console.log('왜이래?', duration);
-        console.log(
-          '제발돼라',
-          parseInt(duration.substring(1, duration.length - 1)),
-        );
+
         if (userToken) {
           const userInfo = await parkingAPI.getUser(userToken);
           console.log('유저정보', userInfo.data);
@@ -75,9 +72,7 @@ const App = () => {
             dispatch(reserve());
           }
           if (duration) {
-            dispatch(
-              setDuration(parseInt(duration.substring(1, duration.length - 1))),
-            );
+            dispatch(setDuration(duration));
           }
         }
         dispatch(endLoading());

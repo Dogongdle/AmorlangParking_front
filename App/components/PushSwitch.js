@@ -4,9 +4,13 @@ import {StyleSheet, View, TouchableOpacity, Text, Switch} from 'react-native';
 //custom imports
 import {colors, width, height} from '../config/globalStyles';
 
-const PushSwitch = ({title, subtitle}) => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+const PushSwitch = ({title, subtitle, status, setStatus, changeStatus}) => {
+  // const [isEnabled, setIsEnabled] = useState(false);
+  // console.log('상태값', status);
+  const toggleSwitch = () => {
+    setStatus(previousState => !previousState);
+    changeStatus();
+  };
   return (
     <View style={styles.pushSwitchView}>
       <View style={styles.pushSwitchText}>
@@ -18,7 +22,7 @@ const PushSwitch = ({title, subtitle}) => {
         thumbColor={colors.white}
         ios_backgroundColor={colors.borderGrey}
         onValueChange={toggleSwitch}
-        value={isEnabled}
+        value={status}
       />
     </View>
   );

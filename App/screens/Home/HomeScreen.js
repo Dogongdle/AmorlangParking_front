@@ -83,7 +83,7 @@ const HomeScreen = ({navigation}) => {
   useEffect(() => {
     const autoRefresh = setTimeout(() => {
       setRefreshCount(prev => prev + 1);
-    }, 320000);
+    }, duration);
 
     return () => clearTimeout(autoRefresh);
   });
