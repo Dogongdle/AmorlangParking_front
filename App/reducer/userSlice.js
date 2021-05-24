@@ -5,7 +5,6 @@ import parkingAPI from '../api/auth';
 export const getReserveData = createAsyncThunk(
   'user/getReserveData',
   async payload => {
-    console.log('시발련아');
     const response = await parkingAPI.getUser(payload);
     if (response.status != 200) throw Error(response.data);
     return response.data.reserved;
@@ -50,19 +49,9 @@ export const userSlice = createSlice({
       state.duration = action.payload * 1000;
       AsyncStorage.setItem('Duration', action.payload);
     },
-    // extraReducers: {
-    //   [reserveSeat.fulfilled]: (state, action) => {
-    //     state.reserving = true;
-    //   },
-    //   [reserveSeat.rejected]: (state, action) => {
-    //     state.status = false;
-    //     alert('데이터를 받아오던 중 문제가 발생하였습니다.');
-    //   },
-    // },
   },
   extraReducers: {
     [getReserveData.fulfilled]: (state, action) => {
-      console.log('gk', action.payload);
       state.user.reserved = action.payload;
     },
     [getReserveData.pending]: (state, action) => {},

@@ -29,7 +29,7 @@ export const ModalButtonView = ({
   const fiveReserve = async () => {
     const response = await parkingAPI.reserveSeat(token, sector, number);
     if (response.status === 200) {
-      dispatch(getReserveData(token));
+      // await dispatch(getReserveData(token));
       setRefreshCount(prev => prev + 1);
       setVisibleModal(false);
     }

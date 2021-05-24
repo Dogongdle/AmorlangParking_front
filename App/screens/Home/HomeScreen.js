@@ -1,5 +1,5 @@
 import React, {Component, useEffect, useState} from 'react';
-import {View, BackHandler, Alert} from 'react-native';
+import {View, BackHandler, Alert, Image} from 'react-native';
 import {
   selectUser,
   selectToken,
@@ -11,7 +11,7 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {AppHeader} from '../../components/AppHeader';
 import {AppSafeArea} from '../../components/AppSafeArea';
-import {colors, width, height} from '../../config/globalStyles';
+import {colors, width, height, images} from '../../config/globalStyles';
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 import {StateArea} from '../../components/StateArea';
@@ -30,17 +30,19 @@ import {
 } from '../../reducer/parkingSlice';
 import {AreaSelect} from '../../components/AreaSelect';
 import AppModal from '../../components/AppModal';
+import ModalSplash from '../../components/ModalSplash';
 import {ModalButtonView} from '../../components/ModalButtonView';
 import LoadingModal from '../../components/LoadingModal';
 import {AppStopWatch} from '../../components/AppStopWatch';
+import {UIActivityIndicator} from 'react-native-indicators';
 
 const HomeScreen = ({navigation}) => {
+  const [visibleAlert, setVisibleAlert] = useState(false);
+  const [modalSplash, setModalSplash] = useState('none');
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   // const reserveStatus = useSelector(selectReserving);
-  // const duration = useSelector(selectDuration);
-
-  console.log('user정보 어떻게 되나요?', user);
+  const duration = useSelector(selectDuration);
 
   // const apartName = user.apart.substring(1, user.apart.length - 1);
   let bottomSheet = React.createRef();
@@ -87,14 +89,14 @@ const HomeScreen = ({navigation}) => {
   useEffect(() => {
     const autoRefresh = setTimeout(async () => {
       setRefreshCount(prev => prev + 1);
-    }, 300000);
+    }, duration);
 
     return () => clearTimeout(autoRefresh);
   });
 
   const reserveModal = () => {
     if (user.reserved == true) {
-      Alert.alert('아몰랑파킹', '현재 예약중인 자리가 있습니다.');
+      setVisibleAlert(true);
     } else {
       setVisibleModal(true);
     }
@@ -102,7 +104,7 @@ const HomeScreen = ({navigation}) => {
 
   if (dataLoading == 'loading') {
     return (
-      <AppModal visible={true}>
+      <AppModal visible={dataLoading == 'loading'}>
         <LoadingModal />
       </AppModal>
     );
@@ -131,6 +133,18 @@ const HomeScreen = ({navigation}) => {
           }
           title={user.apart}
         />
+        {/* {dataLoading == 'loading' && (
+          <UIActivityIndicator
+            style={{
+              position: 'absolute',
+              zIndex: 999,
+              left: '43%',
+              top: '50%',
+            }}
+            color={colors.primary}
+            size={width * 40}
+          />
+        )} */}
         <View style={{flex: 1, backgroundColor: colors.parkingBackground}}>
           <ReactNativeZoomableView
             maxZoom={2.0}
@@ -157,6 +171,7 @@ const HomeScreen = ({navigation}) => {
           )}
         </View>
       </AppSafeArea>
+
       <BottomSheet
         ref={bottomSheet}
         snapPoints={[height * 500, height * 80]}
