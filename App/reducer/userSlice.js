@@ -1,20 +1,16 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-community/async-storage';
-import parkingAPI from '../api/parking';
+import parkingAPI from '../api/auth';
 
-// export const reserveSeat = createAsyncThunk(
-//   'parking/getParkingData',
-//   async payload => {
-//     const response = await parkingAPI.reserveSeat(
-//       payload.token,
-//       payload.sector,
-//       payload.number,
-//     );
-//     console.log('야된다', response);
-//     if (response.status != 200) throw Error(response.data);
-//     return;
-//   },
-// );
+export const getReserveData = createAsyncThunk(
+  'user/getReserveData',
+  async payload => {
+    console.log('시발련아');
+    const response = await parkingAPI.getUser(payload);
+    if (response.status != 200) throw Error(response.data);
+    return response.data.reserved;
+  },
+);
 
 export const userSlice = createSlice({
   name: 'user',
@@ -40,13 +36,13 @@ export const userSlice = createSlice({
     },
     setUser: (state, action) => {
       state.user = action.payload;
-      console.log(state.user);
+      console.log('유저세팅', state.user);
     },
     register: (state, action) => {
       state.user.apart = action.payload;
     },
     reserve: (state, action) => {
-      state.reserving = true;
+      state.user.reserved = true;
       AsyncStorage.setItem('reserving', 'true');
     },
     setDuration: (state, action) => {
@@ -63,6 +59,14 @@ export const userSlice = createSlice({
     //     alert('데이터를 받아오던 중 문제가 발생하였습니다.');
     //   },
     // },
+  },
+  extraReducers: {
+    [getReserveData.fulfilled]: (state, action) => {
+      console.log('gk', action.payload);
+      state.user.reserved = action.payload;
+    },
+    [getReserveData.pending]: (state, action) => {},
+    [getReserveData.rejected]: (state, action) => {},
   },
 });
 export const {

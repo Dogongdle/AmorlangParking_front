@@ -6,7 +6,7 @@ import {colors, height, width} from '../config/globalStyles';
 
 import {ModalButton} from './ModalButton';
 import {useSelector, useDispatch} from 'react-redux';
-import {selectToken, reserve} from '../reducer/userSlice';
+import {selectToken, getReserveData} from '../reducer/userSlice';
 import parkingAPI from '../api/parking';
 
 import {
@@ -29,8 +29,8 @@ export const ModalButtonView = ({
   const fiveReserve = async () => {
     const response = await parkingAPI.reserveSeat(token, sector, number);
     if (response.status === 200) {
+      dispatch(getReserveData(token));
       setRefreshCount(prev => prev + 1);
-      dispatch(reserve());
       setVisibleModal(false);
     }
   };

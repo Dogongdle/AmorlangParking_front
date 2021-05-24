@@ -54,7 +54,7 @@ const App = () => {
 
       try {
         userToken = await AsyncStorage.getItem('userToken');
-        reserveStatus = await AsyncStorage.getItem('reserving');
+        // reserveStatus = await AsyncStorage.getItem('reserving');
         const duration = await AsyncStorage.getItem('Duration');
         console.log('왜이래?', duration);
 
@@ -67,10 +67,7 @@ const App = () => {
           }
           await dispatch(setUser(userInfo.data));
           dispatch(login({token: userToken}));
-          console.log('예약상태 어떻지?', reserveStatus);
-          if (reserveStatus && reserveStatus == 'true') {
-            dispatch(reserve());
-          }
+
           if (duration) {
             dispatch(setDuration(duration));
           }

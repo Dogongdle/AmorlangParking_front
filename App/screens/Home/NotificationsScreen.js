@@ -14,7 +14,8 @@ const NotificationsScreen = ({navigation}) => {
 
   useEffect(async () => {
     const pushList = await parkingAPI.getPushList(token);
-    console.log(pushList);
+
+    console.log(pushList.data);
   }, []);
 
   return (

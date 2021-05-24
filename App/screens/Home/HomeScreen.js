@@ -5,6 +5,8 @@ import {
   selectToken,
   selectReserving,
   selectDuration,
+  setUser,
+  getReserveData,
 } from '../../reducer/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppHeader} from '../../components/AppHeader';
@@ -35,9 +37,11 @@ import {AppStopWatch} from '../../components/AppStopWatch';
 const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const reserveStatus = useSelector(selectReserving);
-  const duration = useSelector(selectDuration);
-  console.log('몇초주기', duration);
+  // const reserveStatus = useSelector(selectReserving);
+  // const duration = useSelector(selectDuration);
+
+  console.log('user정보 어떻게 되나요?', user);
+
   // const apartName = user.apart.substring(1, user.apart.length - 1);
   let bottomSheet = React.createRef();
   let fall = new Animated.Value(1);
@@ -49,8 +53,6 @@ const HomeScreen = ({navigation}) => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [refreshCount, setRefreshCount] = useState(0);
   const [floor, setFloor] = useState(0);
-
-  console.log('예약상태', reserveStatus);
 
   const backAction = () => {
     Alert.alert('앱 종료하기', '앱을 종료하시겠습니까', [
@@ -72,25 +74,27 @@ const HomeScreen = ({navigation}) => {
   }, []);
 
   useEffect(() => {
+    dispatch(getReserveData(token));
     dispatch(getParkingData({sector: 'a', token: token}));
     dispatch(getParkingData({sector: 'b', token: token}));
     dispatch(getParkingData({sector: 'c', token: token}));
+    // dispatch(getParkingData({sector: 'd', token: token}));
     return () => {
       dispatch(clearData());
     };
   }, [refreshCount, floor]);
 
   useEffect(() => {
-    const autoRefresh = setTimeout(() => {
+    const autoRefresh = setTimeout(async () => {
       setRefreshCount(prev => prev + 1);
-    }, duration);
+    }, 300000);
 
     return () => clearTimeout(autoRefresh);
   });
 
   const reserveModal = () => {
-    if (reserveStatus == true) {
-      Alert.alert('현재 예약중인 자리가 있습니다.');
+    if (user.reserved == true) {
+      Alert.alert('아몰랑파킹', '현재 예약중인 자리가 있습니다.');
     } else {
       setVisibleModal(true);
     }
@@ -146,7 +150,7 @@ const HomeScreen = ({navigation}) => {
             setFloor={setFloor}
             onPressRefresh={() => setRefreshCount(prev => prev + 1)}
           />
-          {reserveStatus == true ? (
+          {user.reserved == true ? (
             <AppStopWatch />
           ) : (
             <StateArea visible={visibleModal} />

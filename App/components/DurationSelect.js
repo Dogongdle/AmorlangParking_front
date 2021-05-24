@@ -13,7 +13,7 @@ const DurationSelect = ({...props}) => {
   const initialDuration = useSelector(selectDuration);
 
   const [duration, setClientDuration] = useState(initialDuration / 1000 + '초');
-  console.log('잘넘어오나?', duration);
+  // console.log('잘넘어오나?', duration);
   const dispatch = useDispatch();
   const options = durationOptions;
   const cancelIndex = 3;

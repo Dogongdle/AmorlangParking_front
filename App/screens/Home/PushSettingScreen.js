@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Text, Switch} from 'react-native';
+// import {Text, Switch} from 'react-native';
 
 import {AppHeader} from '../../components/AppHeader';
 import {AppSafeArea} from '../../components/AppSafeArea';
@@ -14,36 +14,52 @@ import DurationSelect from '../../components/DurationSelect';
 const PushSettingScreen = ({navigation}) => {
   const token = useSelector(selectToken);
   const [settingStatus, setSettingStatus] = useState('');
-  const [inStatus, setInStatus] = useState(false);
-  const [outStatus, setOutStatus] = useState(false);
+  const [inStatus, setInStatus] = useState();
+  const [outStatus, setOutStatus] = useState();
 
-  useEffect(async () => {
+  useEffect(() => {
+    setCurrentSetting();
+  }, []);
+
+  const setCurrentSetting = async () => {
     const pushStatus = await parkingApi.getSettingPush(token);
-    console.log('너어떻게오니', pushStatus.data);
     if (pushStatus.data.pushStatus == 'BOTH') {
-      setInStatus(true);
-      setOutStatus(true);
-    } else if (pushStatus.data == 'ENABLE_ONLY') {
-      setOutStatus(true);
-      setInStatus(false);
-    } else if (pushStatus.data == 'DISABLE_ONLY') {
-      setOutStatus(false);
-      setInStatus(true);
+      console.log('Both입니다.');
+      setOutStatus(prevState => true);
+      setInStatus(prevState => true);
+    } else if (pushStatus.data.pushStatus == 'ENABLE_ONLY') {
+      console.log('출차알림만 표시합니다..');
+      setOutStatus(prevState => true);
+      setInStatus(prevState => false);
+    } else if (pushStatus.data.pushStatus == 'DISABLE_ONLY') {
+      console.log('입차알림만 표시합니다..');
+      setOutStatus(prevState => false);
+      setInStatus(prevState => true);
+    } else if (pushStatus.data.pushStatus == 'NEITHER') {
+      console.log('둘다 표시하지 않습니다');
+      setOutStatus(prevState => false);
+      setInStatus(prevState => false);
     }
-  }, [inStatus, outStatus]);
+  };
 
   const changeStatus = async () => {
+    console.log('입차알림설정', inStatus, '출차알림설정', outStatus);
     if (inStatus == true && outStatus == true) {
       setSettingStatus('BOTH');
-    } else if (inStatus == true && outStatus == false) {
-      setSettingStatus('ENABLE_ONLY');
     } else if (inStatus == false && outStatus == true) {
+      setSettingStatus('ENABLE_ONLY');
+    } else if (inStatus == true && outStatus == false) {
       setSettingStatus('DISABLE_ONLY');
+    } else {
+      setSettingStatus('NEITHER');
     }
+    console.log('보내기 직전 상태', settingStatus);
     const response = await parkingApi.settingPush(token, {
       pushStatus: settingStatus,
     });
-    console.log('가나연?', response);
+    if (response.status == 200) {
+      setCurrentSetting();
+    }
   };
 
   return (
@@ -65,15 +81,15 @@ const PushSettingScreen = ({navigation}) => {
       <PushSwitch
         title="출차 알림"
         status={outStatus}
-        setStatus={setOutStatus}
-        changeStatus={changeStatus}
+        setStatus={() => setOutStatus(prevStatus => !prevStatus)}
+        changeStatus={() => changeStatus()}
         subtitle="찜한 자리에 대해 출차 시 알림"
       />
       <PushSwitch
         title="입차 알림"
         status={inStatus}
-        setStatus={setInStatus}
-        changeStatus={changeStatus}
+        setStatus={() => setInStatus(prevStatus => !prevStatus)}
+        changeStatus={() => changeStatus()}
         subtitle="찜한 자리에 대해 입차 시 알림"
       />
       <DurationSelect />

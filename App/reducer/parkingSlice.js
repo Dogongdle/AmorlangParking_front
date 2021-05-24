@@ -15,7 +15,7 @@ export const getParkingData = createAsyncThunk(
 );
 
 export const parkingSlice = createSlice({
-  name: 'user',
+  name: 'parking',
   initialState: {
     AsectorData: [],
     BsectorData: [],
