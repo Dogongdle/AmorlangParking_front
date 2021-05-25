@@ -27,6 +27,7 @@ import {
   selectParkingA,
   selectParkingB,
   selectParkingC,
+  selectDoubleSeat,
   parkingStatus,
   clearSeat,
   clearData,
@@ -46,11 +47,12 @@ import {SeatCountArea} from '../../components/SeatCountArea';
 const HomeScreen = ({navigation}) => {
   const [visibleAlert, setVisibleAlert] = useState(false);
   const [modalSplash, setModalSplash] = useState('none');
+  const [doubleVisible, setDoubleVisible] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const userReserveLoading = useSelector(userStatus);
   const duration = useSelector(selectDuration);
-
+  const doubleSeatData = useSelector(selectDoubleSeat);
   // const apartName = user.apart.substring(1, user.apart.length - 1);
   let bottomSheet = React.createRef();
   let fall = new Animated.Value(1);
@@ -90,7 +92,7 @@ const HomeScreen = ({navigation}) => {
 
   useEffect(async () => {
     dispatch(getReserveData(token));
-
+    dispatch(getDoubleParkingData({token: token}));
     dispatch(getParkingData({sector: 'a', token: token}));
     dispatch(getParkingData({sector: 'b', token: token}));
     dispatch(getParkingData({sector: 'c', token: token}));
@@ -168,7 +170,9 @@ const HomeScreen = ({navigation}) => {
               Adata={Adata}
               Bdata={Bdata}
               Cdata={Cdata}
+              doubleData={doubleSeatData}
               onPress={reserveModal}
+              doubleVisible={doubleVisible}
             />
           </ReactNativeZoomableView>
           <AreaSelect
@@ -196,7 +200,10 @@ const HomeScreen = ({navigation}) => {
         enabledGestureInteraction={true}
         renderContent={() => (
           <BottomSheetInner
-            onPress={() => dispatch(getDoubleParkingData({token: token}))}
+            number={doubleSeatData.length}
+            onPress={() => {
+              setDoubleVisible(true), bottomSheet.current.snapTo(1);
+            }}
           />
         )}
       />

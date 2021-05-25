@@ -7,7 +7,17 @@ import {EntryView} from './EntryView';
 import {SectorDrawing} from './SectorDrawing';
 
 export const AreaDrawing = React.memo(
-  ({Adata, Bdata, Cdata, Ddata, onPress, floor, ...props}) => {
+  ({
+    Adata,
+    Bdata,
+    Cdata,
+    Ddata,
+    onPress,
+    floor,
+    doubleData,
+    doubleVisible,
+    ...props
+  }) => {
     const getFloor = floor => {
       return `B${floor}`;
     };
@@ -26,6 +36,35 @@ export const AreaDrawing = React.memo(
               style={{}}
             />
           </View>
+          {doubleVisible && (
+            <>
+              <View
+                style={[
+                  styles.doubleSeat,
+                  {top: width * 390, left: width * 180},
+                ]}></View>
+              <View
+                style={[
+                  styles.doubleSeat,
+                  {top: width * 320, left: width * 180},
+                ]}></View>
+              <View
+                style={[
+                  styles.doubleSeat,
+                  {top: width * 320, left: width * 310},
+                ]}></View>
+              <View
+                style={[
+                  styles.doubleSeat,
+                  {top: width * 175, left: width * 310},
+                ]}></View>
+              <View
+                style={[
+                  styles.doubleSeat,
+                  {top: width * 433, left: width * 120},
+                ]}></View>
+            </>
+          )}
 
           <View style={{flexDirection: 'row'}}>
             <SectorDrawing
@@ -61,5 +100,11 @@ const styles = StyleSheet.create({
     fontSize: width * 45,
     fontWeight: 'bold',
     color: colors.borderGrey,
+  },
+  doubleSeat: {
+    position: 'absolute',
+    backgroundColor: colors.naver,
+    width: height * 20,
+    height: width * 40,
   },
 });
