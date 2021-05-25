@@ -46,7 +46,7 @@ const HomeScreen = ({navigation}) => {
   const [modalSplash, setModalSplash] = useState('none');
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  // const reserveStatus = useSelector(selectReserving);
+
   const duration = useSelector(selectDuration);
 
   // const apartName = user.apart.substring(1, user.apart.length - 1);
@@ -64,7 +64,6 @@ const HomeScreen = ({navigation}) => {
   const [refreshCount, setRefreshCount] = useState(0);
   const [floor, setFloor] = useState(0);
   let nowTime = new Date();
-  console.log('끝나는시간', endTime);
 
   // console.log(parseInt(endTime.substring(1, endTime.length - 1)));
   const remainTime = endTime - nowTime;
@@ -152,9 +151,13 @@ const HomeScreen = ({navigation}) => {
           <UIActivityIndicator
             style={{
               position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              justifyContent: 'center',
+              alignItems: 'center',
               zIndex: 999,
-              left: '43%',
-              top: '50%',
             }}
             color={colors.primary}
             size={width * 40}
