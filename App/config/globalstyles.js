@@ -40,6 +40,7 @@ export const colors = {
   darkMediumGrey: '#0A1321',
   postcardGrey: '#F2F2F2',
   parkingBackground: '#EFEFF1',
+  yellow: '#FFCA08',
 };
 
 export const fonts = {

@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   doubleSeat: {
     position: 'absolute',
-    backgroundColor: colors.naver,
+    backgroundColor: colors.yellow,
     width: height * 20,
     height: width * 40,
   },
