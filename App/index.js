@@ -51,7 +51,6 @@ const App = () => {
 
       try {
         userToken = await AsyncStorage.getItem('userToken');
-        // reserveStatus = await AsyncStorage.getItem('reserving');
         const duration = await AsyncStorage.getItem('Duration');
         const endTime = await AsyncStorage.getItem('reserveEndTime');
         console.log(endTime);

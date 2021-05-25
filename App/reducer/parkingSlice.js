@@ -14,6 +14,15 @@ export const getParkingData = createAsyncThunk(
   },
 );
 
+export const getDoubleParkingData = createAsyncThunk(
+  'parking/getDoubleParkingData',
+  async payload => {
+    const response = await parkingAPI.getDoubleParkingData(payload.token, 'A');
+    if (response.status != 200) throw Error(response.data);
+    return {sector: payload.sector, data: response.data};
+  },
+);
+
 export const parkingSlice = createSlice({
   name: 'parking',
   initialState: {
@@ -27,6 +36,7 @@ export const parkingSlice = createSlice({
     enableSeat: [],
     totalSeat: [],
     endTime: null,
+    doubleSeat: [],
   },
 
   reducers: {
@@ -91,6 +101,15 @@ export const parkingSlice = createSlice({
       state.status = 'failed';
       alert('데이터를 받아오던 중 문제가 발생하였습니다.');
     },
+    [getDoubleParkingData.fulfilled]: (state, action) => {
+      state.doubleSeat = action.payload.data;
+    },
+    // [getDoubleParkingData.fulfilled]: (state, action) => {
+    //   console.log(action.payload.data);
+    // },
+    // [getDoubleParkingData.fulfilled]: (state, action) => {
+    //   console.log(action.payload.data);
+    // },
   },
 });
 
@@ -107,5 +126,6 @@ export const selectSeatSector = state => state.parking.selectSeatSector;
 // export const selectEndHour = state => state.parking.endHour;
 // export const selectEndMinute = state => state.parking.endMinute;
 export const selectEndTime = state => state.parking.endTime;
+export const selectDoubleSeat = state => state.parking.doubleSeat;
 
 export default parkingSlice.reducer;

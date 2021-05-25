@@ -8,6 +8,7 @@ import {
   setUser,
   getReserveData,
   clearReserve,
+  userStatus,
 } from '../../reducer/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppHeader} from '../../components/AppHeader';
@@ -22,6 +23,7 @@ import {AreaDrawing} from '../../components/AreaDrawing';
 import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 import {
   getParkingData,
+  getDoubleParkingData,
   selectParkingA,
   selectParkingB,
   selectParkingC,
@@ -46,7 +48,7 @@ const HomeScreen = ({navigation}) => {
   const [modalSplash, setModalSplash] = useState('none');
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-
+  const userReserveLoading = useSelector(userStatus);
   const duration = useSelector(selectDuration);
 
   // const apartName = user.apart.substring(1, user.apart.length - 1);
@@ -87,7 +89,8 @@ const HomeScreen = ({navigation}) => {
   }, []);
 
   useEffect(async () => {
-    await dispatch(getReserveData(token));
+    dispatch(getReserveData(token));
+
     dispatch(getParkingData({sector: 'a', token: token}));
     dispatch(getParkingData({sector: 'b', token: token}));
     dispatch(getParkingData({sector: 'c', token: token}));
@@ -114,15 +117,6 @@ const HomeScreen = ({navigation}) => {
     }
   };
 
-  // console.log(enableSeat);
-
-  // if (dataLoading == 'loading') {
-  //   return (
-  //     <AppModal visible={dataLoading == 'loading'}>
-  //       <LoadingModal />
-  //     </AppModal>
-  //   );
-  // }
   return (
     <>
       <AppSafeArea>
@@ -147,7 +141,7 @@ const HomeScreen = ({navigation}) => {
           }
           title={user.apart}
         />
-        {dataLoading == 'loading' && (
+        {(dataLoading == 'loading' || userReserveLoading == 'loading') && (
           <UIActivityIndicator
             style={{
               position: 'absolute',
@@ -160,7 +154,7 @@ const HomeScreen = ({navigation}) => {
               zIndex: 999,
             }}
             color={colors.primary}
-            size={width * 40}
+            size={width * 50}
           />
         )}
         <View style={{flex: 1, backgroundColor: colors.parkingBackground}}>
@@ -200,7 +194,11 @@ const HomeScreen = ({navigation}) => {
         initialSnap={1}
         callbackNode={fall}
         enabledGestureInteraction={true}
-        renderContent={() => <BottomSheetInner />}
+        renderContent={() => (
+          <BottomSheetInner
+            onPress={() => dispatch(getDoubleParkingData({token: token}))}
+          />
+        )}
       />
     </>
   );

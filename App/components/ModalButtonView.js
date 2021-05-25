@@ -28,8 +28,6 @@ export const ModalButtonView = ({
   const dispatch = useDispatch();
   let reserveEndTime = new Date().getTime() + 300000;
 
-  console.log(typeof reserveEndTime);
-
   const fiveReserve = async () => {
     const response = await parkingAPI.reserveSeat(token, sector, number);
     if (response.status === 200) {

@@ -105,7 +105,7 @@ export const BottomSheetInner = ({
             />
           </View>
         )}
-        {complete && <CompleteView number={2} />}
+        {complete && <CompleteView onPress={onPress} number={2} />}
       </View>
     </View>
   );

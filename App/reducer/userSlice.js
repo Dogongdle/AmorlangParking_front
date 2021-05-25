@@ -20,6 +20,7 @@ export const userSlice = createSlice({
     reservingSeat: null,
     duration: 10000,
     time: null,
+    status: 'success',
   },
 
   reducers: {
@@ -57,9 +58,15 @@ export const userSlice = createSlice({
   extraReducers: {
     [getReserveData.fulfilled]: (state, action) => {
       state.user.reserved = action.payload;
+      state.status = 'success';
     },
-    [getReserveData.pending]: (state, action) => {},
-    [getReserveData.rejected]: (state, action) => {},
+    [getReserveData.pending]: (state, action) => {
+      state.status = 'loading';
+    },
+    [getReserveData.rejected]: (state, action) => {
+      state.status = 'failed';
+      alert('데이터를 받아오던 중 문제가 발생하였습니다.');
+    },
   },
 });
 export const {
@@ -77,5 +84,6 @@ export const selectToken = state => state.user.token;
 export const selectUser = state => state.user.user;
 export const selectReserving = state => state.user.reserving;
 export const selectDuration = state => state.user.duration;
+export const userStatus = state => state.user.status;
 
 export default userSlice.reducer;
