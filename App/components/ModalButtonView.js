@@ -6,7 +6,7 @@ import {colors, height, width} from '../config/globalStyles';
 
 import {ModalButton} from './ModalButton';
 import {useSelector, useDispatch} from 'react-redux';
-import {selectToken, getReserveData} from '../reducer/userSlice';
+import {selectToken, getReserveData, reserve} from '../reducer/userSlice';
 import parkingAPI from '../api/parking';
 
 import {
@@ -26,20 +26,16 @@ export const ModalButtonView = ({
   const number = useSelector(selectSeatNumber);
   // const reserveSeat = useSelector(reserveSeat);
   const dispatch = useDispatch();
-  let reserveEndTime = new Date();
-  reserveEndTime.setMinutes(reserveEndTime.getMinutes() + 5);
-  let hours = reserveEndTime.getHours(); // 시
-  let minutes = reserveEndTime.getMinutes(); // 분
-  let seconds = reserveEndTime.getSeconds(); // 분
-  console.log('예약종료시간은', seconds);
+  let reserveEndTime = new Date().getTime() + 300000;
+
+  console.log(typeof reserveEndTime);
 
   const fiveReserve = async () => {
     const response = await parkingAPI.reserveSeat(token, sector, number);
     if (response.status === 200) {
-      dispatch(setTime({hour: hours, minute: minutes}));
+      dispatch(setTime({time: JSON.stringify(reserveEndTime)}));
       setRefreshCount(prev => prev + 1);
       setVisibleModal(false);
-      console.log(hours, '시', minutes, '분');
     }
   };
 

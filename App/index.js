@@ -10,9 +10,9 @@ import {
   selectLogin,
   selectUser,
   setUser,
-  reserve,
   setDuration,
 } from './reducer/userSlice';
+import {setTime} from './reducer/parkingSlice';
 import {selectLoading, endLoading} from './reducer/loadingSlice';
 import {Provider, useDispatch, useSelector} from 'react-redux';
 import store from './store';
@@ -48,12 +48,13 @@ const App = () => {
   useEffect(() => {
     const bootstrapAsync = async () => {
       let userToken;
-      let reserveStatus;
 
       try {
         userToken = await AsyncStorage.getItem('userToken');
         // reserveStatus = await AsyncStorage.getItem('reserving');
         const duration = await AsyncStorage.getItem('Duration');
+        const endTime = await AsyncStorage.getItem('reserveEndTime');
+        console.log(endTime);
         console.log('왜이래?', duration);
 
         if (userToken) {
@@ -68,6 +69,9 @@ const App = () => {
 
           if (duration) {
             dispatch(setDuration(duration));
+          }
+          if (endTime) {
+            dispatch(setTime({time: endTime}));
           }
         }
         dispatch(endLoading());

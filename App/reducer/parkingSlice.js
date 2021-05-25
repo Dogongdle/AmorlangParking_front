@@ -26,8 +26,7 @@ export const parkingSlice = createSlice({
     selectSeatSector: null,
     enableSeat: [],
     totalSeat: [],
-    endHour: null,
-    endMinute: null,
+    endTime: null,
   },
 
   reducers: {
@@ -47,8 +46,8 @@ export const parkingSlice = createSlice({
       // state.selectTotalSeat = 0;
     },
     setTime: (state, action) => {
-      state.endHour = action.payload.hour;
-      state.endMinute = action.payload.minute;
+      state.endTime = action.payload.time;
+      AsyncStorage.setItem('reserveEndTime', action.payload.time);
     },
   },
   extraReducers: {
@@ -105,7 +104,8 @@ export const parkingStatus = state => state.parking.status;
 export const {selectSeat, clearSeat, clearData, setTime} = parkingSlice.actions;
 export const selectSeatNumber = state => state.parking.selectSeatNumber;
 export const selectSeatSector = state => state.parking.selectSeatSector;
-export const selectEndHour = state => state.parking.endHour;
-export const selectEndMinute = state => state.parking.endMinute;
+// export const selectEndHour = state => state.parking.endHour;
+// export const selectEndMinute = state => state.parking.endMinute;
+export const selectEndTime = state => state.parking.endTime;
 
 export default parkingSlice.reducer;

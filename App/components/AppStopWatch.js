@@ -1,10 +1,30 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 //custom imports
 import {colors, height, width} from '../config/globalStyles';
-import CountDown from 'react-native-countdown-component';
 import MyIcon from '../config/Icon-font.js';
-export const AppStopWatch = React.memo(({style, hour, minute, ...props}) => {
+
+export const AppStopWatch = React.memo(({style, time, ...props}) => {
+  const [minutes, setMinutes] = useState(Math.floor((time / 1000 / 60) % 60));
+  const [seconds, setSeconds] = useState(Math.floor((time / 1000) % 60));
+
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      if (parseInt(seconds) > 0) {
+        setSeconds(parseInt(seconds) - 1);
+      }
+      if (parseInt(seconds) === 0) {
+        if (parseInt(minutes) === 0) {
+          clearInterval(countdown);
+        } else {
+          setMinutes(parseInt(minutes) - 1);
+          setSeconds(59);
+        }
+      }
+    }, 1000);
+    return () => clearInterval(countdown);
+  }, [minutes, seconds]);
+
   return (
     <View style={styles.stopWatchView}>
       <View
@@ -19,19 +39,8 @@ export const AppStopWatch = React.memo(({style, hour, minute, ...props}) => {
 
       <MyIcon name={'alarm-1'} size={width * 19} color={colors.primary} />
       <Text style={styles.stopWatchTime}>
-        ~ {hour}:{minute}
+        {('0' + minutes).slice(-2)}:{('0' + seconds).slice(-2)}
       </Text>
-      {/* <CountDown
-        size={width * 15}
-        until={300}
-        onFinish={() => alert('Finished')}
-        digitStyle={{}}
-        digitTxtStyle={{color: colors.primary}}
-        separatorStyle={{color: colors.primary}}
-        timeToShow={['M', 'S']}
-        timeLabels={{m: null, s: null}}
-        showSeparator
-      /> */}
     </View>
   );
 });
@@ -44,7 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     paddingHorizontal: width * 10,
     paddingVertical: height * 10,
     shadowColor: '#000',
@@ -63,6 +72,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   stopWatchTime: {
+    textAlign: 'center',
     fontSize: width * 16,
     color: colors.primary,
     fontWeight: '700',

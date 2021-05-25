@@ -30,8 +30,7 @@ import {
   clearData,
   selectTotalSeat,
   selectEnableSeat,
-  selectEndHour,
-  selectEndMinute,
+  selectEndTime,
 } from '../../reducer/parkingSlice';
 import {AreaSelect} from '../../components/AreaSelect';
 import AppModal from '../../components/AppModal';
@@ -58,20 +57,17 @@ const HomeScreen = ({navigation}) => {
   const Bdata = useSelector(selectParkingB);
   const Cdata = useSelector(selectParkingC);
   const dataLoading = useSelector(parkingStatus);
-  const endHour = useSelector(selectEndHour);
-  const endMinute = useSelector(selectEndMinute);
+  const endTime = useSelector(selectEndTime);
   const totalSeat = useSelector(selectTotalSeat);
   const enableSeat = useSelector(selectEnableSeat);
   const [visibleModal, setVisibleModal] = useState(false);
   const [refreshCount, setRefreshCount] = useState(0);
   const [floor, setFloor] = useState(0);
-  let reserveEndTime = new Date();
-  reserveEndTime.setMinutes(reserveEndTime.getMinutes() + 5);
-  let hours = reserveEndTime.getHours(); // 시
-  let minutes = reserveEndTime.getMinutes(); // 분
-  let seconds = reserveEndTime.getSeconds(); // 분
-  console.log('예약종료시간은', seconds);
+  let nowTime = new Date();
+  console.log('끝나는시간', endTime);
 
+  // console.log(parseInt(endTime.substring(1, endTime.length - 1)));
+  const remainTime = endTime - nowTime;
   const backAction = () => {
     Alert.alert('앱 종료하기', '앱을 종료하시겠습니까', [
       {
@@ -119,7 +115,7 @@ const HomeScreen = ({navigation}) => {
     }
   };
 
-  console.log(enableSeat);
+  // console.log(enableSeat);
 
   // if (dataLoading == 'loading') {
   //   return (
@@ -188,7 +184,7 @@ const HomeScreen = ({navigation}) => {
             enableSeatCount={enableSeat.reduce((a, b) => a + b, 0)}
           />
           {user.reserved == true ? (
-            <AppStopWatch hour={endHour} minute={endMinute} />
+            <AppStopWatch time={remainTime} />
           ) : (
             <StateArea visible={visibleModal} />
           )}
