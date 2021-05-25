@@ -13,6 +13,7 @@ import {
   selectSeatSector,
   selectSeatNumber,
   selectSeat,
+  setTime,
 } from '../reducer/parkingSlice';
 
 export const ModalButtonView = ({
@@ -25,16 +26,17 @@ export const ModalButtonView = ({
   const number = useSelector(selectSeatNumber);
   // const reserveSeat = useSelector(reserveSeat);
   const dispatch = useDispatch();
-  let today = new Date();
-
-  let hours = today.getHours(); // 시
-  let minutes = today.getMinutes(); // 분
-  let seconds = today.getSeconds(); // 초
+  let reserveEndTime = new Date();
+  reserveEndTime.setMinutes(reserveEndTime.getMinutes() + 5);
+  let hours = reserveEndTime.getHours(); // 시
+  let minutes = reserveEndTime.getMinutes(); // 분
+  let seconds = reserveEndTime.getSeconds(); // 분
+  console.log('예약종료시간은', seconds);
 
   const fiveReserve = async () => {
     const response = await parkingAPI.reserveSeat(token, sector, number);
     if (response.status === 200) {
-      // await dispatch(getReserveData(token));
+      dispatch(setTime({hour: hours, minute: minutes}));
       setRefreshCount(prev => prev + 1);
       setVisibleModal(false);
       console.log(hours, '시', minutes, '분');

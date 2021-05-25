@@ -4,7 +4,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {colors, height, width} from '../config/globalStyles';
 import CountDown from 'react-native-countdown-component';
 import MyIcon from '../config/Icon-font.js';
-export const AppStopWatch = React.memo(({style, ...props}) => {
+export const AppStopWatch = React.memo(({style, hour, minute, ...props}) => {
   return (
     <View style={styles.stopWatchView}>
       <View
@@ -16,8 +16,12 @@ export const AppStopWatch = React.memo(({style, ...props}) => {
         }}
       />
       <Text style={styles.stopWatchText}>5분 예약 자리</Text>
+
       <MyIcon name={'alarm-1'} size={width * 19} color={colors.primary} />
-      <CountDown
+      <Text style={styles.stopWatchTime}>
+        ~ {hour}:{minute}
+      </Text>
+      {/* <CountDown
         size={width * 15}
         until={300}
         onFinish={() => alert('Finished')}
@@ -27,7 +31,7 @@ export const AppStopWatch = React.memo(({style, ...props}) => {
         timeToShow={['M', 'S']}
         timeLabels={{m: null, s: null}}
         showSeparator
-      />
+      /> */}
     </View>
   );
 });
@@ -42,6 +46,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: width * 10,
+    paddingVertical: height * 10,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -56,5 +61,10 @@ const styles = StyleSheet.create({
   stopWatchText: {
     fontSize: width * 13,
     fontWeight: '600',
+  },
+  stopWatchTime: {
+    fontSize: width * 16,
+    color: colors.primary,
+    fontWeight: '700',
   },
 });
