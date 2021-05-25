@@ -19,6 +19,7 @@ export const userSlice = createSlice({
     reserving: null,
     reservingSeat: null,
     duration: 10000,
+    time: null,
   },
 
   reducers: {
@@ -49,6 +50,9 @@ export const userSlice = createSlice({
       state.duration = action.payload * 1000;
       AsyncStorage.setItem('Duration', action.payload);
     },
+    clearReserve: state => {
+      state.user.reserved = '';
+    },
   },
   extraReducers: {
     [getReserveData.fulfilled]: (state, action) => {
@@ -65,6 +69,7 @@ export const {
   register,
   reserve,
   setDuration,
+  clearReserve,
 } = userSlice.actions; //액션들을 익스포트
 
 export const selectLogin = state => state.user.loggedIn;

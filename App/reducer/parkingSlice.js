@@ -24,16 +24,14 @@ export const parkingSlice = createSlice({
     status: 'success',
     selectSeatNumber: null,
     selectSeatSector: null,
+    enableSeat: [],
+    totalSeat: [],
   },
 
   reducers: {
     selectSeat: (state, action) => {
       state.selectSeatNumber = action.payload.number;
       state.selectSeatSector = action.payload.sector;
-      // AsyncStorage.multiSet(
-      //   ['seatNumber', action.payload.number],
-      //   ['seatSector', action.payload.number],
-      // );
     },
     clearSeat: state => {
       state.selectSeatNumber = null;
@@ -44,6 +42,7 @@ export const parkingSlice = createSlice({
       state.BsectorData = [];
       state.CsectorData = [];
       state.DsectorData = [];
+      // state.selectTotalSeat = 0;
     },
   },
   extraReducers: {
@@ -51,15 +50,31 @@ export const parkingSlice = createSlice({
       switch (action.payload.sector) {
         case 'a':
           state.AsectorData = action.payload.data;
+          state.totalSeat[0] = action.payload.data.length;
+          state.enableSeat[0] = action.payload.data.filter(
+            item => item.enable == true,
+          ).length;
           break;
         case 'b':
           state.BsectorData = action.payload.data;
+          state.totalSeat[1] = action.payload.data.length;
+          state.enableSeat[1] = action.payload.data.filter(
+            item => item.enable == true,
+          ).length;
           break;
         case 'c':
           state.CsectorData = action.payload.data;
+          state.totalSeat[2] = action.payload.data.length;
+          state.enableSeat[2] = action.payload.data.filter(
+            item => item.enable == true,
+          ).length;
           break;
         case 'd':
           state.DsectorData = action.payload.data;
+          state.totalSeat[3] = action.payload.data.length;
+          state.enableSeat[3] = action.payload.data.filter(
+            item => item.enable == true,
+          ).length;
           break;
       }
       state.status = 'success';
@@ -78,6 +93,8 @@ export const selectParkingA = state => state.parking.AsectorData;
 export const selectParkingB = state => state.parking.BsectorData;
 export const selectParkingC = state => state.parking.CsectorData;
 export const selectParkingD = state => state.parking.DsectorData;
+export const selectTotalSeat = state => state.parking.totalSeat;
+export const selectEnableSeat = state => state.parking.enableSeat;
 export const parkingStatus = state => state.parking.status;
 export const {selectSeat, clearSeat, clearData} = parkingSlice.actions;
 export const selectSeatNumber = state => state.parking.selectSeatNumber;

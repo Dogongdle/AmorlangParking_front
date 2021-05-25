@@ -25,6 +25,11 @@ export const ModalButtonView = ({
   const number = useSelector(selectSeatNumber);
   // const reserveSeat = useSelector(reserveSeat);
   const dispatch = useDispatch();
+  let today = new Date();
+
+  let hours = today.getHours(); // 시
+  let minutes = today.getMinutes(); // 분
+  let seconds = today.getSeconds(); // 초
 
   const fiveReserve = async () => {
     const response = await parkingAPI.reserveSeat(token, sector, number);
@@ -32,6 +37,7 @@ export const ModalButtonView = ({
       // await dispatch(getReserveData(token));
       setRefreshCount(prev => prev + 1);
       setVisibleModal(false);
+      console.log(hours, '시', minutes, '분');
     }
   };
 

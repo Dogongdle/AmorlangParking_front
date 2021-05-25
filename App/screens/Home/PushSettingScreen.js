@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-// import {Text, Switch} from 'react-native';
+import {Text, Switch} from 'react-native';
 
 import {AppHeader} from '../../components/AppHeader';
 import {AppSafeArea} from '../../components/AppSafeArea';

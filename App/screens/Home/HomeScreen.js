@@ -7,6 +7,7 @@ import {
   selectDuration,
   setUser,
   getReserveData,
+  clearReserve,
 } from '../../reducer/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppHeader} from '../../components/AppHeader';
@@ -27,6 +28,8 @@ import {
   parkingStatus,
   clearSeat,
   clearData,
+  selectTotalSeat,
+  selectEnableSeat,
 } from '../../reducer/parkingSlice';
 import {AreaSelect} from '../../components/AreaSelect';
 import AppModal from '../../components/AppModal';
@@ -35,6 +38,7 @@ import {ModalButtonView} from '../../components/ModalButtonView';
 import LoadingModal from '../../components/LoadingModal';
 import {AppStopWatch} from '../../components/AppStopWatch';
 import {UIActivityIndicator} from 'react-native-indicators';
+import {SeatCountArea} from '../../components/SeatCountArea';
 
 const HomeScreen = ({navigation}) => {
   const [visibleAlert, setVisibleAlert] = useState(false);
@@ -52,6 +56,9 @@ const HomeScreen = ({navigation}) => {
   const Bdata = useSelector(selectParkingB);
   const Cdata = useSelector(selectParkingC);
   const dataLoading = useSelector(parkingStatus);
+
+  const totalSeat = useSelector(selectTotalSeat);
+  const enableSeat = useSelector(selectEnableSeat);
   const [visibleModal, setVisibleModal] = useState(false);
   const [refreshCount, setRefreshCount] = useState(0);
   const [floor, setFloor] = useState(0);
@@ -75,13 +82,14 @@ const HomeScreen = ({navigation}) => {
       BackHandler.removeEventListener('hardwareBackPress', backAction);
   }, []);
 
-  useEffect(() => {
-    dispatch(getReserveData(token));
+  useEffect(async () => {
+    await dispatch(getReserveData(token));
     dispatch(getParkingData({sector: 'a', token: token}));
     dispatch(getParkingData({sector: 'b', token: token}));
     dispatch(getParkingData({sector: 'c', token: token}));
     // dispatch(getParkingData({sector: 'd', token: token}));
     return () => {
+      dispatch(clearReserve());
       dispatch(clearData());
     };
   }, [refreshCount, floor]);
@@ -102,13 +110,15 @@ const HomeScreen = ({navigation}) => {
     }
   };
 
-  if (dataLoading == 'loading') {
-    return (
-      <AppModal visible={dataLoading == 'loading'}>
-        <LoadingModal />
-      </AppModal>
-    );
-  }
+  console.log(enableSeat);
+
+  // if (dataLoading == 'loading') {
+  //   return (
+  //     <AppModal visible={dataLoading == 'loading'}>
+  //       <LoadingModal />
+  //     </AppModal>
+  //   );
+  // }
   return (
     <>
       <AppSafeArea>
@@ -133,7 +143,7 @@ const HomeScreen = ({navigation}) => {
           }
           title={user.apart}
         />
-        {/* {dataLoading == 'loading' && (
+        {dataLoading == 'loading' && (
           <UIActivityIndicator
             style={{
               position: 'absolute',
@@ -144,7 +154,7 @@ const HomeScreen = ({navigation}) => {
             color={colors.primary}
             size={width * 40}
           />
-        )} */}
+        )}
         <View style={{flex: 1, backgroundColor: colors.parkingBackground}}>
           <ReactNativeZoomableView
             maxZoom={2.0}
@@ -163,6 +173,10 @@ const HomeScreen = ({navigation}) => {
             floor={floor}
             setFloor={setFloor}
             onPressRefresh={() => setRefreshCount(prev => prev + 1)}
+          />
+          <SeatCountArea
+            totalSeatCount={totalSeat.reduce((a, b) => a + b, 0)}
+            enableSeatCount={enableSeat.reduce((a, b) => a + b, 0)}
           />
           {user.reserved == true ? (
             <AppStopWatch />
