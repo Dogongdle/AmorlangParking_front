@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 //custom imports
 import {colors, height, width} from '../config/globalStyles';
+import {SeatCount} from './SeatCount';
 
 export const SeatCountArea = ({
   totalSeatCount,
@@ -15,34 +16,18 @@ export const SeatCountArea = ({
   return (
     <>
       <View style={[styles.indicator, style]}>
-        <View style={styles.stateItem}>
-          <Text style={styles.title}>주차 공간</Text>
-          <Text style={styles.count}>
-            {totalSeatCount}
-            <Text> 대</Text>
-          </Text>
-        </View>
-        <View style={styles.stateItem}>
-          <Text style={styles.title}>사용 가능</Text>
-          <Text style={styles.count}>
-            {enableSeatCount}
-            <Text> 대</Text>
-          </Text>
-        </View>
-        <View style={styles.stateItem}>
-          <Text style={styles.title}>사용 가능</Text>
-          <Text style={styles.count}>
-            {enableSeatCount2}
-            <Text> 대</Text>
-          </Text>
-        </View>
-        <View style={styles.stateItem}>
-          <Text style={styles.title}>사용 가능</Text>
-          <Text style={styles.count}>
-            {enableSeatCount3}
-            <Text> 대</Text>
-          </Text>
-        </View>
+        <Text
+          style={{
+            fontSize: width * 15,
+            color: colors.black,
+            marginVertical: height * 10,
+            fontWeight: 'bold',
+          }}>
+          주차 가능 자리
+        </Text>
+        <SeatCount title="B1" count={enableSeatCount} />
+        <SeatCount title="B2" count={enableSeatCount2} />
+        <SeatCount title="B3" count={enableSeatCount3} />
       </View>
     </>
   );
@@ -56,9 +41,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     paddingHorizontal: width * 15,
     paddingVertical: height * 10,
-    width: width * 120,
-    height: height * 90,
-
+    width: width * 140,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -69,23 +52,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 5,
   },
-  stateItem: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
   circle: {
     width: width * 15,
     height: height * 15,
     borderRadius: 50,
-  },
-  title: {
-    fontWeight: '600',
-    fontSize: width * 12,
-  },
-  count: {
-    color: colors.primary,
-    fontWeight: '600',
   },
 });
