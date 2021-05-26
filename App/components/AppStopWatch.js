@@ -2,12 +2,13 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 //custom imports
 import {colors, height, width} from '../config/globalStyles';
+
 import MyIcon from '../config/Icon-font.js';
 
-export const AppStopWatch = React.memo(({style, time, ...props}) => {
+export const AppStopWatch = ({style, time, ...props}) => {
   const [minutes, setMinutes] = useState(Math.floor((time / 1000 / 60) % 60));
   const [seconds, setSeconds] = useState(Math.floor((time / 1000) % 60));
-
+  console.log('time', time);
   useEffect(() => {
     const countdown = setInterval(() => {
       if (parseInt(seconds) > 0) {
@@ -27,25 +28,23 @@ export const AppStopWatch = React.memo(({style, time, ...props}) => {
 
   return (
     <View style={styles.stopWatchView}>
-      <View
-        style={{
-          width: width * 15,
-          height: height * 15,
-          borderRadius: 50,
-          backgroundColor: colors.primary,
-        }}
-      />
+      <View style={styles.parkingDot} />
       <Text style={styles.stopWatchText}>5분 예약 자리</Text>
-
       <MyIcon name={'alarm-1'} size={width * 19} color={colors.primary} />
       <Text style={styles.stopWatchTime}>
         {('0' + minutes).slice(-2)}:{('0' + seconds).slice(-2)}
       </Text>
     </View>
   );
-});
+};
 
 const styles = StyleSheet.create({
+  parkingDot: {
+    width: width * 15,
+    height: height * 15,
+    borderRadius: 50,
+    backgroundColor: colors.primary,
+  },
   stopWatchView: {
     position: 'absolute',
     bottom: height * 80,

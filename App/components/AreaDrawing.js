@@ -5,7 +5,11 @@ import {colors, height, images, width} from '../config/globalStyles';
 import {EntryView} from './EntryView';
 
 import {SectorDrawing} from './SectorDrawing';
-
+import {DoubleSeat} from './DoubleSeat';
+import {
+  doubleSeatPositionTop,
+  doubleSeatPositionLeft,
+} from '../config/globalArray';
 export const AreaDrawing = React.memo(
   ({
     Adata,
@@ -28,7 +32,7 @@ export const AreaDrawing = React.memo(
     };
 
     const formatFloor = useMemo(() => getFloor(floor + 1), [floor]);
-    console.log('현재층수', formatFloor);
+    // console.log('현재층수', formatFloor);
     return (
       <>
         <EntryView />
@@ -44,31 +48,15 @@ export const AreaDrawing = React.memo(
           </View>
           {doubleVisible && (
             <>
-              <View
-                style={[
-                  styles.doubleSeat,
-                  {top: width * 390, left: width * 180},
-                ]}></View>
-              <View
-                style={[
-                  styles.doubleSeat,
-                  {top: width * 320, left: width * 180},
-                ]}></View>
-              <View
-                style={[
-                  styles.doubleSeat,
-                  {top: width * 320, left: width * 310},
-                ]}></View>
-              <View
-                style={[
-                  styles.doubleSeat,
-                  {top: width * 175, left: width * 310},
-                ]}></View>
-              <View
-                style={[
-                  styles.doubleSeat,
-                  {top: width * 433, left: width * 120},
-                ]}></View>
+              {doubleData &&
+                doubleData.map((item, index) => (
+                  <DoubleSeat
+                    onPress={onPress}
+                    positionLeft={width * doubleSeatPositionLeft[index]}
+                    positionTop={width * doubleSeatPositionTop[index]}
+                    key={index}
+                  />
+                ))}
             </>
           )}
 
@@ -106,11 +94,5 @@ const styles = StyleSheet.create({
     fontSize: width * 45,
     fontWeight: 'bold',
     color: colors.borderGrey,
-  },
-  doubleSeat: {
-    position: 'absolute',
-    backgroundColor: colors.yellow,
-    width: height * 20,
-    height: width * 40,
   },
 });

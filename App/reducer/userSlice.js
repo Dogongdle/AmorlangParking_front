@@ -52,7 +52,7 @@ export const userSlice = createSlice({
       AsyncStorage.setItem('Duration', action.payload);
     },
     clearReserve: state => {
-      state.user.reserved = '';
+      state.user.reserved = null;
     },
   },
   extraReducers: {

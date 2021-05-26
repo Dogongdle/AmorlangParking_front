@@ -7,12 +7,12 @@ import {colors, height, width} from '../config/globalStyles';
 import {ModalButton} from './ModalButton';
 import {useSelector, useDispatch} from 'react-redux';
 import {selectToken, getReserveData, reserve} from '../reducer/userSlice';
+import {startLoading, endLoading} from '../reducer/loadingSlice';
 import parkingAPI from '../api/parking';
 
 import {
   selectSeatSector,
   selectSeatNumber,
-  selectSeat,
   setTime,
 } from '../reducer/parkingSlice';
 
@@ -34,6 +34,11 @@ export const ModalButtonView = ({
       dispatch(setTime({time: JSON.stringify(reserveEndTime)}));
       setRefreshCount(prev => prev + 1);
       setVisibleModal(false);
+      // dispatch(startLoading());
+      // setTimeout(async () => {
+      //   dispatch(endLoading());
+      // }, 3000);
+      // dispatch(startLoading);
     }
   };
 

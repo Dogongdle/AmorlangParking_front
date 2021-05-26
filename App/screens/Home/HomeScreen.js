@@ -123,7 +123,7 @@ const HomeScreen = ({navigation}) => {
       dispatch(clearReserve());
       dispatch(clearData());
     };
-  }, [refreshCount, floor]);
+  }, [refreshCount, floor, user.reserved]);
 
   useEffect(() => {
     const autoRefresh = setTimeout(async () => {
@@ -221,7 +221,6 @@ const HomeScreen = ({navigation}) => {
           )}
         </View>
       </AppSafeArea>
-
       <BottomSheet
         ref={bottomSheet}
         snapPoints={[height * 500, height * 80]}
