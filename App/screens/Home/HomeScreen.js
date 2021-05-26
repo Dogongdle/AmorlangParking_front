@@ -27,12 +27,20 @@ import {
   selectParkingA,
   selectParkingB,
   selectParkingC,
+  selectParkingD,
+  selectParkingE,
+  selectParkingF,
+  selectParkingG,
+  selectParkingH,
+  selectParkingI,
   selectDoubleSeat,
   parkingStatus,
   clearSeat,
   clearData,
   selectTotalSeat,
   selectEnableSeat,
+  selectEnableSeat2,
+  selectEnableSeat3,
   selectEndTime,
 } from '../../reducer/parkingSlice';
 import {AreaSelect} from '../../components/AreaSelect';
@@ -60,10 +68,18 @@ const HomeScreen = ({navigation}) => {
   const Adata = useSelector(selectParkingA);
   const Bdata = useSelector(selectParkingB);
   const Cdata = useSelector(selectParkingC);
+  const Ddata = useSelector(selectParkingD);
+  const Edata = useSelector(selectParkingE);
+  const Fdata = useSelector(selectParkingF);
+  const Gdata = useSelector(selectParkingG);
+  const Hdata = useSelector(selectParkingH);
+  const Idata = useSelector(selectParkingI);
   const dataLoading = useSelector(parkingStatus);
   const endTime = useSelector(selectEndTime);
   const totalSeat = useSelector(selectTotalSeat);
   const enableSeat = useSelector(selectEnableSeat);
+  const enableSeat2 = useSelector(selectEnableSeat2);
+  const enableSeat3 = useSelector(selectEnableSeat3);
   const [visibleModal, setVisibleModal] = useState(false);
   const [refreshCount, setRefreshCount] = useState(0);
   const [floor, setFloor] = useState(0);
@@ -96,6 +112,12 @@ const HomeScreen = ({navigation}) => {
     dispatch(getParkingData({sector: 'a', token: token}));
     dispatch(getParkingData({sector: 'b', token: token}));
     dispatch(getParkingData({sector: 'c', token: token}));
+    dispatch(getParkingData({sector: 'd', token: token}));
+    dispatch(getParkingData({sector: 'e', token: token}));
+    dispatch(getParkingData({sector: 'f', token: token}));
+    dispatch(getParkingData({sector: 'g', token: token}));
+    dispatch(getParkingData({sector: 'h', token: token}));
+    dispatch(getParkingData({sector: 'i', token: token}));
     // dispatch(getParkingData({sector: 'd', token: token}));
     return () => {
       dispatch(clearReserve());
@@ -170,6 +192,12 @@ const HomeScreen = ({navigation}) => {
               Adata={Adata}
               Bdata={Bdata}
               Cdata={Cdata}
+              Ddata={Ddata}
+              Edata={Edata}
+              Fdata={Fdata}
+              Gdata={Gdata}
+              Hdata={Hdata}
+              Idata={Idata}
               doubleData={doubleSeatData}
               onPress={reserveModal}
               doubleVisible={doubleVisible}
@@ -183,6 +211,8 @@ const HomeScreen = ({navigation}) => {
           <SeatCountArea
             totalSeatCount={totalSeat.reduce((a, b) => a + b, 0)}
             enableSeatCount={enableSeat.reduce((a, b) => a + b, 0)}
+            enableSeatCount2={enableSeat2.reduce((a, b) => a + b, 0)}
+            enableSeatCount3={enableSeat3.reduce((a, b) => a + b, 0)}
           />
           {user.reserved == true ? (
             <AppStopWatch time={remainTime} />

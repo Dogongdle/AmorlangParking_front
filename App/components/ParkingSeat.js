@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {StyleSheet, TouchableOpacity, Alert, Text} from 'react-native';
 //custom imports
 import {colors, height, width} from '../config/globalStyles';
 import parkingAPI from '../api/parking';
@@ -49,8 +49,9 @@ export const ParkingSeat = ({
       onPress={() => {
         onPress();
         onSelect();
-      }}
-    />
+      }}/>
+   
+   
   );
 };
 

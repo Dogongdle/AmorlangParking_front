@@ -6,6 +6,8 @@ import {colors, height, width} from '../config/globalStyles';
 export const SeatCountArea = ({
   totalSeatCount,
   enableSeatCount,
+  enableSeatCount2,
+  enableSeatCount3,
   style,
   children,
   ...props
@@ -24,6 +26,20 @@ export const SeatCountArea = ({
           <Text style={styles.title}>사용 가능</Text>
           <Text style={styles.count}>
             {enableSeatCount}
+            <Text> 대</Text>
+          </Text>
+        </View>
+        <View style={styles.stateItem}>
+          <Text style={styles.title}>사용 가능</Text>
+          <Text style={styles.count}>
+            {enableSeatCount2}
+            <Text> 대</Text>
+          </Text>
+        </View>
+        <View style={styles.stateItem}>
+          <Text style={styles.title}>사용 가능</Text>
+          <Text style={styles.count}>
+            {enableSeatCount3}
             <Text> 대</Text>
           </Text>
         </View>

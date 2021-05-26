@@ -12,6 +12,11 @@ export const AreaDrawing = React.memo(
     Bdata,
     Cdata,
     Ddata,
+    Edata,
+    Fdata,
+    Gdata,
+    Hdata,
+    Idata,
     onPress,
     floor,
     doubleData,
@@ -23,6 +28,7 @@ export const AreaDrawing = React.memo(
     };
 
     const formatFloor = useMemo(() => getFloor(floor + 1), [floor]);
+    console.log('현재층수', formatFloor);
     return (
       <>
         <EntryView />
@@ -30,8 +36,8 @@ export const AreaDrawing = React.memo(
           <View style={styles.leftArea}>
             <Text style={styles.floorText}>{formatFloor}</Text>
             <SectorDrawing
-              data={floor == 0 ? Adata : floor == 1 ? Bdata : Cdata}
-              sector="a"
+              data={floor == 0 ? Adata : floor == 1 ? Ddata : Gdata}
+              sector={floor == 0 ? 'a' : floor == 1 ? 'd' : 'g'}
               onPress={onPress}
               style={{}}
             />
@@ -68,13 +74,13 @@ export const AreaDrawing = React.memo(
 
           <View style={{flexDirection: 'row'}}>
             <SectorDrawing
-              sector="b"
-              data={floor == 0 ? Bdata : floor == 1 ? Cdata : Adata}
+              sector={floor == 0 ? 'b' : floor == 1 ? 'e' : 'h'}
+              data={floor == 0 ? Bdata : floor == 1 ? Edata : Hdata}
               onPress={onPress}
             />
             <SectorDrawing
-              sector="c"
-              data={floor == 0 ? Cdata : floor == 1 ? Adata : Bdata}
+              sector={floor == 0 ? 'c' : floor == 1 ? 'f' : 'i'}
+              data={floor == 0 ? Cdata : floor == 1 ? Fdata : Idata}
               onPress={onPress}
             />
           </View>
