@@ -10,6 +10,7 @@ import {
   doubleSeatPositionTop,
   doubleSeatPositionLeft,
 } from '../config/globalArray';
+import {BorderView} from './BorderView';
 export const AreaDrawing = React.memo(
   ({
     Adata,
@@ -36,6 +37,7 @@ export const AreaDrawing = React.memo(
     return (
       <>
         <EntryView />
+        <BorderView />
         <View style={styles.drawingView}>
           <View style={styles.leftArea}>
             <Text style={styles.floorText}>{formatFloor}</Text>

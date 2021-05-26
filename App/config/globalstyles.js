@@ -64,6 +64,7 @@ export const images = {
   user: require('../images/user.png'),
   refresh: require('../images/refresh-button.png'),
   parkingIcon: require('../images/parkingIcon.png'),
+  apartEntryIcon: require('../images/apartEntry.png'),
 };
 
 export const storyBoardDimensions = {
