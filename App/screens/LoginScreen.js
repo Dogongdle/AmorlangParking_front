@@ -44,6 +44,7 @@ const loginScreen = () => {
     const userData = await parkingAPI.signUp(data);
     console.log('회원가입 후 유저데이터', userData);
     if (userData.status === 200) {
+      console.log('로그인 직전 데이따', data);
       const response = await parkingAPI.signIn(data);
       console.log('로그인 후 리스폰스', response);
       const token = response.data.token;

@@ -5,7 +5,7 @@ import {colors, height, width, images} from '../config/globalStyles';
 import {AppButton} from './AppButton';
 import * as Animatable from 'react-native-animatable';
 
-export const CompleteView = ({style, number, ...props}) => {
+export const CompleteView = ({style, number, onPress, ...props}) => {
   return (
     <View style={styles.completeView}>
       <Text style={styles.completeViewTitle}>자리가 탐색되었습니다!!</Text>
@@ -21,7 +21,7 @@ export const CompleteView = ({style, number, ...props}) => {
         style={{flex: 3}}>
         <AppButton
           style={{marginTop: height * 60, borderRadius: 10}}
-          onPress={() => console.log('완료')}>
+          onPress={onPress}>
           <Text style={styles.buttonText}>위치 확인하기</Text>
         </AppButton>
       </Animatable.View>

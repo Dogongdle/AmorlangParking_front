@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import HomeScreen from '../screens/Home/HomeScreen';
 import NotificationsScreen from '../screens/Home/NotificationsScreen';
+import PushSettingScreen from '../screens/Home/PushSettingScreen';
 
 const StackHome = createStackNavigator();
 const navOptionHandler = () => ({
@@ -20,6 +21,11 @@ const HomeStack = ({navigation, route}) => {
       <StackHome.Screen
         name="Notifications"
         component={NotificationsScreen}
+        options={navOptionHandler}
+      />
+      <StackHome.Screen
+        name="PushSetting"
+        component={PushSettingScreen}
         options={navOptionHandler}
       />
     </StackHome.Navigator>

@@ -25,8 +25,7 @@ const styles = StyleSheet.create({
   menuView: {
     paddingHorizontal: width * 10,
     paddingVertical: width * 20,
-    borderTopWidth: 0.5,
-    borderBottomWidth: 0.5,
+
     borderColor: colors.borderGrey,
     flexDirection: 'row',
     justifyContent: 'space-between',

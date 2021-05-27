@@ -31,8 +31,6 @@ const AppDrawer = ({navigation}) => {
     setModalSplash('flex');
   };
 
-  const apartName = user.apart.substring(1, user.apart.length - 1);
-
   return (
     <View style={{flex: 1}}>
       <View
@@ -45,17 +43,20 @@ const AppDrawer = ({navigation}) => {
           <View style={styles.profileView}>
             <Image style={styles.profileImage} source={images.user} />
             <SocialTag
-              provider="kakao"
+              provider={user.provider}
               style={{position: 'absolute', bottom: 0, right: 0}}
             />
           </View>
           <Text style={styles.userName}>{user.username}</Text>
-          <Text style={styles.apartText}>{apartName}</Text>
+          <Text style={styles.apartText}>{user.apart}</Text>
         </View>
       </View>
       <View style={{flex: 5}}>
         <AppMenu>성별 인증(여성 전용 주차장)</AppMenu>
         <AppMenu>장애인 인증</AppMenu>
+        <AppMenu onPress={() => navigation.navigate('PushSetting')}>
+          알림 설정
+        </AppMenu>
         <AppMenu
           leftIcon={
             <MyIcon name={'alarm-5'} size={width * 19} color={colors.primary} />

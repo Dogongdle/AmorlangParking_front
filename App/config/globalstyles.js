@@ -40,6 +40,7 @@ export const colors = {
   darkMediumGrey: '#0A1321',
   postcardGrey: '#F2F2F2',
   parkingBackground: '#EFEFF1',
+  yellow: '#FFCA08',
 };
 
 export const fonts = {
@@ -63,6 +64,7 @@ export const images = {
   user: require('../images/user.png'),
   refresh: require('../images/refresh-button.png'),
   parkingIcon: require('../images/parkingIcon.png'),
+  apartEntryIcon: require('../images/apartEntry.png'),
 };
 
 export const storyBoardDimensions = {

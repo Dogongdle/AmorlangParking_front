@@ -32,14 +32,12 @@ const CodeVerifyScreen = ({navigation, route}) => {
   const token = useSelector(selectToken);
 
   const handleUpdate = () => {
-    parkingAPI
-      .registerApart(token, {apart: JSON.stringify(apart)})
-      .then(res => {
-        console.log(res);
-        if ((res.status = 200)) {
-          dispatch(register(apart));
-        }
-      });
+    parkingAPI.registerApart(token, {apart: apart}).then(res => {
+      console.log(res);
+      if ((res.status = 200)) {
+        dispatch(register(apart));
+      }
+    });
   };
 
   // const verifyCheck = () => {

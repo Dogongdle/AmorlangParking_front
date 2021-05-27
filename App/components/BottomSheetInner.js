@@ -13,6 +13,7 @@ export const BottomSheetInner = ({
   style,
   onPress,
   children,
+  number,
   ...props
 }) => {
   const [loading, setLoading] = useState(false);
@@ -105,7 +106,7 @@ export const BottomSheetInner = ({
             />
           </View>
         )}
-        {complete && <CompleteView number={2} />}
+        {complete && <CompleteView onPress={onPress} number={number} />}
       </View>
     </View>
   );

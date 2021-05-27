@@ -5,37 +5,72 @@ import {colors, height, images, width} from '../config/globalStyles';
 import {EntryView} from './EntryView';
 
 import {SectorDrawing} from './SectorDrawing';
-
+import {DoubleSeat} from './DoubleSeat';
+import {
+  doubleSeatPositionTop,
+  doubleSeatPositionLeft,
+} from '../config/globalArray';
+import {BorderView} from './BorderView';
 export const AreaDrawing = React.memo(
-  ({Adata, Bdata, Cdata, Ddata, onPress, floor, ...props}) => {
+  ({
+    Adata,
+    Bdata,
+    Cdata,
+    Ddata,
+    Edata,
+    Fdata,
+    Gdata,
+    Hdata,
+    Idata,
+    onPress,
+    floor,
+    doubleData,
+    doubleVisible,
+    ...props
+  }) => {
     const getFloor = floor => {
       return `B${floor}`;
     };
 
     const formatFloor = useMemo(() => getFloor(floor + 1), [floor]);
+    // console.log('현재층수', formatFloor);
     return (
       <>
         <EntryView />
+        <BorderView />
         <View style={styles.drawingView}>
           <View style={styles.leftArea}>
             <Text style={styles.floorText}>{formatFloor}</Text>
             <SectorDrawing
-              data={floor == 0 ? Adata : floor == 1 ? Bdata : Cdata}
-              sector="a"
+              data={floor == 0 ? Adata : floor == 1 ? Ddata : Gdata}
+              sector={floor == 0 ? 'a' : floor == 1 ? 'd' : 'g'}
               onPress={onPress}
               style={{}}
             />
           </View>
+          {doubleVisible && (
+            <>
+              {doubleData &&
+                doubleData.map((item, index) => (
+                  <DoubleSeat
+                    onPress={onPress}
+                    positionLeft={width * doubleSeatPositionLeft[index]}
+                    positionTop={width * doubleSeatPositionTop[index]}
+                    key={index}
+                  />
+                ))}
+            </>
+          )}
 
           <View style={{flexDirection: 'row'}}>
             <SectorDrawing
-              sector="b"
-              data={floor == 0 ? Bdata : floor == 1 ? Cdata : Adata}
+              sector={floor == 0 ? 'b' : floor == 1 ? 'e' : 'h'}
+              data={floor == 0 ? Bdata : floor == 1 ? Edata : Hdata}
               onPress={onPress}
             />
             <SectorDrawing
-              sector="c"
-              data={floor == 0 ? Cdata : floor == 1 ? Adata : Bdata}
+              sector={floor == 0 ? 'c' : floor == 1 ? 'f' : 'i'}
+              data={floor == 0 ? Cdata : floor == 1 ? Fdata : Idata}
               onPress={onPress}
             />
           </View>

@@ -6,9 +6,20 @@ import {colors, height, width} from '../config/globalStyles';
 
 import {ModalButton} from './ModalButton';
 import {useSelector, useDispatch} from 'react-redux';
-import {selectToken, reserve} from '../reducer/userSlice';
+import {
+  selectToken,
+  getReserveData,
+  reserve,
+  selectUser,
+} from '../reducer/userSlice';
+import {startLoading, endLoading} from '../reducer/loadingSlice';
 import parkingAPI from '../api/parking';
-import {selectSeatSector, selectSeatNumber} from '../reducer/parkingSlice';
+
+import {
+  selectSeatSector,
+  selectSeatNumber,
+  setTime,
+} from '../reducer/parkingSlice';
 
 export const ModalButtonView = ({
   onPress,
@@ -18,14 +29,33 @@ export const ModalButtonView = ({
   const token = useSelector(selectToken);
   const sector = useSelector(selectSeatSector);
   const number = useSelector(selectSeatNumber);
+
+  // const reserveSeat = useSelector(reserveSeat);
   const dispatch = useDispatch();
+  let reserveEndTime = new Date().getTime() + 300000;
 
   const fiveReserve = async () => {
     const response = await parkingAPI.reserveSeat(token, sector, number);
+    if (response.status === 200) {
+      dispatch(setTime({time: JSON.stringify(reserveEndTime)}));
+
+      setRefreshCount(prev => prev + 1);
+
+      setVisibleModal(false);
+
+      // dispatch(startLoading());
+      // setTimeout(async () => {
+      //   dispatch(endLoading());
+      // }, 3000);
+      // dispatch(startLoading);
+    }
+  };
+
+  const zzimSeat = async () => {
+    const response = await parkingAPI.registerPush(token, sector, number);
     console.log(response);
     if (response.status === 200) {
       setRefreshCount(prev => prev + 1);
-      () => dispatch(reserve());
       setVisibleModal(false);
     }
   };
@@ -43,6 +73,7 @@ export const ModalButtonView = ({
       <ModalButton
         icon="alarm-2"
         size={14}
+        onPress={zzimSeat}
         color={colors.red}
         style={{marginRight: width * 5}}
         title="찜하기"

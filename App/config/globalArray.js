@@ -38,3 +38,8 @@ export const apartOptions = [
 ];
 
 export const floorOptions = ['지하 1층', '지하 2층', '지하 3층', '취소'];
+
+export const durationOptions = ['5초', '10초', '30초', '취소'];
+
+export const doubleSeatPositionTop = [390, 320, 320, 175, 433];
+export const doubleSeatPositionLeft = [180, 180, 310, 310, 120];
