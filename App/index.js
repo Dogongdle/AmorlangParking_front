@@ -12,6 +12,7 @@ import {
   setUser,
   setDuration,
 } from './reducer/userSlice';
+import {addPushList} from './reducer/pushSlice';
 import {setTime} from './reducer/parkingSlice';
 import {selectLoading, endLoading} from './reducer/loadingSlice';
 import {Provider, useDispatch, useSelector} from 'react-redux';
@@ -40,6 +41,7 @@ const App = () => {
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
       Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+      dispatch(addPushList());
     });
 
     return unsubscribe;
@@ -53,9 +55,7 @@ const App = () => {
         userToken = await AsyncStorage.getItem('userToken');
         const duration = await AsyncStorage.getItem('Duration');
         const endTime = await AsyncStorage.getItem('reserveEndTime');
-        console.log(endTime);
-        console.log('왜이래?', duration);
-
+        dispatch(addPushList());
         if (userToken) {
           const userInfo = await parkingAPI.getUser(userToken);
           console.log('유저정보', userInfo.data);

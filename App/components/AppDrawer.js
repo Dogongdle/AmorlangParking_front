@@ -43,7 +43,7 @@ const AppDrawer = ({navigation}) => {
           <View style={styles.profileView}>
             <Image style={styles.profileImage} source={images.user} />
             <SocialTag
-              provider="kakao"
+              provider={user.provider}
               style={{position: 'absolute', bottom: 0, right: 0}}
             />
           </View>

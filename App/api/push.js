@@ -1,6 +1,6 @@
 import parkingAPI from './API';
 
-const getPushList = async token => {
+const getZzimSeat = async token => {
   // 현재 유저에게 할당된 alarm을 받아오는 api
   try {
     return await parkingAPI.get('/push', null, {
@@ -42,7 +42,7 @@ const settingPush = async (token, data) => {
 };
 
 export default {
-  getPushList,
+  getZzimSeat,
   getSettingPush,
   settingPush,
 };

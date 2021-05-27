@@ -7,7 +7,7 @@ import {colors, width, height} from '../config/globalStyles';
 
 import MyIcon from '../config/Icon-font.js';
 
-const Notification = ({...props}) => {
+const Notification = ({content, title, ...props}) => {
   const swipeoutBtns = [
     {
       text: '삭제',
@@ -22,7 +22,7 @@ const Notification = ({...props}) => {
           <View style={styles.notificationBody}>
             <MyIcon name={'alarm-3'} size={width * 25} color={colors.red} />
             <Text style={styles.notificationContent}>
-              회원님이 찜한 주차공간 자리가 비었습니다.
+              {content}
             </Text>
           </View>
           <Text style={styles.notificationTime}>방금 전</Text>
