@@ -20,10 +20,12 @@ const Notification = ({content, title, ...props}) => {
       <View>
         <TouchableOpacity activeOpacity={0.8} style={styles.notification}>
           <View style={styles.notificationBody}>
-            <MyIcon name={'alarm-3'} size={width * 25} color={colors.red} />
-            <Text style={styles.notificationContent}>
-              {content}
-            </Text>
+            <MyIcon
+              name={'alarm-3'}
+              size={width * 25}
+              color={colors.borderGrey}
+            />
+            <Text style={styles.notificationContent}>{content}</Text>
           </View>
           <Text style={styles.notificationTime}>방금 전</Text>
         </TouchableOpacity>

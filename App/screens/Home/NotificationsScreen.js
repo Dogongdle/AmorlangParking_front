@@ -29,6 +29,8 @@ const NotificationsScreen = ({navigation}) => {
     wait(1000).then(() => setRefreshing(false));
   }, []);
 
+  console.log(pushList);
+
   useEffect(async () => {
     const response = await parkingAPI.getZzimSeat(token);
     // console.log(response.data);
@@ -38,7 +40,7 @@ const NotificationsScreen = ({navigation}) => {
       setZzimSeat('지하 2층');
     else if (response.data[0].sector == 'g' || 'h' || 'i')
       setZzimSeat('지하 3층');
-  }, []);
+  }, [pushList]);
 
   return (
     <AppSafeArea>

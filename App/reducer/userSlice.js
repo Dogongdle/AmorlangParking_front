@@ -47,7 +47,7 @@ export const userSlice = createSlice({
       AsyncStorage.setItem('reserving', 'true');
     },
     setDuration: (state, action) => {
-      console.log('reducer에서 어떻게받지?', action.payload);
+      // console.log('reducer에서 어떻게받지?', action.payload);
       state.duration = action.payload * 1000;
       AsyncStorage.setItem('Duration', action.payload);
     },
@@ -59,6 +59,7 @@ export const userSlice = createSlice({
     [getReserveData.fulfilled]: (state, action) => {
       state.user.reserved = action.payload;
       state.status = 'success';
+      console.log('예약상태', action.payload);
     },
     [getReserveData.pending]: (state, action) => {
       state.status = 'loading';

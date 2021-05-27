@@ -16,7 +16,6 @@ import {AppSafeArea} from '../../components/AppSafeArea';
 import {colors, width, height, images} from '../../config/globalStyles';
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
-import {StateArea} from '../../components/StateArea';
 import MyIcon from '../../config/Icon-font.js';
 import {BottomSheetInner} from '../../components/BottomSheetInner';
 import {AreaDrawing} from '../../components/AreaDrawing';
@@ -49,10 +48,10 @@ import AppModal from '../../components/AppModal';
 import ModalSplash from '../../components/ModalSplash';
 import {ModalButtonView} from '../../components/ModalButtonView';
 import LoadingModal from '../../components/LoadingModal';
-import {AppStopWatch} from '../../components/AppStopWatch';
 import {UIActivityIndicator} from 'react-native-indicators';
 import {SeatCountArea} from '../../components/SeatCountArea';
 import PushBadge from '../../components/PushBadge';
+import Conditional from '../../components/Conditional';
 
 const HomeScreen = ({navigation}) => {
   const [visibleAlert, setVisibleAlert] = useState(false);
@@ -221,11 +220,11 @@ const HomeScreen = ({navigation}) => {
             enableSeatCount2={enableSeat2.reduce((a, b) => a + b, 0)}
             enableSeatCount3={enableSeat3.reduce((a, b) => a + b, 0)}
           />
-          {user.reserved == true ? (
-            <AppStopWatch time={remainTime} />
-          ) : (
-            <StateArea visible={visibleModal} />
-          )}
+          <Conditional
+            condition={user.reserved}
+            visible={visibleModal}
+            time={remainTime}
+          />
         </View>
       </AppSafeArea>
       <BottomSheet

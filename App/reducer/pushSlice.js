@@ -9,12 +9,8 @@ export const pushSlice = createSlice({
   },
 
   reducers: {
-    addPushList: (state, payload) => {
-      state.pushList.push({
-        body: '아몰랑파킹입니다.',
-        ios: {badge: 0},
-        title: '아몰랑파킹',
-      });
+    addPushList: (state, action) => {
+      state.pushList.push(action.payload);
     },
   },
 });

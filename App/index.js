@@ -32,7 +32,7 @@ const navOptionHandler = () => ({
   headerShown: false,
 });
 
-const App = () => {
+const App = ({pushMessage}) => {
   const dispatch = useDispatch();
   const loggedIn = useSelector(selectLogin);
   const user = useSelector(selectUser);
@@ -40,8 +40,8 @@ const App = () => {
 
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
-      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
-      dispatch(addPushList());
+      // Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+      dispatch(addPushList(remoteMessage.notification));
     });
 
     return unsubscribe;
@@ -55,7 +55,9 @@ const App = () => {
         userToken = await AsyncStorage.getItem('userToken');
         const duration = await AsyncStorage.getItem('Duration');
         const endTime = await AsyncStorage.getItem('reserveEndTime');
-        dispatch(addPushList());
+        if (pushMessage.length >= 1) {
+          dispatch(addPushList(JSON.parse(pushMessage)));
+        }
         if (userToken) {
           const userInfo = await parkingAPI.getUser(userToken);
           console.log('유저정보', userInfo.data);
