@@ -43,6 +43,7 @@ import {
   selectEnableSeat3,
   selectEndTime,
 } from '../../reducer/parkingSlice';
+import {selectPushList} from '../../reducer/pushSlice';
 import {AreaSelect} from '../../components/AreaSelect';
 import AppModal from '../../components/AppModal';
 import ModalSplash from '../../components/ModalSplash';
@@ -51,6 +52,7 @@ import LoadingModal from '../../components/LoadingModal';
 import {AppStopWatch} from '../../components/AppStopWatch';
 import {UIActivityIndicator} from 'react-native-indicators';
 import {SeatCountArea} from '../../components/SeatCountArea';
+import PushBadge from '../../components/PushBadge';
 
 const HomeScreen = ({navigation}) => {
   const [visibleAlert, setVisibleAlert] = useState(false);
@@ -61,6 +63,8 @@ const HomeScreen = ({navigation}) => {
   const userReserveLoading = useSelector(userStatus);
   const duration = useSelector(selectDuration);
   const doubleSeatData = useSelector(selectDoubleSeat);
+  const pushList = useSelector(selectPushList);
+
   // const apartName = user.apart.substring(1, user.apart.length - 1);
   let bottomSheet = React.createRef();
   let fall = new Animated.Value(1);
@@ -161,7 +165,10 @@ const HomeScreen = ({navigation}) => {
             <MyIcon name={'alarm-7'} size={width * 15} color={colors.white} />
           }
           rightTitle={
-            <MyIcon name={'alarm-8'} size={width * 19} color={colors.white} />
+            <>
+              {pushList.length >= 1 && <PushBadge count={pushList.length} />}
+              <MyIcon name={'alarm-8'} size={width * 19} color={colors.white} />
+            </>
           }
           title={user.apart}
         />
