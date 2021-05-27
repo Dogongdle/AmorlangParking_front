@@ -11,7 +11,6 @@ import store from './App/store';
 import AsyncStorage from '@react-native-community/async-storage';
 import {addPushList} from './App/reducer/pushSlice';
 import messaging from '@react-native-firebase/messaging';
-import {add} from 'react-native-reanimated';
 
 const ReduxProvider = () => {
   const [pushMessage, setPushMessage] = useState([]);
@@ -37,8 +36,10 @@ const ReduxProvider = () => {
   useEffect(() => {
     requestUserPermission();
     messaging().setBackgroundMessageHandler(async remoteMessage => {
-      console.log('Message handled in the background!', remoteMessage);
-
+      console.log(
+        'Message handled in the background!',
+        JSON.stringify(remoteMessage),
+      );
       setPushMessage(previous => previous.push(remoteMessage.notification));
     });
   }, []);

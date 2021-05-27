@@ -12,6 +12,9 @@ export const pushSlice = createSlice({
     addPushList: (state, action) => {
       state.pushList.push(action.payload);
     },
+    // deletePushList: (state,action)=>{
+    //   state.pushList.
+    // }
   },
 });
 export const {addPushList} = pushSlice.actions; //액션들을 익스포트

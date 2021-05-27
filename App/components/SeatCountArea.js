@@ -20,7 +20,7 @@ export const SeatCountArea = ({
           style={{
             fontSize: width * 15,
             color: colors.black,
-            marginVertical: height * 10,
+            marginBottom: height * 10,
             fontWeight: 'bold',
           }}>
           주차 가능 자리

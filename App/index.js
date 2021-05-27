@@ -25,6 +25,8 @@ import AppDrawer from './components/AppDrawer';
 import HomeStack from './navigation/HomeStack';
 import {Root} from 'native-base';
 import messaging from '@react-native-firebase/messaging';
+import Toast, {BaseToast} from 'react-native-toast-message';
+import {colors} from './config/globalStyles';
 
 const StackApp = createStackNavigator();
 
@@ -38,10 +40,34 @@ const App = ({pushMessage}) => {
   const user = useSelector(selectUser);
   const loading = useSelector(selectLoading);
 
+  const toastConfig = {
+    success: ({text1, ...rest}) => (
+      <BaseToast
+        {...rest}
+        style={{borderLeftColor: colors.primary}}
+        contentContainerStyle={{paddingHorizontal: 15}}
+        text1Style={{
+          fontSize: 15,
+          fontWeight: 'bold',
+        }}
+        text1="아몰랑 파킹"
+        text2="새로운 알림이 도착하였습니다."
+      />
+    ),
+  };
+
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
-      // Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+      console.log(JSON.stringify(remoteMessage));
       dispatch(addPushList(remoteMessage.notification));
+      Toast.show({
+        props: {
+          onPress: () => {
+            navigation.navigate('Notification');
+          },
+          guid: 'guid-id',
+        },
+      });
     });
 
     return unsubscribe;
@@ -140,6 +166,7 @@ const App = ({pushMessage}) => {
               )}
             </StackApp.Navigator>
           </NavigationContainer>
+          <Toast config={toastConfig} ref={ref => Toast.setRef(ref)} />
         </SafeAreaProvider>
       </Root>
     </Provider>
