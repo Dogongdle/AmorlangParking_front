@@ -6,12 +6,16 @@ import Swipeout from 'react-native-swipeout';
 import {colors, width, height} from '../config/globalStyles';
 
 import MyIcon from '../config/Icon-font.js';
+import {deletePushList} from '../reducer/pushSlice';
+import {useDispatch} from 'react-redux';
 
-const Notification = ({content, title, ...props}) => {
+const Notification = ({content, title, index, ...props}) => {
+  const dispatch = useDispatch();
   const swipeoutBtns = [
     {
       text: '삭제',
       backgroundColor: colors.red,
+      onPress: () => dispatch(deletePushList(index)),
     },
   ];
 

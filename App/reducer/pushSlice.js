@@ -12,12 +12,14 @@ export const pushSlice = createSlice({
     addPushList: (state, action) => {
       state.pushList.push(action.payload);
     },
-    // deletePushList: (state,action)=>{
-    //   state.pushList.
-    // }
+    deletePushList: (state, action) => {
+      if (action.payload > -1) {
+        state.pushList.splice(action.payload, 1);
+      }
+    },
   },
 });
-export const {addPushList} = pushSlice.actions; //액션들을 익스포트
+export const {addPushList, deletePushList} = pushSlice.actions; //액션들을 익스포트
 
 export const selectPushList = state => state.push.pushList;
 

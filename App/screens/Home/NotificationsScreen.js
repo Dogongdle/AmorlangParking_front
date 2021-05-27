@@ -34,12 +34,14 @@ const NotificationsScreen = ({navigation}) => {
   useEffect(async () => {
     const response = await parkingAPI.getZzimSeat(token);
     // console.log(response.data);
-    setZzimNumber(response.data[0].seat);
-    if (response.data[0].sector == 'a' || 'b' || 'c') setZzimSeat('지하 1층');
-    else if (response.data[0].sector == 'd' || 'e' || 'f')
-      setZzimSeat('지하 2층');
-    else if (response.data[0].sector == 'g' || 'h' || 'i')
-      setZzimSeat('지하 3층');
+    if (response.data.length > 0) {
+      setZzimNumber(response.data[0].seat);
+      if (response.data[0].sector == 'a' || 'b' || 'c') setZzimSeat('지하 1층');
+      else if (response.data[0].sector == 'd' || 'e' || 'f')
+        setZzimSeat('지하 2층');
+      else if (response.data[0].sector == 'g' || 'h' || 'i')
+        setZzimSeat('지하 3층');
+    }
   }, [pushList]);
 
   return (
@@ -62,10 +64,15 @@ const NotificationsScreen = ({navigation}) => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <PushListHeader zzimNumber={zzimNumber} zzimSeat={zzimSeat} />
+        {zzimSeat.length > 0 ? (
+          <PushListHeader zzimNumber={zzimNumber} zzimSeat={zzimSeat} />
+        ) : (
+          <PushListHeader empty={true} />
+        )}
+
         {pushList &&
           pushList.map((item, index) => (
-            <Notification content={item.body} key={index} />
+            <Notification content={item.body} key={index} index={index} />
           ))}
       </ScrollView>
     </AppSafeArea>
