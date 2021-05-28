@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Text, Platform} from 'react-native';
 
 //custom imports
 import {colors, width, height} from '../config/globalStyles';
@@ -78,7 +78,7 @@ export default ModalSplash;
 const styles = StyleSheet.create({
   splashContainer: {
     width: width * 259,
-    height: height * 300,
+    height: Platform.OS == 'ios' ? height * 300 : height * 310,
     borderRadius: 7,
     backgroundColor: colors.white,
     overflow: 'hidden',

@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   ImageBackground,
+  Platform,
 } from 'react-native';
 
 import {useDispatch, useSelector} from 'react-redux';
@@ -51,7 +52,7 @@ const AppDrawer = ({navigation}) => {
           <Text style={styles.apartText}>{user.apart}</Text>
         </View>
       </View>
-      <View style={{flex: 5}}>
+      <View style={{flex: Platform.OS == 'ios' ? 5 : 4}}>
         <AppMenu>성별 인증(여성 전용 주차장)</AppMenu>
         <AppMenu>장애인 인증</AppMenu>
         <AppMenu onPress={() => navigation.navigate('PushSetting')}>

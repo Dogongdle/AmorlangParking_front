@@ -68,7 +68,6 @@ const loginScreen = () => {
           width: '100%',
           height: '100%',
           flex: 1,
-          paddingTop: Platform.OS === 'android' ? 25 : 0,
         }}
         source={images.loginBackground}>
         <View style={{flex: 1, backgroundColor: 'rgba(52, 52, 52, 0.5)'}}>

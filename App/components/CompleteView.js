@@ -18,7 +18,7 @@ export const CompleteView = ({style, number, onPress, ...props}) => {
         delay={0}
         duration={2000}
         useNativeDriver
-        style={{flex: 3}}>
+        style={{flex: 3, zIndex: 1000}}>
         <AppButton
           style={{marginTop: height * 60, borderRadius: 10}}
           onPress={onPress}>
