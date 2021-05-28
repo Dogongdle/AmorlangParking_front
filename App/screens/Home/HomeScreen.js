@@ -138,7 +138,7 @@ const HomeScreen = ({navigation}) => {
 
   const reserveModal = () => {
     if (user.reserved == true) {
-      setVisibleAlert(true);
+      setVisibleModal(true);
     } else {
       setVisibleModal(true);
     }

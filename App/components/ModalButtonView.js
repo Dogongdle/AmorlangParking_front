@@ -29,6 +29,7 @@ export const ModalButtonView = ({
   const token = useSelector(selectToken);
   const sector = useSelector(selectSeatSector);
   const number = useSelector(selectSeatNumber);
+  const user = useSelector(selectUser);
 
   // const reserveSeat = useSelector(reserveSeat);
   const dispatch = useDispatch();
@@ -62,14 +63,16 @@ export const ModalButtonView = ({
 
   return (
     <View style={styles.modalButtonView}>
-      <ModalButton
-        icon="alarm-1"
-        size={18}
-        onPress={fiveReserve}
-        color={colors.primary}
-        title="5분 예약하기"
-        style={{marginRight: width * 5}}
-      />
+      {user.reserved == true ? null : (
+        <ModalButton
+          icon="alarm-1"
+          size={18}
+          onPress={fiveReserve}
+          color={colors.primary}
+          title="5분 예약하기"
+          style={{marginRight: width * 5}}
+        />
+      )}
       <ModalButton
         icon="alarm-2"
         size={14}

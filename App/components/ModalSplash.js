@@ -78,7 +78,7 @@ export default ModalSplash;
 const styles = StyleSheet.create({
   splashContainer: {
     width: width * 259,
-    height: Platform.OS == 'ios' ? height * 300 : height * 310,
+    height: height * 300,
     borderRadius: 7,
     backgroundColor: colors.white,
     overflow: 'hidden',

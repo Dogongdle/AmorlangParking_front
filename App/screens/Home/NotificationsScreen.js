@@ -35,7 +35,7 @@ const NotificationsScreen = ({navigation}) => {
     const response = await parkingAPI.getZzimSeat(token);
     // console.log(response.data);
     if (response.data.length > 0) {
-      setZzimNumber(response.data[0].seat);
+      setZzimNumber(response.data[response.data.length - 1].seat);
       if (response.data[0].sector == 'a' || 'b' || 'c') setZzimSeat('지하 1층');
       else if (response.data[0].sector == 'd' || 'e' || 'f')
         setZzimSeat('지하 2층');
