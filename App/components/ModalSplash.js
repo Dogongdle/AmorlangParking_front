@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Text, Platform} from 'react-native';
 
 //custom imports
 import {colors, width, height} from '../config/globalStyles';

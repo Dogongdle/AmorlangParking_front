@@ -3,7 +3,6 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 //custom imports
 import {colors, height} from '../config/globalStyles';
 
-
 export const AppButton = ({disable, style, onPress, children, ...props}) => {
   return (
     <TouchableOpacity

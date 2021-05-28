@@ -14,8 +14,8 @@ import DurationSelect from '../../components/DurationSelect';
 const PushSettingScreen = ({navigation}) => {
   const token = useSelector(selectToken);
   const [settingStatus, setSettingStatus] = useState('');
-  const [inStatus, setInStatus] = useState();
-  const [outStatus, setOutStatus] = useState();
+  const [inStatus, setInStatus] = useState(false);
+  const [outStatus, setOutStatus] = useState(false);
 
   useEffect(() => {
     setCurrentSetting();
@@ -24,19 +24,15 @@ const PushSettingScreen = ({navigation}) => {
   const setCurrentSetting = async () => {
     const pushStatus = await parkingApi.getSettingPush(token);
     if (pushStatus.data.pushStatus == 'BOTH') {
-      console.log('Both입니다.');
       setOutStatus(prevState => true);
       setInStatus(prevState => true);
     } else if (pushStatus.data.pushStatus == 'ENABLE_ONLY') {
-      console.log('출차알림만 표시합니다..');
       setOutStatus(prevState => true);
       setInStatus(prevState => false);
     } else if (pushStatus.data.pushStatus == 'DISABLE_ONLY') {
-      console.log('입차알림만 표시합니다..');
       setOutStatus(prevState => false);
       setInStatus(prevState => true);
     } else if (pushStatus.data.pushStatus == 'NEITHER') {
-      console.log('둘다 표시하지 않습니다');
       setOutStatus(prevState => false);
       setInStatus(prevState => false);
     }

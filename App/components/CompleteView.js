@@ -10,16 +10,16 @@ export const CompleteView = ({style, number, onPress, ...props}) => {
     <View style={styles.completeView}>
       <Text style={styles.completeViewTitle}>자리가 탐색되었습니다!!</Text>
       <Text style={styles.completeViewText}>
-        지하 2층 주차장에 이중주차 가능 한 장소{' '}
+        지하 1층 주차장에 이중주차 가능 한 장소{' '}
         <Text style={styles.pointText}>{number} 곳</Text> 발견되었습니다.
       </Text>
       <Animatable.View
         animation="fadeInUp"
         delay={0}
         duration={2000}
-        useNativeDriver
-        style={{flex: 3}}>
+        useNativeDriver>
         <AppButton
+          disable={false}
           style={{marginTop: height * 60, borderRadius: 10}}
           onPress={onPress}>
           <Text style={styles.buttonText}>위치 확인하기</Text>
