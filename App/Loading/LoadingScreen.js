@@ -1,22 +1,14 @@
+//로딩 스크린. 로그인 이후에 유저의 정보를 받아올 때 보여진다.
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {useDispatch, useSelector} from 'react-redux';
 import {UIActivityIndicator} from 'react-native-indicators';
 import {colors, height, width} from '../config/globalStyles';
-import {logout, selectUser} from '../reducer/userSlice';
 const LoadingScreen = ({navigation, route}) => {
-  const dispatch = useDispatch();
-  const handleLogout = () => {
-    dispatch(logout());
-  };
   return (
     <SafeAreaView style={styles.SafeContainer}>
       <View style={styles.ScreenContainer}>
         <UIActivityIndicator color={colors.primary} size={width * 50} />
-        <TouchableOpacity onPress={handleLogout}>
-          <Text>dd</Text>
-        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

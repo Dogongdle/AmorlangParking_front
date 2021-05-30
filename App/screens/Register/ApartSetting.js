@@ -1,3 +1,4 @@
+//아파트를 설정하는 스크린
 import React, {Component, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {logout, selectUser} from '../../reducer/userSlice';
@@ -87,9 +88,6 @@ const ApartSetting = ({navigation}) => {
             </ModalDropdown>
           </>
         )}
-        {/* <TouchableOpacity onPress={handleLogout}>
-          <Text>로그아웃</Text>
-        </TouchableOpacity> */}
       </View>
       <AppButton
         onPress={() =>

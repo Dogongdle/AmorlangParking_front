@@ -1,3 +1,4 @@
+//주차장의 주차자리 상태에 대한 설명이 나타나있는 컴포넌트. 만약 유저가 예약중인 상태라면 보여지지 않게끔 하였다.
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 //custom imports

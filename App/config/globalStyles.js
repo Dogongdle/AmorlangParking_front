@@ -1,3 +1,6 @@
+//React-Native는 앱이라는 특성상 핸드폰의 크기에 많은 구애를 받는다. 따라서 상대적인 값들이 필요하였고, 이를 globalStyles에서 관리한다.
+//또한 색상, 이미지 등 그때그때 컴포넌트에서 부르기 힘든 요소들에 대해 가볍게 정리함으로써 가용성을 높였다.
+
 import {Dimensions} from 'react-native';
 
 export const colors = {

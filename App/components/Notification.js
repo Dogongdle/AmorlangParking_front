@@ -1,3 +1,4 @@
+// 알림 리스트 화면에서 각 알림의 컴포넌트. swipeout을 사용하여, UI/UX 적인 발전을 이루었다.
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
 import Swipeout from 'react-native-swipeout';
@@ -15,7 +16,7 @@ const Notification = ({content, title, index, ...props}) => {
     {
       text: '삭제',
       backgroundColor: colors.red,
-      onPress: () => dispatch(deletePushList(index)),
+      onPress: () => dispatch(deletePushList(index)),  //알림 삭제
     },
   ];
 

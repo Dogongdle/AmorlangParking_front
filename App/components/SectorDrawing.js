@@ -1,3 +1,4 @@
+// 주차장의 각 라인별로 컴포넌트 화를 처리하였다.
 import React from 'react';
 import {View} from 'react-native';
 //custom imports

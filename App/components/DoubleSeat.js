@@ -1,3 +1,4 @@
+// 이중주차 자리 컴포넌트
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 //custom imports

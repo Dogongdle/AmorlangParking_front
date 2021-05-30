@@ -1,8 +1,9 @@
+// 앱의 전반적인 Loading 시에 사용되는 모달. 현재는 자동 렌더링으로 인해 사용하지 않는 상태이지만 추후에 필요할 경우 도입할 예정
 import React from 'react';
-import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 //custom imports
-import {colors, width, height} from '../config/globalStyles';
+import {colors, width} from '../config/globalStyles';
 
 const LoadingModal = ({...props}) => {
   return (

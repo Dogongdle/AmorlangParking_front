@@ -1,8 +1,8 @@
+//주차장 테두리에 아파트임을 인지할 수 있게끔 해주는 항목들을 보여지게 하기위한 border component
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 //custom imports
 import {colors, height, width, images} from '../config/globalStyles';
-import MyIcon from '../config/Icon-font.js';
 
 export const BorderView = ({disable, style, onPress, children, ...props}) => {
   return (

@@ -1,9 +1,10 @@
+// 서비스가 현재 로딩 상태인가를 파악하기 위한 redux-slice
 import {createSlice} from '@reduxjs/toolkit';
 
 export const loadingSlice = createSlice({
   name: 'loading',
   initialState: {
-    loading: true,
+    loading: true, //로딩 상태
   },
 
   reducers: {
@@ -15,7 +16,7 @@ export const loadingSlice = createSlice({
     },
   },
 });
-export const {endLoading, startLoading} = loadingSlice.actions; //액션들을 익스포트
+export const {endLoading, startLoading} = loadingSlice.actions;
 
 export const selectLoading = state => state.loading.loading;
 

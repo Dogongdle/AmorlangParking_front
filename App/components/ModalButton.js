@@ -1,3 +1,4 @@
+// 자리를 클릭시 나타나는 5분예약, 찜하기 버튼의 컴포넌트, 둘의 형태가 유사하여 같은 컴포넌트로 처리하였다.
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import MyIcon from '../config/Icon-font.js';

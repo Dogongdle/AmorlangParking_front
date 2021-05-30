@@ -1,7 +1,8 @@
+// 푸시알림 관련 API 관리
 import parkingAPI from './API';
 
 const getZzimSeat = async token => {
-  // 현재 유저에게 할당된 alarm을 받아오는 api
+  // 현재 유저가 찜한 자리 정보
   try {
     return await parkingAPI.get('/push', null, {
       headers: {
@@ -15,6 +16,7 @@ const getZzimSeat = async token => {
 };
 
 const getSettingPush = async token => {
+  // 푸시 알림 출차/입차 설정 정보 받아오기
   try {
     return await parkingAPI.get('/push/status', null, {
       headers: {
@@ -28,6 +30,7 @@ const getSettingPush = async token => {
 };
 
 const settingPush = async (token, data) => {
+  // 푸시 알림 출차/입차 설정 정보 변경
   try {
     console.log(data);
     return await parkingAPI.post('/push/status', data, {

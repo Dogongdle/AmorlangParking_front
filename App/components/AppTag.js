@@ -1,3 +1,4 @@
+// 몇몇 스크린에서 사용될 태그 컴포넌트 (아파트 이름 등등)
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 //custom imports

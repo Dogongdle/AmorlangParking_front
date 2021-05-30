@@ -1,3 +1,4 @@
+//카카오 로그인 프로세스
 import KakaoLogins from '@react-native-seoul/kakao-login';
 import {Platform} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -21,8 +22,8 @@ const signInKakaoTalk = async setUserInfo => {
             username: email,
             provider: 'kakao',
             serviceId: id,
-            platform: Platform.OS.toUpperCase(),
-            deviceToken: fcmToken,
+            platform: Platform.OS.toUpperCase(),  //푸시알림을 등록하기 위한 플랫폼
+            deviceToken: fcmToken, //푸시알림을 등록하기 위한 디바이스 토큰
           });
         })
         .catch(err => {

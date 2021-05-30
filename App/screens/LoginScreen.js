@@ -1,3 +1,4 @@
+//로그인 스크린. 소셜로그인은 애플, 구글, 카카오로 이루어지며 안드로이드의 경우 애플로그인은 보이지 않는다.
 import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
@@ -25,12 +26,13 @@ import {SocialButton} from '../components/socialButton';
 import LoadingScreen from '../Loading/LoadingScreen';
 
 const loginScreen = () => {
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState(null); //로그인 시 필요한 유저 정보
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (userInfo) {
+      //유저정보의 변화가 있을 때 해당 정보를 통한 로그인이 진행된다.
       handleLogin(userInfo);
     }
   }, [userInfo]);
@@ -40,19 +42,17 @@ const loginScreen = () => {
   // };
 
   const handleLogin = async data => {
+    //로그인 함수
     setLoading(true);
     const userData = await parkingAPI.signUp(data);
-    console.log('회원가입 후 유저데이터', userData);
     if (userData.status === 200) {
-      console.log('로그인 직전 데이따', data);
       const response = await parkingAPI.signIn(data);
-      console.log('로그인 후 리스폰스', response);
       const token = response.data.token;
       const userInfo = await parkingAPI.getUser(token);
       await dispatch(setUser(userInfo.data));
       dispatch(login({token: token}));
     } else {
-      alert('실패', userData.data);
+      alert('실패', userData.data); // 만약 이 메시지를 본다면 500 에러일 확률이 매우 높다. backend 측에 문의
     }
     setLoading(false);
   };

@@ -1,3 +1,4 @@
+// 앱의 modal 컴포넌트
 import React from 'react';
 import {StyleSheet, Modal, StatusBar, Platform} from 'react-native';
 import {colors} from '../config/globalStyles';
@@ -6,7 +7,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 const AppModal = ({visible, children}) => {
   return (
     <Modal animationType="fade" transparent visible={visible}>
-      <SafeAreaView  style={styles.container}>
+      <SafeAreaView style={styles.container}>
         {Platform.OS === 'android' && (
           <StatusBar
             hidden={false}

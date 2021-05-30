@@ -1,3 +1,4 @@
+//5분 예약을 설정할 시에 나오는 스톱워치 컴포넌트
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 //custom imports
@@ -9,7 +10,7 @@ export const AppStopWatch = ({style, time, ...props}) => {
   const [minutes, setMinutes] = useState(Math.floor((time / 1000 / 60) % 60));
   const [seconds, setSeconds] = useState(Math.floor((time / 1000) % 60));
   console.log('time', time);
-  useEffect(() => {
+  useEffect(() => {  //setInterval+useEffect를 활용하여 서버시간을 따라갈 수 있도록 처리
     const countdown = setInterval(() => {
       if (parseInt(seconds) > 0) {
         setSeconds(parseInt(seconds) - 1);

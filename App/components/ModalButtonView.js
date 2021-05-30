@@ -1,3 +1,4 @@
+// 주차장 자리를 클릭할 시 나오는 화면의 컴포넌트. 이를 모달로 처리하였기에 이러한 네이밍을 함.
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {color} from 'react-native-reanimated';

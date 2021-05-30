@@ -1,3 +1,4 @@
+//앱의 가장 대표적인 버튼 컴포넌트
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 //custom imports

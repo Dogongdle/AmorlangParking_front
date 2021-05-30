@@ -1,3 +1,4 @@
+// 층 수 선택을 위한 컴포넌트 (ActionSheet 사용)
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 //custom imports

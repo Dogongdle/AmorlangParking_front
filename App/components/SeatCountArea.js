@@ -1,3 +1,4 @@
+// 주차장 자리 수를 알려주는 사각형 컴포넌트
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 //custom imports

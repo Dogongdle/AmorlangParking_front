@@ -1,3 +1,4 @@
+// 이중 주차 프로세스에 사용되는 BottomSheet의 inner 컴포넌트
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 //custom imports

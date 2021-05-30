@@ -1,3 +1,4 @@
+//애플 로그인 프로세스
 import {appleAuth} from '@invertase/react-native-apple-authentication';
 import jwtDecode from 'jwt-decode';
 import {Platform} from 'react-native';
