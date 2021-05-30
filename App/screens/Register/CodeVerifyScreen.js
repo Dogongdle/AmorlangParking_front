@@ -1,12 +1,6 @@
+// 아파트 고유 코드 체크 스크린
 import React, {Component, useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Alert,
-} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {register, selectToken} from '../../reducer/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppSafeArea} from '../../components/AppSafeArea';
@@ -32,6 +26,7 @@ const CodeVerifyScreen = ({navigation, route}) => {
   const token = useSelector(selectToken);
 
   const handleUpdate = () => {
+    //아파트 정보를 처리해준다. promise를 사용하여 비동기 처리를 진행하였다.
     parkingAPI.registerApart(token, {apart: apart}).then(res => {
       console.log(res);
       if ((res.status = 200)) {
@@ -40,21 +35,8 @@ const CodeVerifyScreen = ({navigation, route}) => {
     });
   };
 
-  // const verifyCheck = () => {
-  //   parkingAPI
-  //     .verifyCheck(token, {
-  //       name: JSON.stringify(apart),
-  //       code: JSON.stringify(code),
-  //     })
-  //     .then(res => {
-  //       console.log(res);
-  //       if (res.data.response) {
-  //         handleUpdate;
-  //       } else console.log('fail');
-  //     });
-  // };
-
   const openModal = () => {
+    //아파트 인증 코드에 대한 설명을 담은 모달을 호출해준다.
     setVisibleModal(true);
     setModalSplash('flex');
   };

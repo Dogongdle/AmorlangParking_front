@@ -1,4 +1,7 @@
+// 프로젝트에서 유용하게 쓰일 배열이 담긴 파일
+
 export const regionOptions = [
+  //지역 정보
   '수원시',
   '강남구',
   '강동구',
@@ -27,6 +30,7 @@ export const regionOptions = [
 ];
 
 export const apartOptions = [
+  //수원시 아파트 정보
   '광교아이파크',
   '수원 성균관대역 동문굿모닝힐',
   '수원고등 LH2단지(행복주택)',
@@ -37,9 +41,10 @@ export const apartOptions = [
   '현대 힐스테이트',
 ];
 
-export const floorOptions = ['지하 1층', '지하 2층', '지하 3층', '취소'];
+export const floorOptions = ['지하 1층', '지하 2층', '지하 3층', '취소']; //층별 배열
 
-export const durationOptions = ['5초', '10초', '30초', '취소'];
+export const durationOptions = ['5초', '10초', '30초', '취소']; //몇초 간격으로 보여질 건지 duration 배열ㄴ
 
+//이중 주차 자리들의 위치 배열, 한 층당 5대까지 밖에 이중주차를 허용하지 않는다 가정함.
 export const doubleSeatPositionTop = [390, 320, 320, 175, 433];
 export const doubleSeatPositionLeft = [180, 180, 310, 310, 120];

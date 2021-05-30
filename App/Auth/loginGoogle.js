@@ -1,3 +1,4 @@
+// 구글 로그인 프로세스
 import {GoogleSignin, statusCodes} from '@react-native-community/google-signin';
 import {Platform} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -22,9 +23,9 @@ const signInGoogle = async setUserInfo => {
         setUserInfo({
           username: response.user.email,
           provider: 'google',
-          serviceId: response.user.id.slice(0, 7),
-          platform: Platform.OS.toUpperCase(),
-          deviceToken: fcmToken,
+          serviceId: response.user.id.slice(0, 7), //구글의 id값은 상당히 길다. 따라서 slice 처리
+          platform: Platform.OS.toUpperCase(), //푸시알림을 등록하기 위한 플랫폼
+          deviceToken: fcmToken, //푸시알림을 등록하기 위한 디바이스 토큰
         });
       })
       .catch(error => {

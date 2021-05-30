@@ -1,3 +1,4 @@
+// 앱의 렌더링 주기를 선택할 수 있는 컴포넌트
 import React, {useState} from 'react';
 import {StyleSheet, View, TouchableOpacity, Text, Switch} from 'react-native';
 import {ActionSheet} from 'native-base';
@@ -5,15 +6,14 @@ import {durationOptions} from '../config/globalArray';
 import MyIcon from '../config/Icon-font.js';
 import {useSelector, useDispatch} from 'react-redux';
 import {setDuration, selectDuration} from '../reducer/userSlice';
-
 //custom imports
 import {colors, width, height} from '../config/globalStyles';
 
 const DurationSelect = ({...props}) => {
   const initialDuration = useSelector(selectDuration);
 
-  const [duration, setClientDuration] = useState(initialDuration / 1000 + '초');
-  // console.log('잘넘어오나?', duration);
+  const [duration, setClientDuration] = useState(initialDuration / 1000 + '초'); //메뉴에 보여지는 것은 1초,10초,30초 이므로 해당 시간을 계산하여 처리해준다.
+
   const dispatch = useDispatch();
   const options = durationOptions;
   const cancelIndex = 3;

@@ -1,3 +1,4 @@
+// 아파트 주차장의 입구를 표시하는 컴포넌트
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 //custom imports

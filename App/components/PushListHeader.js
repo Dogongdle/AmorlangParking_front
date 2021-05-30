@@ -1,3 +1,4 @@
+// 어떤 자리를 찜하였는지 같은 ScrollView에 나타내주기 위해 따로 컴포넌트 처리하였다.
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 

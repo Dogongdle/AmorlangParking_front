@@ -1,7 +1,8 @@
+// 로그인 스크린의 소셜 로그인 버튼
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 //custom imports
-import {colors, height, width} from '../config/globalStyles';
+import {height} from '../config/globalStyles';
 
 export const SocialButton = ({disable, style, onPress, children, ...props}) => {
   return (

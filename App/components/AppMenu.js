@@ -1,3 +1,4 @@
+// AppDrawer에 들어갈 메뉴 컴포넌트
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 //custom imports

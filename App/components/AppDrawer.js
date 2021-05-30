@@ -1,3 +1,4 @@
+//앱의 좌측 drawer 메뉴 컴포넌트
 import React, {Component, useState} from 'react';
 import {
   Text,

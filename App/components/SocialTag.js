@@ -1,7 +1,8 @@
+//소셜 로그인를 활용하는 서비스에서는 유저의 프로필 우측 하단에 어떤 소셜 계정인지 명시해주는 것이 요즘의 트랜드이다. 이를 적용시키기 위한 컴포넌트
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, View, Image} from 'react-native';
 //custom imports
-import {height, width, colors, images} from '../config/globalStyles';
+import {width, colors, images} from '../config/globalStyles';
 
 export const SocialTag = ({provider, style, ...props}) => {
   return (

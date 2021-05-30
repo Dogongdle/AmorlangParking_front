@@ -1,18 +1,12 @@
-import React, {useState, useMemo} from 'react';
-import {StyleSheet, View, TouchableOpacity, Text, Switch} from 'react-native';
+// 푸시 알림 설정 스크린의 스위치 컴포넌트
+import React from 'react';
+import {StyleSheet, View, Text, Switch} from 'react-native';
 
 //custom imports
 import {colors, width, height} from '../config/globalStyles';
 
 const PushSwitch = React.memo(
   ({title, subtitle, status, setStatus, changeStatus}) => {
-    // const [isEnabled, setIsEnabled] = useState(false);
-    // const getStatus = status => {
-    //   return status;
-    // };
-
-    // const showStatus = useMemo(() => getStatus(status), [status]);
-    // console.log('상태값', status);
     const toggleSwitch = async () => {
       setStatus();
       changeStatus();

@@ -1,3 +1,4 @@
+// 주차장 틀 컴포넌트
 import React, {useMemo} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 //custom imports

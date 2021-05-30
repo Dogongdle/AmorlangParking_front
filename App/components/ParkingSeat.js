@@ -1,15 +1,10 @@
+//주차장 자리 컴포넌트
 import React from 'react';
-import {StyleSheet, TouchableOpacity, Alert, Text} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 //custom imports
 import {colors, height, width} from '../config/globalStyles';
-import parkingAPI from '../api/parking';
-import {useDispatch, useSelector} from 'react-redux';
-import {selectUser, selectToken} from '../reducer/userSlice';
-import {
-  selectSeat,
-  selectSeatNumber,
-  selectSeatSector,
-} from '../reducer/parkingSlice';
+import {useDispatch} from 'react-redux';
+import {selectSeat} from '../reducer/parkingSlice';
 
 export const ParkingSeat = ({
   style,
@@ -23,8 +18,6 @@ export const ParkingSeat = ({
   ...props
 }) => {
   const dispatch = useDispatch();
-  const reserveSeatNumber = useSelector(selectSeatNumber);
-  const reserveSeatSector = useSelector(selectSeatSector);
 
   const onSelect = () => {
     dispatch(selectSeat({sector: sector, number: seatNumber}));
@@ -39,7 +32,7 @@ export const ParkingSeat = ({
           backgroundColor:
             reservedUser == true
               ? colors.primary
-              : enable == true || (enable == true && reserved == false)
+              : enable == true && reserved == false
               ? colors.darkBlue
               : colors.lightGrey,
         },
@@ -49,9 +42,8 @@ export const ParkingSeat = ({
       onPress={() => {
         onPress();
         onSelect();
-      }}/>
-   
-   
+      }}
+    />
   );
 };
 

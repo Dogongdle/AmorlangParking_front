@@ -1,3 +1,4 @@
+//모달의 실제 컴포넌트
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Text, Platform} from 'react-native';
 

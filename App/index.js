@@ -1,5 +1,5 @@
+//foreground 상태의 앱을 총괄하는 index 파일
 import React, {useState, useEffect, useCallback} from 'react';
-import {BackHandler, Alert} from 'react-native';
 import loginScreen from './screens/LoginScreen';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
@@ -41,6 +41,7 @@ const App = ({pushMessage}) => {
   const loading = useSelector(selectLoading);
 
   const toastConfig = {
+    //알림이 도착할 시에 toastmessage를 호출하여 유저가 알림을 받았다고 인지할 수 있게끔 한다.
     success: ({text1, ...rest}) => (
       <BaseToast
         {...rest}
@@ -57,6 +58,7 @@ const App = ({pushMessage}) => {
   };
 
   useEffect(() => {
+    //알림이 도착할 시에 toastmessage를 호출하여 유저가 알림을 받았다고 인지할 수 있게끔 한다.
     const unsubscribe = messaging().onMessage(async remoteMessage => {
       console.log(JSON.stringify(remoteMessage));
       dispatch(addPushList(remoteMessage.notification));
@@ -78,12 +80,14 @@ const App = ({pushMessage}) => {
       let userToken;
 
       try {
-        userToken = await AsyncStorage.getItem('userToken');
-        const duration = await AsyncStorage.getItem('Duration');
-        const endTime = await AsyncStorage.getItem('reserveEndTime');
+        //Async 스토리지에서 필요한 정보들을 받아온다.
+        userToken = await AsyncStorage.getItem('userToken'); //유저 토큰
+        const duration = await AsyncStorage.getItem('Duration'); // 유저가 커스텀한 자동 렌더링 주기 시간
+        const endTime = await AsyncStorage.getItem('reserveEndTime'); //5분 예약 마감 시간
         if (pushMessage.length >= 1) {
-          dispatch(addPushList(JSON.parse(pushMessage)));
+          dispatch(addPushList(JSON.parse(pushMessage))); //background에서 저장되어 있는 push 알림들을 리스트에 추가
         }
+        //앱을 사용하는데에 필요한 정보들을 담아주는 프로세스
         if (userToken) {
           const userInfo = await parkingAPI.getUser(userToken);
           console.log('유저정보', userInfo.data);
@@ -131,7 +135,7 @@ const App = ({pushMessage}) => {
         <SafeAreaProvider>
           <NavigationContainer>
             <StackApp.Navigator mode="modal">
-              {loading ? (
+              {loading ? ( //기본적으로 로딩 상태일 때에는 loading스크린이 보인다.
                 <StackApp.Screen
                   name="Loading"
                   component={LoadingScreen}
@@ -139,7 +143,7 @@ const App = ({pushMessage}) => {
                 />
               ) : (
                 <>
-                  {!loggedIn ? (
+                  {!loggedIn ? ( //유저의 상태가 로그인 상태일 때
                     <StackApp.Screen
                       name="Login"
                       component={loginScreen}
@@ -147,7 +151,7 @@ const App = ({pushMessage}) => {
                     />
                   ) : (
                     <>
-                      {!user.apart ? (
+                      {!user.apart ? ( //유저가 아파트를 설정해놓은 상태일 때 => 이러한 처리를 하지 않는다면 회원가입 후 아파트 설정을 하지 않은 채 앱을 꺼버린 유저가 다음에 앱을 켰을 때 오류 메시지를 받을 수 있다.
                         <StackApp.Screen
                           name="Register"
                           component={RegisterStack}

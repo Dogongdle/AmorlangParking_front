@@ -1,6 +1,7 @@
+//로그인,회원가입,토큰 등등 유저 관련 API 관리
 import parkingAPI from './API';
 
-const signUp = async data => {
+const signUp = async data => {  //회원가입
   try {
     console.log(data);
     return await parkingAPI.post('/signup', data, {
@@ -13,7 +14,7 @@ const signUp = async data => {
   }
 };
 
-const signIn = async data => {
+const signIn = async data => {  //로그인
   try {
     console.log(data);
     return await parkingAPI.post('/signin', data, {
@@ -26,7 +27,7 @@ const signIn = async data => {
   }
 };
 
-const getUser = async token => {
+const getUser = async token => {  //유저정보 열람
   try {
     return await parkingAPI.get('/user', null, {
       headers: {
@@ -39,7 +40,7 @@ const getUser = async token => {
   }
 };
 
-const registerApart = async (token, data) => {
+const registerApart = async (token, data) => {  //아파트 정보 등록
   try {
     return await parkingAPI.post('/user', data, {
       headers: {
@@ -52,7 +53,7 @@ const registerApart = async (token, data) => {
   }
 };
 
-const verifyCheck = async (token, data) => {
+const verifyCheck = async (token, data) => {  //아파트 유효성 체크
   try {
     return await parkingAPI.post('/verify', data, {
       headers: {

@@ -1,3 +1,4 @@
+// 각 층별 남은 주차자리 수를 보여주기 위한 컴포넌트
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 //custom imports

@@ -48,6 +48,7 @@
 		2506D01B21394C2CB0299BF4 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		2A57799B2637B76D007A4563 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2A57799F2637B773007A4563 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2A8ADADC2662553000B54917 /* AmorangParking-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AmorangParking-Bridging-Header.h"; sourceTree = "<group>"; };
 		2A974039262F2C14009B3AC6 /* amorlangicon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = amorlangicon.ttf; path = ../App/assets/icon/amorlangicon.ttf; sourceTree = "<group>"; };
 		2AAB5F452619CBAA00B1B865 /* google-signin */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "google-signin"; path = "../node_modules/@react-native-community/google-signin"; sourceTree = "<group>"; };
 		2AAB5F4F2619D7C500B1B865 /* kakao-login */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "kakao-login"; path = "../node_modules/@react-native-seoul/kakao-login"; sourceTree = "<group>"; };
@@ -147,6 +148,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				2A8ADADC2662553000B54917 /* AmorangParking-Bridging-Header.h */,
 				2A974039262F2C14009B3AC6 /* amorlangicon.ttf */,
 				2AAB5F4F2619D7C500B1B865 /* kakao-login */,
 				2AAB5F452619CBAA00B1B865 /* google-signin */,

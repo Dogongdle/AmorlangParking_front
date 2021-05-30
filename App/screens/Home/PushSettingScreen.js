@@ -1,6 +1,5 @@
+//알림 설정 페이지
 import React, {useEffect, useState} from 'react';
-import {Text, Switch} from 'react-native';
-
 import {AppHeader} from '../../components/AppHeader';
 import {AppSafeArea} from '../../components/AppSafeArea';
 import MyIcon from '../../config/Icon-font.js';
@@ -22,6 +21,7 @@ const PushSettingScreen = ({navigation}) => {
   }, []);
 
   const setCurrentSetting = async () => {
+    // 유저가 알림을 어떻게 설정해놓았는지 정보를 받아온다. 프론트에서 이것까지는 관리할 필요가 없다고 생각하였기에 그때그때 설정해주는 식으로 동작한다.
     const pushStatus = await parkingApi.getSettingPush(token);
     if (pushStatus.data.pushStatus == 'BOTH') {
       setOutStatus(prevState => true);
@@ -39,6 +39,7 @@ const PushSettingScreen = ({navigation}) => {
   };
 
   const changeStatus = async () => {
+    // 알림 설정 스위치를 변경할 시에 변경 내역이 backend로 보내지게끔 구현하였다.
     console.log('입차알림설정', inStatus, '출차알림설정', outStatus);
     if (inStatus == true && outStatus == true) {
       setSettingStatus('BOTH');

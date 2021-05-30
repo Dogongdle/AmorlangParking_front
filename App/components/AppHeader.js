@@ -1,3 +1,4 @@
+//앱의 header 컴포넌트
 import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 

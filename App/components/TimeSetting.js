@@ -1,7 +1,8 @@
+// 이중 주차 세팅에서 시간을 설정할 때 사용하는 컴포넌트. 각자 영향을 주지 않기 위해 useMemo를 사용한 최적화를 진행하였다.
 import React, {useMemo} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 //custom imports
-import {colors, height, width} from '../config/globalStyles';
+import {colors, width} from '../config/globalStyles';
 import MyIcon from '../config/Icon-font.js';
 import Moment from 'moment';
 

@@ -1,3 +1,4 @@
+// 이중 주차 탐색이 완료되었을 때 보여지는 컴포넌트
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 //custom imports

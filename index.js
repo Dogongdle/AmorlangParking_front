@@ -1,7 +1,7 @@
 /**
  * @format
  */
-
+//앱의 background 부분 담당 index
 import React, {useEffect, useState} from 'react';
 import {AppRegistry} from 'react-native';
 import {Provider} from 'react-redux';
@@ -16,6 +16,7 @@ const ReduxProvider = () => {
   const [pushMessage, setPushMessage] = useState([]);
 
   async function requestUserPermission() {
+    // 유저가 앱을 다운로드 받았을 때 푸시알림 수신을 허용하시겠습니까? 라는 메시지가 뜨도록 한다.
     const authStatus = await messaging().requestPermission();
     const enabled =
       authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
@@ -33,7 +34,7 @@ const ReduxProvider = () => {
     }
   }
 
-  useEffect(() => {
+  useEffect(() => { // background에서 알림이 왔을 시에 그를 처리해주기 위한 함수
     requestUserPermission();
     messaging().setBackgroundMessageHandler(async remoteMessage => {
       console.log(
