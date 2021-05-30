@@ -3,13 +3,12 @@ import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
 
 //custom imports
 import {colors, width, height} from '../config/globalStyles';
-import {UIActivityIndicator} from 'react-native-indicators';
 
 const LoadingModal = ({...props}) => {
   return (
     <>
       <View style={styles.splashContainer}>
-        <UIActivityIndicator color={colors.primary} size={40} />
+        <UIActivityIndicator color={colors.primary} size={width * 40} />
       </View>
     </>
   );
